@@ -8,6 +8,7 @@
     "strict": true,
     "noImplicitOverride": true,
     "forceConsistentCasingInFileNames": true,
+    "types": ["node"],
     "skipLibCheck": true,
     "noEmit": true,
     "resolveJsonModule": true
