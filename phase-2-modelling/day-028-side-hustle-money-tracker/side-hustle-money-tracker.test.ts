@@ -3,6 +3,7 @@ import { spawnSync } from "node:child_process";
 import { mkdtemp, rm, writeFile, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import {
   isEntry,
   isLedger,
@@ -180,10 +181,10 @@ describe("runCommand", () => {
 });
 
 describe("the real CLI, run as a separate process", () => {
-  const cli = new URL("./starter/cli.ts", import.meta.url);
+  const cli = fileURLToPath(new URL("./starter/cli.ts", import.meta.url));
 
   const run = (args: string[]) =>
-    spawnSync(process.execPath, [cli.pathname.replace(/^\/([A-Za-z]:)/, "$1"), ...args], {
+    spawnSync(process.execPath, [cli, ...args], {
       encoding: "utf8",
       env: { ...process.env, MONEY_FILE: file },
     });
