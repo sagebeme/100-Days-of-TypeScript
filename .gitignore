@@ -11,3 +11,6 @@ announced.json
 prices.json
 results.png
 .build-*/
+*.db
+*.db-wal
+*.db-shm
