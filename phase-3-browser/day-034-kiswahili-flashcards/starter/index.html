@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kiswahili flashcards</title>
+    <style>
+      body { font-family: system-ui, sans-serif; max-width: 26rem; margin: 2rem auto; padding: 0 1rem; text-align: center; background: #f4f1e8; }
+      .card { background: white; border-radius: 1rem; padding: 2.5rem 1rem; box-shadow: 0 4px 16px rgb(0 0 0 / 0.1); }
+      #prompt { font-size: 2rem; font-weight: 700; margin: 0; }
+      #answer { font-size: 1.3rem; color: #555; margin: 1rem 0 0; }
+      button { font-size: 1.1rem; padding: 0.6rem 1.2rem; margin: 1rem 0.25rem 0; border-radius: 0.5rem; border: 0; cursor: pointer; }
+      #right { background: #2e7d32; color: white; }
+      #wrong { background: #c62828; color: white; }
+      #stats { color: #666; }
+    </style>
+  </head>
+  <body>
+    <h1>Kiswahili flashcards</h1>
+    <div class="card">
+      <p id="prompt" lang="sw"></p>
+      <p id="answer" hidden></p>
+    </div>
+    <button id="reveal" type="button">Show answer</button>
+    <div id="grade" hidden>
+      <button id="wrong" type="button">Missed it</button>
+      <button id="right" type="button">Got it</button>
+    </div>
+    <p id="stats"></p>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
