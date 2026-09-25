@@ -12,7 +12,8 @@
     "types": ["node"],
     "skipLibCheck": true,
     "noEmit": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "jsx": "react-jsx"
   },
-  "include": ["phase-*/**/*.ts"]
+  "include": ["phase-*/**/*.ts", "phase-*/**/*.tsx"]
 }
