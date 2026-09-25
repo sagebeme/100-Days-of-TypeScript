@@ -3,39 +3,51 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
     <title>Pixel sticker maker</title>
-    <style>
-      body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
-      .tools { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem; }
-      button, select { font-size: 1rem; padding: 0.4rem 0.9rem; }
-      #board {
-        display: grid;
-        width: max-content;
-        touch-action: none;
-        user-select: none;
-        cursor: crosshair;
-        background: repeating-conic-gradient(#eee 0 25%, #fff 0 50%) 0 0 / 20px 20px;
-        border: 1px solid #ccc;
-      }
-      .cell { box-sizing: border-box; border: 1px solid rgb(0 0 0 / 0.04); }
-      #svg { width: 100%; height: 6rem; margin-top: 1rem; font-family: monospace; }
-    </style>
+    <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    <h1>Pixel sticker maker</h1>
-    <div class="tools">
-      <input id="color" type="color" value="#e63946" aria-label="Colour">
-      <select id="tool" aria-label="Tool">
-        <option value="pen">Pen</option>
-        <option value="eraser">Eraser</option>
-        <option value="fill">Fill</option>
-      </select>
-      <button id="undo" type="button">Undo</button>
-      <button id="clear" type="button">Clear</button>
-      <button id="export" type="button">Export SVG</button>
-    </div>
-    <div id="board"></div>
-    <textarea id="svg" readonly aria-label="Your sticker as SVG"></textarea>
+    <main class="app">
+      <header class="app-header">
+        <h1>Pixel sticker maker</h1>
+        <p class="tagline">Draw a 16 × 16 sticker with a mouse, a finger or a pen, then export it as an SVG.</p>
+      </header>
+
+      <div class="studio">
+        <aside class="tools card" aria-label="Tools">
+          <div class="field">
+            <label for="color">Colour</label>
+            <input id="color" type="color" value="#e63946">
+          </div>
+          <div class="field">
+            <label for="tool">Tool</label>
+            <select id="tool">
+              <option value="pen">Pen</option>
+              <option value="eraser">Eraser</option>
+              <option value="fill">Fill</option>
+            </select>
+          </div>
+          <div class="tool-actions">
+            <button class="button" id="undo" type="button">Undo</button>
+            <button class="button" id="clear" type="button">Clear</button>
+          </div>
+        </aside>
+
+        <div class="canvas-area">
+          <div id="board" role="img" aria-label="Drawing board, 16 by 16 pixels"></div>
+        </div>
+      </div>
+
+      <section class="export card" aria-labelledby="export-title">
+        <div class="export-head">
+          <h2 id="export-title">Export</h2>
+          <button class="button button-primary" id="export" type="button">Export SVG</button>
+        </div>
+        <label class="visually-hidden" for="svg">Your sticker as SVG</label>
+        <textarea id="svg" readonly placeholder="Press Export SVG, then copy this into a file called sticker.svg"></textarea>
+      </section>
+    </main>
 
     <script type="module" src="./main.ts"></script>
   </body>

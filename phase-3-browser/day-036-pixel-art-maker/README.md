@@ -17,7 +17,7 @@ toSvg(grid, 20)                 →  '<svg xmlns="http://www.w3.org/2000/svg" wi
 
 - **Pointer events**: `pointerdown`, `pointermove`, `pointerup` and `pointercancel`. One set of events covers mouse, touch and pen, so you don't write the code three times
 - `setPointerCapture`, so a stroke keeps going when your finger slides off the board
-- `event.clientX - rect.left`, from `getBoundingClientRect()`, to turn a screen position into a spot on the board
+- `event.clientX - rect.left`, from `getBoundingClientRect()`, to turn a screen position into a spot on the board, and `rect.width / size` for how big a cell really is on screen (the board shrinks to fit a phone)
 - `touch-action: none` in the CSS, so dragging a finger draws instead of scrolling the page
 - A grid as `string[][]`, changed only by returning new grids. That makes Undo a stack of old grids
 - Flood fill: a queue of cells to visit, the same idea a paint bucket uses in every drawing app
@@ -37,7 +37,7 @@ toSvg(grid, 20)                 →  '<svg xmlns="http://www.w3.org/2000/svg" wi
    - `floodFill(grid, row, col, color)`: colour the cell and every cell joined to it (up, down, left, right, not diagonally) that had the same starting colour. Off the grid, or already that colour: the same grid back.
    - `toSvg(grid, cellSize)`: an `<svg>` with `xmlns`, `width`, `height` and `viewBox`, and one `<rect x y width height fill>` per painted cell, row by row. Skip empty cells, so the sticker's background stays see-through.
 3. In `starter/app.ts`, write `mountPixelArt(root, options)`:
-   - Fill `#board` with `size × size` `<div class="cell">` elements once. Drawing only updates them: set each cell's `style.background` and `dataset.color` (the tests read `data-color`).
+   - Fill `#board` with `size × size` `<div class="cell">` elements once. The board is `size × cellSize` pixels wide at most, and shrinks on a small screen, so give it `size` equal columns and let the cells be square. Drawing only updates them: set each cell's `style.background` and `dataset.color` (the tests read `data-color`).
    - `pointerdown` on the board starts a stroke: save the current grid for Undo, capture the pointer, and use the tool on that cell. **Pen** paints with `#color`, **Eraser** paints `""`, **Fill** flood-fills.
    - `pointermove` keeps drawing while a pen or eraser stroke is going. `pointerup` and `pointercancel` end it. If the stroke changed nothing, throw away the Undo entry you saved.
    - `#undo` puts back the last saved grid. `#clear` saves the grid, then empties it.

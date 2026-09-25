@@ -20,13 +20,13 @@ export function mountPixelArt(root: ParentNode, options: PixelArtOptions): void 
   const history: Grid[] = [];
   let strokeStart: Grid | null = null;
 
-  board.style.gridTemplateColumns = `repeat(${size}, ${cellSize}px)`;
+  // The board is at most size * cellSize wide, and shrinks to fit a phone. Cells stay square.
+  board.style.gridTemplateColumns = `repeat(${size}, minmax(0, 1fr))`;
+  board.style.width = `min(100%, ${size * cellSize}px)`;
   const cells: HTMLDivElement[] = [];
   for (let i = 0; i < size * size; i++) {
     const cell = document.createElement("div");
     cell.className = "cell";
-    cell.style.width = `${cellSize}px`;
-    cell.style.height = `${cellSize}px`;
     cells.push(cell);
   }
   board.replaceChildren(...cells);
@@ -42,8 +42,10 @@ export function mountPixelArt(root: ParentNode, options: PixelArtOptions): void 
   }
 
   function applyTool(event: PointerEvent): void {
+    // Measure the cells on screen: on a phone the board is smaller than size * cellSize.
     const rect = board.getBoundingClientRect();
-    const spot = cellFromPoint(event.clientX - rect.left, event.clientY - rect.top, cellSize, size);
+    const onScreen = rect.width > 0 ? rect.width / size : cellSize;
+    const spot = cellFromPoint(event.clientX - rect.left, event.clientY - rect.top, onScreen, size);
     if (spot === null) return;
     const tool = toolSelect.value;
     if (tool === "fill") {
