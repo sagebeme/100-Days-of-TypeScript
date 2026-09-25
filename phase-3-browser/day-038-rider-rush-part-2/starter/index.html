@@ -3,31 +3,62 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
     <title>Rider Rush</title>
-    <style>
-      body { margin: 0; font-family: system-ui, sans-serif; background: #111; color: #eee; display: grid; justify-items: center; gap: 0.75rem; padding: 1rem; }
-      canvas { max-width: 100%; max-height: 70vh; border-radius: 0.5rem; }
-      .hud { display: flex; gap: 1.5rem; font-variant-numeric: tabular-nums; margin: 0; }
-      .controls { display: flex; gap: 1rem; }
-      .controls button { font-size: 2rem; width: 5rem; height: 3.5rem; border-radius: 0.75rem; border: 0; touch-action: manipulation; }
-      #message { font-size: 1.2rem; font-weight: 700; min-height: 1.5em; margin: 0; }
-      #restart { font-size: 1.1rem; padding: 0.6rem 1.4rem; border-radius: 999px; border: 0; background: #ffd166; }
-    </style>
+    <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    <h1>Rider Rush</h1>
-    <canvas id="game" role="img" aria-label="Rider Rush game"></canvas>
-    <p class="hud">
-      <span>Distance: <span id="distance">0 m</span></span>
-      <span>Score: <span id="score">0</span></span>
-      <span>Best: <span id="best">0</span></span>
-    </p>
-    <p id="message" role="status"></p>
-    <button id="restart" type="button" hidden>Ride again</button>
-    <div class="controls">
-      <button id="left" type="button" aria-label="Steer left">◀</button>
-      <button id="right" type="button" aria-label="Steer right">▶</button>
-    </div>
+    <main class="app">
+      <header class="app-header">
+        <h1>Rider Rush</h1>
+        <p class="tagline">Deliver the order. Dodge the traffic.</p>
+      </header>
+
+      <section class="game" aria-label="Game">
+        <dl class="hud">
+          <div class="stat">
+            <dt>Distance</dt>
+            <dd id="distance">0 m</dd>
+          </div>
+          <div class="stat">
+            <dt>Score</dt>
+            <dd id="score">0</dd>
+          </div>
+          <div class="stat">
+            <dt>Best</dt>
+            <dd id="best">0</dd>
+          </div>
+        </dl>
+
+        <div class="screen">
+          <canvas id="game" role="img" aria-label="Rider Rush: a three-lane road with traffic coming towards your motorbike"></canvas>
+        </div>
+
+        <p class="message" id="message" role="status"></p>
+
+        <div class="actions">
+          <button class="button button-primary" id="restart" type="button" hidden>Ride again</button>
+        </div>
+
+        <div class="steer" aria-label="Steering">
+          <button class="button steer-button" id="left" type="button" aria-label="Steer left">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+          </button>
+          <button class="button steer-button" id="right" type="button" aria-label="Steer right">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <section class="help" aria-labelledby="help-title">
+        <h2 id="help-title">Controls</h2>
+        <dl class="keys">
+          <div><dt><kbd>←</kbd> <kbd>→</kbd> or <kbd>A</kbd> <kbd>D</kbd></dt><dd>Change lane</dd></div>
+          <div><dt><kbd>Space</kbd> or <kbd>Enter</kbd></dt><dd>Ride again after a crash</dd></div>
+          <div><dt>Touch</dt><dd>The arrow buttons under the road</dd></div>
+        </dl>
+      </section>
+    </main>
 
     <script type="module" src="./main.ts"></script>
   </body>
