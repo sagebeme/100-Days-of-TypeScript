@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeAll } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { parseRobots, matches, productToken, isAllowed, crawlDelay, type Group } from "./starter/robots.ts";
@@ -6,17 +6,15 @@ import { pathPattern, findJsonEndpoints, asFetchCode } from "./starter/har.ts";
 import { politeFetcher, DisallowedError, type Fetcher } from "./starter/polite.ts";
 
 const read = (file: string) => readFileSync(join(import.meta.dirname, "starter", file), "utf8");
-let robots: Group[] = [];
-beforeAll(() => {
-  robots = parseRobots(read("robots.txt"));
-});
+// Parsed fresh in each test, so one broken function doesn't stop unrelated tests from running.
+const robots = (): Group[] => parseRobots(read("robots.txt"));
 const har: unknown = JSON.parse(read("duka.har"));
 const BOT = "FitCheckBot/1.0 (you@example.com)";
 
 describe("parseRobots", () => {
   it("reads the groups, rules and delays", () => {
-    expect(robots).toHaveLength(3);
-    expect(robots[0]).toEqual({
+    expect(robots()).toHaveLength(3);
+    expect(robots()[0]).toEqual({
       agents: ["*"],
       crawlDelay: 2,
       rules: [
@@ -32,8 +30,8 @@ describe("parseRobots", () => {
   });
 
   it("puts User-agent lines in a row into one group", () => {
-    expect(robots[1].agents).toEqual(["pricebot", "beibot"]);
-    expect(robots[1].crawlDelay).toBe(10);
+    expect(robots()[1].agents).toEqual(["pricebot", "beibot"]);
+    expect(robots()[1].crawlDelay).toBe(10);
   });
 
   it("ignores comments, blank lines, odd casing and empty Disallows", () => {
@@ -70,14 +68,14 @@ describe("isAllowed", () => {
   });
 
   it("uses the * group for bots it doesn't name", () => {
-    expect(isAllowed(robots, BOT, "/products/sneakers")).toBe(true);
-    expect(isAllowed(robots, BOT, "/checkout/pay")).toBe(false);
-    expect(isAllowed(robots, BOT, "/menus/october.pdf")).toBe(false);
+    expect(isAllowed(robots(), BOT, "/products/sneakers")).toBe(true);
+    expect(isAllowed(robots(), BOT, "/checkout/pay")).toBe(false);
+    expect(isAllowed(robots(), BOT, "/menus/october.pdf")).toBe(false);
   });
 
   it("lets the longest matching rule win", () => {
-    expect(isAllowed(robots, BOT, "/api/products?page=2")).toBe(true); // Allow /api/products beats Disallow /api/
-    expect(isAllowed(robots, BOT, "/api/reviews/1234")).toBe(false);
+    expect(isAllowed(robots(), BOT, "/api/products?page=2")).toBe(true); // Allow /api/products beats Disallow /api/
+    expect(isAllowed(robots(), BOT, "/api/reviews/1234")).toBe(false);
   });
 
   it("lets Allow win a tie", () => {
@@ -85,22 +83,22 @@ describe("isAllowed", () => {
   });
 
   it("uses a bot's own group instead of *", () => {
-    expect(isAllowed(robots, "PriceBot/2.0", "/api/products")).toBe(false);
-    expect(isAllowed(robots, "BeiBot", "/products/1234")).toBe(true);
-    expect(isAllowed(robots, "BadBot/1.0", "/")).toBe(false);
+    expect(isAllowed(robots(), "PriceBot/2.0", "/api/products")).toBe(false);
+    expect(isAllowed(robots(), "BeiBot", "/products/1234")).toBe(true);
+    expect(isAllowed(robots(), "BadBot/1.0", "/")).toBe(false);
   });
 
   it("always allows robots.txt itself, and everything when there are no rules", () => {
-    expect(isAllowed(robots, "BadBot", "/robots.txt")).toBe(true);
+    expect(isAllowed(robots(), "BadBot", "/robots.txt")).toBe(true);
     expect(isAllowed([], BOT, "/anything")).toBe(true);
   });
 });
 
 describe("crawlDelay", () => {
   it("reads the delay for the bot's group", () => {
-    expect(crawlDelay(robots, BOT)).toBe(2);
-    expect(crawlDelay(robots, "PriceBot")).toBe(10);
-    expect(crawlDelay(robots, "BadBot")).toBeNull();
+    expect(crawlDelay(robots(), BOT)).toBe(2);
+    expect(crawlDelay(robots(), "PriceBot")).toBe(10);
+    expect(crawlDelay(robots(), "BadBot")).toBeNull();
   });
 });
 
@@ -159,7 +157,7 @@ describe("politeFetcher", () => {
     const waits: number[] = [];
     const fetchFn = vi.fn<Fetcher>(async () => new Response("{}"));
     const polite = politeFetcher({
-      robots,
+      robots: robots(),
       userAgent: BOT,
       minDelayMs,
       fetchFn,
