@@ -3,28 +3,34 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
     <title>Kitenge print generator</title>
-    <style>
-      body { font-family: system-ui, sans-serif; max-width: 42rem; margin: 2rem auto; padding: 0 1rem; background: #fbf6ee; }
-      canvas { width: 100%; height: auto; border-radius: 0.5rem; display: block; }
-      .controls { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin: 1rem 0; }
-      button, select { font-size: 1rem; padding: 0.5rem 1rem; }
-    </style>
+    <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    <h1>Kitenge print generator</h1>
-    <div class="controls">
-      <label>Palette
-        <select id="palette">
-          <option value="sunset">Sunset</option>
-          <option value="lake">Lake Victoria</option>
-          <option value="savanna">Savanna</option>
-        </select>
-      </label>
-      <button id="new" type="button">New print</button>
-      <span id="seed"></span>
-    </div>
-    <canvas id="print" role="img" aria-label="A generated kitenge-style pattern"></canvas>
+    <main class="app">
+      <header class="app-header">
+        <h1>Kitenge print generator</h1>
+        <p class="tagline">Every print comes from a number. Find one you love, and you can always get it back.</p>
+      </header>
+
+      <div class="toolbar card">
+        <div class="field">
+          <label for="palette">Palette</label>
+          <select id="palette">
+            <option value="sunset">Sunset</option>
+            <option value="lake">Lake Victoria</option>
+            <option value="savanna">Savanna</option>
+          </select>
+        </div>
+        <p class="seed" id="seed" aria-live="polite"></p>
+        <button class="button button-primary" id="new" type="button">New print</button>
+      </div>
+
+      <figure class="fabric">
+        <canvas id="print" role="img" aria-label="A generated kitenge-style pattern"></canvas>
+      </figure>
+    </main>
 
     <script type="module" src="./main.ts"></script>
   </body>
