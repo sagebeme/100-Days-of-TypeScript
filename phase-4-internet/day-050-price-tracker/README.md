@@ -4,7 +4,7 @@ Watch the video: *(not recorded yet)*
 
 ## The brief
 
-You've had your eye on a pair of sneakers for weeks, waiting for a sale. Yesterday you checked the site on purpose; the site you want to track has no API (you checked, Day 49), so this time you do read the HTML. Build a tracker that reads a shop's listing page, remembers every price, and shows what went down, what went up, and what just hit its lowest price ever.
+You've had your eye on a pair of sneakers for weeks, waiting for a sale. The shop has no API (you checked, the Day 49 way), so this time you do read the HTML. Build a tracker that reads a shop's listing page, remembers every price, and shows what went down, what went up, and what just hit its lowest price ever.
 
 ```
 $ node phase-4-internet/day-050-price-tracker/starter/cli.ts pages/sneakers-today.html 2026-09-26
