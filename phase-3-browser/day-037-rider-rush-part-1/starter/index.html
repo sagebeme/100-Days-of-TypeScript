@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rider Rush</title>
+    <style>
+      body { margin: 0; font-family: system-ui, sans-serif; background: #111; color: #eee; display: grid; justify-items: center; gap: 0.75rem; padding: 1rem; }
+      canvas { max-width: 100%; max-height: 75vh; border-radius: 0.5rem; }
+      .controls { display: flex; gap: 1rem; }
+      .controls button { font-size: 2rem; width: 5rem; height: 3.5rem; border-radius: 0.75rem; border: 0; touch-action: manipulation; }
+      #distance { font-variant-numeric: tabular-nums; }
+    </style>
+  </head>
+  <body>
+    <h1>Rider Rush</h1>
+    <canvas id="game" role="img" aria-label="Rider Rush game"></canvas>
+    <p>Distance: <span id="distance" aria-live="off">0 m</span></p>
+    <div class="controls">
+      <button id="left" type="button" aria-label="Steer left">◀</button>
+      <button id="right" type="button" aria-label="Steer right">▶</button>
+    </div>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
