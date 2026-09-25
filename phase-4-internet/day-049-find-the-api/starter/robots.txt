@@ -1,0 +1,21 @@
+# robots.txt for duka.example (a made-up shop for practice)
+
+User-agent: *
+Crawl-delay: 2
+Disallow: /cart
+Disallow: /checkout
+Disallow: /account/
+Disallow: /search?
+Disallow: /*.pdf$
+Allow: /api/products
+Disallow: /api/
+
+# Price-comparison bots may read product pages, but slowly.
+User-agent: PriceBot
+User-agent: BeiBot
+Crawl-delay: 10
+Disallow: /api/
+Allow: /products/
+
+User-agent: BadBot
+Disallow: /
