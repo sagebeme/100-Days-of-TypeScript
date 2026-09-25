@@ -16,7 +16,7 @@ import { alertNewDrops } from "./starter/alerts.ts";
 
 const drop = (overrides: Partial<Drop> = {}): Drop => ({
   id: "sauti-sol-kicc",
-  event: "Sauti Sol Reunion Tour",
+  event: "Jioni Jazz Night Tour",
   venue: "KICC",
   date: "2026-11-14",
   priceKes: 3500,
@@ -64,7 +64,7 @@ describe("toGsmFriendly", () => {
   });
 
   it("makes a pasted message fit GSM-7", () => {
-    expect(smsInfo(toGsmFriendly("Blankets & Wine – the year’s best…")).encoding).toBe("GSM-7");
+    expect(smsInfo(toGsmFriendly("Picnic Sounds – the year’s best…")).encoding).toBe("GSM-7");
   });
 });
 
@@ -72,7 +72,7 @@ describe("dropMessage", () => {
   it("fits everything in one plain SMS", () => {
     const message = dropMessage(drop());
     expect(message).toBe(
-      "TICKETS OUT: Sauti Sol Reunion Tour @ KICC, Sat 14 Nov. From KES 3,500. https://tix.example/ss26 Reply STOP to opt out",
+      "TICKETS OUT: Jioni Jazz Night Tour @ KICC, Sat 14 Nov. From KES 3,500. https://tix.example/ss26 Reply STOP to opt out",
     );
     expect(smsInfo(message)).toMatchObject({ encoding: "GSM-7", parts: 1 });
   });
@@ -83,7 +83,7 @@ describe("dropMessage", () => {
 
   it("shortens a long name a word at a time, keeping the price, link and opt-out", () => {
     const long = drop({
-      event: "Blankets & Wine – December Edition, with the year’s best line-up",
+      event: "Picnic Sounds – December Edition, with the year’s best line-up",
       venue: "Laureate Gardens",
       date: "2026-12-06",
       priceKes: 4000,
@@ -91,7 +91,7 @@ describe("dropMessage", () => {
     });
     const message = dropMessage(long);
     expect(message).toBe(
-      "TICKETS OUT: Blankets & Wine - December Edition, with the... @ Laureate Gardens, Sun 6 Dec. From KES 4,000. https://tix.example/bw1206 Reply STOP to opt out",
+      "TICKETS OUT: Picnic Sounds - December Edition, with the... @ Laureate Gardens, Sun 6 Dec. From KES 4,000. https://tix.example/bw1206 Reply STOP to opt out",
     );
     expect(smsInfo(message).parts).toBe(1);
   });

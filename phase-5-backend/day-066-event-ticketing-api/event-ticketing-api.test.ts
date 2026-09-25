@@ -91,7 +91,7 @@ async function setup(options: { payments?: Payments; capacity?: number; priceKes
 
   const organiser = await person("Wanjiru", "organiser");
   const created = await organiser.json("POST", "/events", {
-    title: "Sauti Sol Reunion",
+    title: "Jioni Jazz Night",
     venue: "Uhuru Gardens",
     startsAt: "2026-12-12T18:00:00+03:00",
     priceKes: options.priceKes ?? 1000,
@@ -306,7 +306,7 @@ describe("checking in at the gate", () => {
     expect([forged.status, (await forged.json()).error]).toEqual([422, "Not a real ticket. Don't let them in."]);
     expect((await scan(organiser, ticketCode(999, SECRET))).status).toBe(422); // well signed, but no such ticket
 
-    const other = await organiser.json("POST", "/events", { title: "Blankets & Wine", venue: "Nairobi", startsAt: "2026-12-14T14:00:00+03:00", priceKes: 3000, capacity: 100 });
+    const other = await organiser.json("POST", "/events", { title: "Picnic Sounds", venue: "Nairobi", startsAt: "2026-12-14T14:00:00+03:00", priceKes: 3000, capacity: 100 });
     await organiser.call("POST", `/events/${other.id}/publish`);
     const wrongEvent = await scan(organiser, codes[0], other.id);
     expect([wrongEvent.status, (await wrongEvent.json()).error]).toEqual([409, "This ticket is for a different event."]);

@@ -1,5 +1,5 @@
 [
-  { "id": "sauti-sol-kicc", "event": "Sauti Sol Reunion Tour", "venue": "KICC", "date": "2026-11-14", "priceKes": 3500, "url": "https://tix.example/ss26" },
-  { "id": "bw-december", "event": "Blankets & Wine – December Edition, with the year’s best line-up", "venue": "Laureate Gardens", "date": "2026-12-06", "priceKes": 4000, "url": "https://tix.example/bw1206" },
+  { "id": "sauti-sol-kicc", "event": "Jioni Jazz Night Tour", "venue": "KICC", "date": "2026-11-14", "priceKes": 3500, "url": "https://tix.example/ss26" },
+  { "id": "bw-december", "event": "Picnic Sounds – December Edition, with the year’s best line-up", "venue": "Laureate Gardens", "date": "2026-12-06", "priceKes": 4000, "url": "https://tix.example/bw1206" },
   { "id": "gengetone-fest", "event": "Gengetone Fest", "venue": "Carnivore Grounds", "date": "2026-11-28", "priceKes": 1500, "url": "https://tix.example/gf26" }
 ]

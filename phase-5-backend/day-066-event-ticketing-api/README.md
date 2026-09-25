@@ -7,7 +7,7 @@ Watch the video: *(not recorded yet)*
 Everything from Phase 5 in one real backend: a ticketing platform where organisers sell seats, fans pay with M-Pesa, and staff scan QR codes at the gate.
 
 ```
-Organiser creates "Sauti Sol Reunion", 500 seats, KES 1,000, and publishes it
+Organiser creates "Jioni Jazz Night", 500 seats, KES 1,000, and publishes it
 Amina orders 2 tickets          -> seats held for 10 minutes, "enter your M-Pesa PIN" on her phone
 Safaricom calls back: paid      -> order paid, 2 tickets: T1-3419C1CF5A2891AA, T2-055C33999142F9B6
 At the gate, scan T1-…          -> {"admitted":true,"holder":"Amina"}
@@ -77,7 +77,7 @@ curl -c org.txt -X POST localhost:3066/signup -H 'Content-Type: application/json
   -d '{"email":"wanjiru@example.com","name":"Wanjiru","password":"matatu-sunset-42"}'
 node -e "new (require('node:sqlite').DatabaseSync)('phase-5-backend/day-066-event-ticketing-api/starter/tickets.db').exec(\"UPDATE users SET role='organiser'\")"
 curl -b org.txt -X POST localhost:3066/events -H 'Content-Type: application/json' \
-  -d '{"title":"Sauti Sol Reunion","venue":"Uhuru Gardens","startsAt":"2026-12-12T18:00:00+03:00","priceKes":1000,"capacity":500}'
+  -d '{"title":"Jioni Jazz Night","venue":"Uhuru Gardens","startsAt":"2026-12-12T18:00:00+03:00","priceKes":1000,"capacity":500}'
 curl -b org.txt -X POST localhost:3066/events/1/publish
 
 # A fan buys two, and "pays":

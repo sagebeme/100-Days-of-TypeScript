@@ -9,7 +9,7 @@ The good tickets sell out in minutes. Build the alert service: when a new ticket
 ```
 $ node phase-4-internet/day-047-ticket-drop-sms/starter/cli.ts
 Skipping numbers that don't look Kenyan: 12345
-SMS to 3 number(s): TICKETS OUT: Sauti Sol Reunion Tour @ KICC, Sat 14 Nov. From KES 3,500. https://tix.example/ss26 Reply STOP to opt out
+SMS to 3 number(s): TICKETS OUT: Jioni Jazz Night Tour @ KICC, Sat 14 Nov. From KES 3,500. https://tix.example/ss26 Reply STOP to opt out
 ...
 Announced 3 drop(s).
 ```

@@ -23,7 +23,7 @@ const releases: Release[] = [
   { artist: "Nyashinski", title: "Practice Track", kind: "single", released: "2026-10-02" },
   { artist: "Bien", title: "Made-Up Single", kind: "single", released: "2026-10-02" },
   { artist: "Nviiri the Storyteller", title: "Sample EP", kind: "EP", released: "2026-09-29" },
-  { artist: "Sauti Sol", title: "An Old Album", kind: "album", released: "2026-08-15" },
+  { artist: "Jioni Jazz", title: "An Old Album", kind: "album", released: "2026-08-15" },
   { artist: "Future Artist", title: "Not Out Yet", kind: "single", released: "2026-10-09" },
 ];
 
