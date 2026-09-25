@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Split the bill</title>
+    <style>
+      body { font-family: system-ui, sans-serif; max-width: 24rem; margin: 2rem auto; padding: 0 1rem; }
+      label { display: block; margin-top: 1rem; font-weight: 600; }
+      input, select { width: 100%; font-size: 1.1rem; padding: 0.5rem; box-sizing: border-box; }
+      #result { margin-top: 1.5rem; font-size: 1.25rem; font-weight: 700; }
+    </style>
+  </head>
+  <body>
+    <h1>Split the bill</h1>
+    <form id="bill">
+      <label for="total">Total (KES)</label>
+      <input id="total" type="number" min="1" inputmode="numeric">
+
+      <label for="people">People</label>
+      <input id="people" type="number" min="1" value="2" inputmode="numeric">
+
+      <label for="tip">Tip</label>
+      <select id="tip">
+        <option value="0">No tip</option>
+        <option value="5">5%</option>
+        <option value="10" selected>10%</option>
+        <option value="15">15%</option>
+      </select>
+    </form>
+    <p id="result" aria-live="polite"></p>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
