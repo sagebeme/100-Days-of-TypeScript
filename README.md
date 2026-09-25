@@ -71,6 +71,16 @@ Run everything you've done so far:
 npm test
 ```
 
+### Browser days
+
+From Day 30, projects run in the browser. Start a dev server for that day's `starter/` folder and open the address it prints (usually `http://localhost:5173`):
+
+```bash
+npm run dev -- phase-3-browser/day-030-split-the-bill/starter
+```
+
+The tests still run with `npm test`. They use a pretend browser, so you don't need one open.
+
 ## The course
 
 100 days in 8 phases. Each phase ends with a bigger project that uses everything before it.
