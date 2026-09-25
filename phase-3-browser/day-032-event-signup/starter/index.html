@@ -3,51 +3,74 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
     <title>Rooftop listening party · sign up</title>
-    <style>
-      body { font-family: system-ui, sans-serif; max-width: 26rem; margin: 2rem auto; padding: 0 1rem; }
-      label, legend { display: block; margin-top: 1rem; font-weight: 600; }
-      input:not([type="radio"]) { width: 100%; font-size: 1rem; padding: 0.5rem; box-sizing: border-box; }
-      fieldset { border: 0; padding: 0; margin: 0; }
-      fieldset label { display: inline; font-weight: 400; margin-right: 1rem; }
-      [aria-invalid="true"] { border: 2px solid #c62828; }
-      .error { color: #c62828; margin: 0.25rem 0 0; min-height: 1.2em; }
-      button { margin-top: 1.5rem; font-size: 1.1rem; padding: 0.6rem 1.4rem; }
-      #status { font-weight: 700; color: #2e7d32; }
-    </style>
+    <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    <h1>Rooftop listening party</h1>
-    <p>Saturday, 8 pm. Sign up for your ticket.</p>
+    <main class="app">
+      <header class="event">
+        <p class="event-kicker">Sign-ups open</p>
+        <h1>Rooftop listening party</h1>
+        <ul class="event-facts">
+          <li>Saturday, 8 pm</li>
+          <li>Kilimani rooftop</li>
+          <li>Limited to 60 people</li>
+        </ul>
+      </header>
 
-    <form id="signup" novalidate>
-      <label for="name">Name</label>
-      <input id="name" name="name" autocomplete="name" aria-describedby="name-error">
-      <p class="error" id="name-error" data-error-for="name"></p>
+      <form class="card" id="signup" novalidate>
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" autocomplete="name" aria-describedby="name-error">
+          <p class="error" id="name-error" data-error-for="name"></p>
+        </div>
 
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email" autocomplete="email" aria-describedby="email-error">
-      <p class="error" id="email-error" data-error-for="email"></p>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" aria-describedby="email-error">
+          <p class="error" id="email-error" data-error-for="email"></p>
+        </div>
 
-      <label for="phone">Phone</label>
-      <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="0712 345 678" aria-describedby="phone-error">
-      <p class="error" id="phone-error" data-error-for="phone"></p>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="0712 345 678" aria-describedby="phone-hint phone-error">
+          <p class="hint" id="phone-hint">We'll send your ticket here by SMS.</p>
+          <p class="error" id="phone-error" data-error-for="phone"></p>
+        </div>
 
-      <fieldset aria-describedby="ticket-error">
-        <legend>Ticket</legend>
-        <label><input type="radio" name="ticket" value="regular"> Regular</label>
-        <label><input type="radio" name="ticket" value="vip"> VIP</label>
-        <label><input type="radio" name="ticket" value="student"> Student</label>
-      </fieldset>
-      <p class="error" id="ticket-error" data-error-for="ticket"></p>
+        <fieldset class="field tickets" aria-describedby="ticket-error">
+          <legend class="label">Ticket</legend>
+          <label class="ticket">
+            <input type="radio" name="ticket" value="regular">
+            <span class="ticket-name">Regular</span>
+            <span class="ticket-price">KES 1,000</span>
+          </label>
+          <label class="ticket">
+            <input type="radio" name="ticket" value="vip">
+            <span class="ticket-name">VIP</span>
+            <span class="ticket-price">KES 2,500</span>
+          </label>
+          <label class="ticket">
+            <input type="radio" name="ticket" value="student">
+            <span class="ticket-name">Student</span>
+            <span class="ticket-price">KES 500</span>
+          </label>
+          <p class="error" id="ticket-error" data-error-for="ticket"></p>
+        </fieldset>
 
-      <label for="guests">Guests (0 to 3)</label>
-      <input id="guests" name="guests" type="number" min="0" max="3" value="0" aria-describedby="guests-error">
-      <p class="error" id="guests-error" data-error-for="guests"></p>
+        <div class="field guests">
+          <label for="guests">Guests</label>
+          <input id="guests" name="guests" type="number" min="0" max="3" value="0" inputmode="numeric" aria-describedby="guests-hint guests-error">
+          <p class="hint" id="guests-hint">Up to 3 friends on your ticket.</p>
+          <p class="error" id="guests-error" data-error-for="guests"></p>
+        </div>
 
-      <button type="submit">Sign up</button>
-    </form>
-    <p id="status" role="status"></p>
+        <button class="button button-primary submit" type="submit">Sign up</button>
+      </form>
+
+      <p class="status" id="status" role="status"></p>
+    </main>
 
     <script type="module" src="./main.ts"></script>
   </body>
