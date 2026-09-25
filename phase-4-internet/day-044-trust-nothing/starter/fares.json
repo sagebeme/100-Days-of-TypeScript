@@ -1,0 +1,11 @@
+[
+  { "route": "46", "from": "CBD", "to": "Kawangware", "fareKes": 80, "updated": "2026-09-20" },
+  { "route": "111", "from": "CBD", "to": "Ngong", "fareKes": "120", "peak": true, "updated": "2026-09-21" },
+  { "route": "  33 ", "from": "CBD", "to": "Embakasi", "fareKes": 100, "updated": "2026-09-19" },
+  { "route": "58", "from": "CBD", "to": "Buruburu", "fareKes": "about 70", "updated": "2026-09-18" },
+  { "route": "", "from": "CBD", "to": "Rongai", "fareKes": 150, "updated": "2026-09-22" },
+  { "route": "105", "from": "CBD", "to": "Kikuyu", "fareKes": 100, "peak": "yes", "updated": "last week" },
+  { "route": "237", "from": "CBD", "to": "Thika", "fareKes": 200, "peak": true, "updated": "2026-09-23" },
+  "44 CBD-Githurai 100",
+  { "route": "125", "from": "CBD", "to": "Rongai", "fareKes": -10, "updated": "2026-09-22" }
+]
