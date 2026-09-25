@@ -3,29 +3,53 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
     <title>Amina Creates · links</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <header>
-      <img class="avatar" src="https://picsum.photos/seed/amina/160" alt="Amina smiling in a yellow kitenge jacket" width="96" height="96">
-      <h1>Amina Creates</h1>
-      <p>Logos, flyers and kitenge merch. Made in Nairobi.</p>
-    </header>
+    <div class="page">
+      <header class="profile">
+        <img class="avatar" src="https://picsum.photos/seed/amina/192" alt="Amina smiling in a yellow kitenge jacket" width="96" height="96">
+        <h1>Amina Creates</h1>
+        <p class="bio">Logos, flyers and kitenge merch. Made in Nairobi.</p>
+        <p class="status"><span class="dot" aria-hidden="true"></span> Taking orders for October</p>
+      </header>
 
-    <main>
-      <nav>
-        <ul class="links">
-          <li><a href="https://example.com/latest-drop" target="_blank" rel="noopener">Latest drop</a></li>
-          <li><a href="https://www.youtube.com/@aminacreates" target="_blank" rel="noopener">YouTube</a></li>
-          <li><a href="https://wa.me/254712345678">Order on WhatsApp</a></li>
-          <li><a href="mailto:hello@example.com">Email me</a></li>
-        </ul>
-      </nav>
-    </main>
+      <main>
+        <nav aria-label="My links">
+          <ul class="links">
+            <li>
+              <a class="link link-featured" href="https://example.com/latest-drop" target="_blank" rel="noopener">
+                <span class="link-title">Latest drop: the Jua collection</span>
+                <span class="link-note">Kitenge tote bags, out now</span>
+              </a>
+            </li>
+            <li>
+              <a class="link" href="https://www.youtube.com/@aminacreates" target="_blank" rel="noopener">
+                <span class="link-title">YouTube</span>
+                <span class="link-note">Watch me design a logo from scratch</span>
+              </a>
+            </li>
+            <li>
+              <a class="link" href="https://wa.me/254712345678">
+                <span class="link-title">Order on WhatsApp</span>
+                <span class="link-note">Logos from KES 3,000</span>
+              </a>
+            </li>
+            <li>
+              <a class="link" href="mailto:hello@example.com">
+                <span class="link-title">Email me</span>
+                <span class="link-note">For brands and bigger projects</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </main>
 
-    <footer>
-      <p>© 2026 Amina Creates</p>
-    </footer>
+      <footer>
+        <p>© 2026 Amina Creates</p>
+      </footer>
+    </div>
   </body>
 </html>
