@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>Rider Rush · deliver the order, dodge the traffic</title>
+    <meta name="description" content="Deliver the order, dodge the traffic. A three-lane arcade game you can play in any browser, on a phone or a laptop.">
+    <meta name="theme-color" content="#0e1015">
+
+    <!-- The preview card when someone pastes your link. After you deploy, change og:image to the
+         full address, like https://your-game.netlify.app/og-image.png: most apps need that. -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Rider Rush">
+    <meta property="og:description" content="Deliver the order. Dodge the traffic. Can you beat my score?">
+    <meta property="og:image" content="/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon-192.png">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <main class="app">
+      <header class="app-header">
+        <h1>Rider Rush</h1>
+        <p class="tagline">Deliver the order. Dodge the traffic.</p>
+      </header>
+
+      <section class="game" aria-label="Game">
+        <dl class="hud">
+          <div class="stat">
+            <dt>Distance</dt>
+            <dd id="distance">0 m</dd>
+          </div>
+          <div class="stat">
+            <dt>Score</dt>
+            <dd id="score">0</dd>
+          </div>
+          <div class="stat">
+            <dt>Best</dt>
+            <dd id="best">0</dd>
+          </div>
+        </dl>
+
+        <div class="screen">
+          <canvas id="game" role="img" aria-label="Rider Rush: a three-lane road with traffic coming towards your motorbike"></canvas>
+        </div>
+
+        <div class="steer" aria-label="Steering">
+          <button class="button steer-button" id="left" type="button" aria-label="Steer left">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+          </button>
+          <button class="button steer-button" id="right" type="button" aria-label="Steer right">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+
+        <div class="actions">
+          <!-- One main button at a time: Start / Ride again, or Pause / Resume. -->
+          <button class="button button-primary" id="start" type="button">Start</button>
+          <button class="button button-primary" id="pause" type="button" hidden>Pause</button>
+          <button class="button" id="share" type="button" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>
+            Share
+          </button>
+          <button class="button" id="mute" type="button" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="sound-waves" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path class="sound-off" d="M16 9l6 6M22 9l-6 6"/></svg>
+            Mute
+          </button>
+        </div>
+      </section>
+
+      <section class="help" aria-labelledby="help-title">
+        <h2 id="help-title">Controls</h2>
+        <dl class="keys">
+          <div><dt><kbd>←</kbd> <kbd>→</kbd> or <kbd>A</kbd> <kbd>D</kbd></dt><dd>Change lane</dd></div>
+          <div><dt><kbd>Space</kbd></dt><dd>Start, or ride again</dd></div>
+          <div><dt><kbd>P</kbd> or <kbd>Esc</kbd></dt><dd>Pause and resume</dd></div>
+          <div><dt><kbd>M</kbd></dt><dd>Sound on and off</dd></div>
+          <div><dt>Touch</dt><dd>Swipe, or tap the side of the road you want</dd></div>
+        </dl>
+      </section>
+
+      <p class="toast" id="toast" role="status" aria-live="polite"></p>
+      <p class="visually-hidden" id="announcer" role="status" aria-live="polite"></p>
+    </main>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

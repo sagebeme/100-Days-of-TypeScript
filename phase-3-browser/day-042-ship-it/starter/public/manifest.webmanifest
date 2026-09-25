@@ -1,0 +1,15 @@
+{
+  "name": "Rider Rush",
+  "short_name": "Rider Rush",
+  "description": "Deliver the order. Dodge the traffic. A three-lane arcade game built in TypeScript.",
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0e1015",
+  "theme_color": "#0e1015",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
