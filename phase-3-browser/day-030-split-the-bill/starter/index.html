@@ -3,32 +3,46 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
     <title>Split the bill</title>
-    <style>
-      body { font-family: system-ui, sans-serif; max-width: 24rem; margin: 2rem auto; padding: 0 1rem; }
-      label { display: block; margin-top: 1rem; font-weight: 600; }
-      input, select { width: 100%; font-size: 1.1rem; padding: 0.5rem; box-sizing: border-box; }
-      #result { margin-top: 1.5rem; font-size: 1.25rem; font-weight: 700; }
-    </style>
+    <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    <h1>Split the bill</h1>
-    <form id="bill">
-      <label for="total">Total (KES)</label>
-      <input id="total" type="number" min="1" inputmode="numeric">
+    <main class="app">
+      <header class="app-header">
+        <h1>Split the bill</h1>
+        <p class="tagline">Type the total, how many of you there are and the tip. Everyone sees what to send.</p>
+      </header>
 
-      <label for="people">People</label>
-      <input id="people" type="number" min="1" value="2" inputmode="numeric">
+      <form class="card" id="bill">
+        <div class="field">
+          <label for="total">Total</label>
+          <div class="money">
+            <span class="money-prefix" aria-hidden="true">KES</span>
+            <input id="total" type="number" min="1" inputmode="numeric" placeholder="4800" aria-describedby="total-hint">
+          </div>
+          <p class="hint" id="total-hint">The full amount on the bill, before the tip.</p>
+        </div>
 
-      <label for="tip">Tip</label>
-      <select id="tip">
-        <option value="0">No tip</option>
-        <option value="5">5%</option>
-        <option value="10" selected>10%</option>
-        <option value="15">15%</option>
-      </select>
-    </form>
-    <p id="result" aria-live="polite"></p>
+        <div class="row">
+          <div class="field">
+            <label for="people">People</label>
+            <input id="people" type="number" min="1" value="2" inputmode="numeric">
+          </div>
+          <div class="field">
+            <label for="tip">Tip</label>
+            <select id="tip">
+              <option value="0">No tip</option>
+              <option value="5">5%</option>
+              <option value="10" selected>10%</option>
+              <option value="15">15%</option>
+            </select>
+          </div>
+        </div>
+      </form>
+
+      <p class="result" id="result" aria-live="polite"></p>
+    </main>
 
     <script type="module" src="./main.ts"></script>
   </body>
