@@ -1,0 +1,11 @@
+/* TODO: in :root, define --accent (a colour) and use it below with var(--accent) */
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  /* TODO: centre the page and keep it narrow with max-width */
+}
+
+/* TODO: style .links a as big, tappable buttons */
+
+/* TODO: a :hover or :focus-visible rule for the links */
