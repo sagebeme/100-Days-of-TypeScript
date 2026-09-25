@@ -1,0 +1,8 @@
+[
+  { "id": "epl-2026-10-03-ars-che", "competition": "Premier League", "home": "Arsenal", "away": "Chelsea", "kickoff": "2026-10-03T16:30:00Z" },
+  { "id": "epl-2026-10-04-mci-liv", "competition": "Premier League", "home": "Manchester City", "away": "Liverpool", "kickoff": "2026-10-04T15:30:00Z" },
+  { "id": "fkf-2026-10-04-gor-afc", "competition": "FKF Premier League", "home": "Gor Mahia", "away": "AFC Leopards", "kickoff": "2026-10-04T12:00:00Z" },
+  { "id": "int-2026-10-09-ken-uga", "competition": "International friendly", "home": "Kenya", "away": "Uganda", "kickoff": "2026-10-09T13:00:00Z" },
+  { "id": "epl-2026-10-17-che-tot", "competition": "Premier League", "home": "Chelsea", "away": "Tottenham", "kickoff": "2026-10-17T11:30:00Z" },
+  { "id": "fkf-2026-10-18-afc-tus", "competition": "FKF Premier League", "home": "AFC Leopards", "away": "Tusker", "kickoff": "2026-10-18T13:00:00Z" }
+]
