@@ -1,0 +1,27 @@
+{
+  "name": "@your-name/ligi",
+  "version": "0.1.0",
+  "description": "A typed client for the Ligi football API: standings, teams and fixtures.",
+  "keywords": ["football", "kenya", "kpl", "api", "sdk", "typescript"],
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": ["dist", "README.md"],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "zod": "^4.0.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run build"
+  }
+}

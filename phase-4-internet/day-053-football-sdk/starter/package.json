@@ -1,0 +1,11 @@
+{
+  "name": "@your-name/ligi",
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "zod": "^4.0.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json"
+  }
+}
