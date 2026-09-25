@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tukio · find events in Kenya</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="app">
+      <header>
+        <h1>Tukio</h1>
+        <p class="tagline">Find something to do this weekend. (A practice site: none of these events are real.)</p>
+      </header>
+
+      <form class="search" role="search" id="search">
+        <div class="field grow">
+          <label for="q">Search events</label>
+          <input id="q" name="q" type="search" placeholder="Music, football, comedy…">
+        </div>
+        <div class="field">
+          <label for="city">City</label>
+          <select id="city" name="city">
+            <option value="">Anywhere</option>
+            <option value="Nairobi">Nairobi</option>
+            <option value="Mombasa">Mombasa</option>
+            <option value="Kisumu">Kisumu</option>
+          </select>
+        </div>
+        <button class="button" type="submit">Search</button>
+      </form>
+
+      <p class="status" role="status" id="status">Search to see events.</p>
+      <ul class="results" id="results" aria-label="Events"></ul>
+      <button class="button secondary" type="button" id="more" hidden>Load more</button>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
