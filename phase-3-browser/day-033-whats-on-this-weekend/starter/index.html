@@ -3,22 +3,29 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
     <title>What's on this weekend</title>
-    <style>
-      body { font-family: system-ui, sans-serif; max-width: 34rem; margin: 2rem auto; padding: 0 1rem; background: #111; color: #eee; }
-      #list { list-style: none; padding: 0; display: grid; gap: 0.75rem; }
-      #list li { background: #1e1e1e; border-left: 4px solid #ff6f3c; padding: 0.75rem 1rem; border-radius: 0.5rem; }
-      #list h2 { margin: 0 0 0.25rem; font-size: 1.1rem; }
-      #list p { margin: 0; opacity: 0.8; }
-      .price { font-weight: 700; opacity: 1; }
-    </style>
+    <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    <h1>What's on this weekend</h1>
-    <label><input id="free-only" type="checkbox"> Free only</label>
-    <p id="status" role="status"></p>
-    <button id="retry" type="button" hidden>Retry</button>
-    <ul id="list"></ul>
+    <main class="app">
+      <header class="app-header">
+        <h1>What's on this weekend</h1>
+        <p class="tagline">Gigs, games and pop-ups in Nairobi, Saturday and Sunday.</p>
+      </header>
+
+      <div class="toolbar">
+        <p class="status" id="status" role="status"></p>
+        <label class="switch">
+          <input id="free-only" type="checkbox" role="switch">
+          <span class="switch-track" aria-hidden="true"></span>
+          Free only
+        </label>
+      </div>
+
+      <button class="button" id="retry" type="button" hidden>Try again</button>
+      <ul class="events" id="list"></ul>
+    </main>
 
     <script type="module" src="./main.ts"></script>
   </body>
