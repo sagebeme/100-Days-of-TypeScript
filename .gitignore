@@ -14,3 +14,4 @@ results.png
 *.db
 *.db-wal
 *.db-shm
+jar.txt
