@@ -1,0 +1,9 @@
+[
+  { "id": "e1", "title": "Gengetone Night", "venue": "Alchemist", "date": "2026-10-03", "time": "21:00", "priceKes": 1000, "tags": ["music"] },
+  { "id": "e2", "title": "Sunday Picnic Jam", "venue": "Karura Forest", "date": "2026-10-04", "time": "13:00", "priceKes": null, "tags": ["music", "outdoors"] },
+  { "id": "e3", "title": "EA FC Tournament", "venue": "iHub", "date": "2026-10-03", "time": "14:00", "priceKes": 500, "tags": ["gaming"] },
+  { "id": "e4", "title": "Thrift Pop-up", "venue": "The Mall, Westlands", "date": "2026-10-04", "time": "10:00", "priceKes": null, "tags": ["fashion"] },
+  { "id": "e5", "title": "Poetry After Dark", "venue": "Kenya National Theatre", "date": "2026-10-02", "time": "19:00", "priceKes": 800, "tags": ["spoken word"] },
+  { "id": "e6", "title": "Afrobeats Brunch", "venue": "Mercury Lounge", "date": "2026-10-03", "time": "11:00", "priceKes": 2500, "tags": ["music", "food"] },
+  { "id": "e7", "title": "Startup Pitch Night", "venue": "Nairobi Garage", "date": "2026-10-06", "time": "18:00", "priceKes": null, "tags": ["tech"] }
+]
