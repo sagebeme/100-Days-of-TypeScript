@@ -1,0 +1,13 @@
+{
+  // The Next.js days. Next's packages (next/link, next/navigation...) are written for bundlers, so
+  // these files use "bundler" resolution; every other day keeps NodeNext, which catches imports
+  // that Node itself couldn't run.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "plugins": [{ "name": "next" }]
+  },
+  "include": ["phase-6-fullstack-react/day-071-*/**/*.ts", "phase-6-fullstack-react/day-071-*/**/*.tsx", "phase-6-fullstack-react/day-074-*/**/*.ts", "phase-6-fullstack-react/day-074-*/**/*.tsx"],
+  "exclude": ["node_modules", "**/.next"]
+}

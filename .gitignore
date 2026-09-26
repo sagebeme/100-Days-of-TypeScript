@@ -15,3 +15,7 @@ results.png
 *.db-wal
 *.db-shm
 jar.txt
+
+# Next.js build output (Days 71 and 74)
+.next/
+next-env.d.ts

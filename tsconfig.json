@@ -15,5 +15,7 @@
     "resolveJsonModule": true,
     "jsx": "react-jsx"
   },
-  "include": ["phase-*/**/*.ts", "phase-*/**/*.tsx"]
+  "include": ["phase-*/**/*.ts", "phase-*/**/*.tsx"],
+  // Next.js days are checked by tsconfig.next.json: Next's packages need "bundler" module resolution.
+  "exclude": ["node_modules", "**/.next", "phase-6-fullstack-react/day-071-*", "phase-6-fullstack-react/day-074-*"]
 }

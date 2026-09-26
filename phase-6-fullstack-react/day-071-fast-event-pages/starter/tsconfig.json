@@ -1,0 +1,6 @@
+{
+  // Already written: the repo's settings for Next.js days, for when Next checks this folder itself.
+  "extends": "../../../tsconfig.next.json",
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": [".next"]
+}
