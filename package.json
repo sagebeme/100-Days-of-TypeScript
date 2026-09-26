@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.next.json"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^0.128.0",
     "@hono/node-server": "^2.1.1",
     "@hookform/resolvers": "^5.9.1",
     "@tanstack/react-query": "^5.103.2",
