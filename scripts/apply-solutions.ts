@@ -32,7 +32,8 @@ for (const dayDir of findDayFolders(root)) {
 
   let solutionFiles: string[];
   try {
-    solutionFiles = readdirSync(solutionDir);
+    // Relative paths, subfolders included: a Next.js day keeps its solutions in app/events/[id]/ and so on.
+    solutionFiles = readdirSync(solutionDir, { recursive: true, encoding: "utf8" }).filter((file) => statSync(join(solutionDir, file)).isFile());
   } catch {
     continue; // no solution/ folder for this day yet
   }
