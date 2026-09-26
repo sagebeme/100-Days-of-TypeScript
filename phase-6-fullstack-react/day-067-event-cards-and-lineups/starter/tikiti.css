@@ -1,0 +1,463 @@
+/* Tikiti: the ticketing app's design system. Already written: every Phase 6 day builds on it.
+   Colours, type and spacing are tokens here, so a component never hard-codes a colour. */
+
+:root {
+  color-scheme: light;
+  --bg: #f6f3ee; /* warm paper, not stark white: easier on the eyes at night */
+  --surface: #ffffff;
+  --surface-2: #efebe4;
+  --ink: #1b1722;
+  --muted: #5d5766; /* 7:1 on --surface */
+  --line: #e3ddd3;
+  --brand: #c2410c; /* burnt orange: 5.2:1 with white text */
+  --brand-ink: #ffffff;
+  --brand-soft: #fde8dc;
+  --ok: #15803d;
+  --ok-soft: #dcfce7;
+  --warn: #b45309;
+  --warn-soft: #fef3c7;
+  --bad: #b91c1c;
+  --bad-soft: #fee2e2;
+  --focus: #2563eb;
+  --shadow: 0 1px 2px rgb(27 23 34 / 0.06), 0 8px 24px -12px rgb(27 23 34 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(27 23 34 / 0.08), 0 18px 40px -16px rgb(27 23 34 / 0.3);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --step--1: 0.8125rem;
+  --step-0: 0.9375rem;
+  --step-1: 1.125rem;
+  --step-2: clamp(1.35rem, 1.1rem + 1vw, 1.65rem);
+  --step-3: clamp(1.9rem, 1.3rem + 2.6vw, 3rem);
+  --space: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #121016;
+    --surface: #1c1922;
+    --surface-2: #26222d;
+    --ink: #f3eff7;
+    --muted: #b4acbf;
+    --line: #332e3b;
+    --brand: #fb8a4c;
+    --brand-ink: #1b1722;
+    --brand-soft: #3a2218;
+    --ok: #4ade80;
+    --ok-soft: #14301f;
+    --warn: #fbbf24;
+    --warn-soft: #33270c;
+    --bad: #f87171;
+    --bad-soft: #3a1717;
+    --focus: #93b4ff;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+    --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.5), 0 18px 40px -16px rgb(0 0 0 / 0.8);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 var(--step-0) / 1.55 var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Page frame ---------- */
+
+.wrap {
+  width: min(100% - 2rem, 72rem);
+  margin-inline: auto;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 3.75rem;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+}
+
+.logo-mark {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9px;
+  background: var(--brand);
+  color: var(--brand-ink);
+  font-size: 1rem;
+  transform: rotate(-6deg);
+}
+
+.site-nav {
+  margin-left: auto;
+  display: flex;
+  gap: 0.25rem;
+}
+
+.site-nav a {
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: var(--step--1);
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: var(--ink);
+  background: var(--surface-2);
+}
+
+.hero {
+  padding: clamp(2rem, 5vw, 4rem) 0 1.5rem;
+}
+
+.eyebrow {
+  color: var(--brand);
+  font-weight: 700;
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.hero h1 {
+  font-size: var(--step-3);
+  font-weight: 800;
+  max-width: 18ch;
+}
+
+.hero p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: var(--step-1);
+  margin-top: 0.75rem;
+  max-width: 46ch;
+}
+
+main {
+  padding-bottom: 4rem;
+}
+
+.section {
+  margin-top: 2.5rem;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.section-head h2 {
+  font-size: var(--step-2);
+  font-weight: 750;
+}
+
+.section-head .count {
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 2rem 0 3rem;
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+/* ---------- Event grid and cards ---------- */
+
+.event-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16.5rem), 1fr));
+  gap: 1.25rem;
+}
+
+.event-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+}
+
+.event-card:focus-within {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.event-card:focus-within :focus-visible {
+  outline: none; /* the whole card shows the focus ring instead */
+}
+
+.event-card[data-status="cancelled"] .poster,
+.event-card[data-tone="sold-out"] .poster {
+  filter: grayscale(0.85) brightness(0.8);
+}
+
+.event-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem 1.1rem 1.1rem;
+  flex: 1;
+}
+
+.event-title {
+  font-size: var(--step-1);
+  font-weight: 750;
+}
+
+/* The title's link covers the whole card, so anywhere you tap opens the event. */
+.event-title a {
+  text-decoration: none;
+}
+
+.event-title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.event-meta {
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+/* The time on one line, the venue on the next: no stray separators when a long venue wraps. */
+.event-meta > * {
+  display: block;
+}
+
+.event-meta time {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.lineup {
+  font-size: var(--step--1);
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+.lineup strong {
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.event-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 0.85rem;
+}
+
+.price {
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+
+.price.note {
+  font-weight: 500;
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+
+.price small {
+  display: block;
+  font-weight: 500;
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+  background: var(--surface-2);
+  color: var(--muted);
+}
+
+.badge::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.badge[data-tone="ok"] {
+  background: var(--ok-soft);
+  color: var(--ok);
+}
+
+.badge[data-tone="low"] {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.badge[data-tone="sold-out"],
+.badge[data-tone="cancelled"] {
+  background: var(--bad-soft);
+  color: var(--bad);
+}
+
+.tag {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgb(0 0 0 / 0.35);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---------- Poster art: made from a hue, so no image files are needed ---------- */
+
+.poster {
+  --h: 20;
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background:
+    radial-gradient(circle at 85% 110%, hsl(calc(var(--h) + 50) 95% 60% / 0.9), transparent 45%),
+    radial-gradient(circle at 10% -10%, hsl(var(--h) 90% 70% / 0.85), transparent 50%),
+    repeating-linear-gradient(115deg, rgb(255 255 255 / 0.06) 0 2px, transparent 2px 14px),
+    linear-gradient(135deg, hsl(var(--h) 70% 32%), hsl(calc(var(--h) + 35) 75% 18%));
+  color: #fff;
+  transition: filter 0.2s;
+}
+
+.poster-date {
+  position: absolute;
+  left: 0.9rem;
+  bottom: 0.8rem;
+  display: grid;
+  line-height: 1;
+  text-align: center;
+  padding: 0.45rem 0.6rem 0.5rem;
+  border-radius: 10px;
+  background: rgb(255 255 255 / 0.95);
+  color: #1b1722;
+  box-shadow: 0 6px 16px -6px rgb(0 0 0 / 0.5);
+}
+
+.poster-date .month {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #c2410c;
+}
+
+.poster-date .day {
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.empty {
+  padding: 2.5rem 1.5rem;
+  border: 2px dashed var(--line);
+  border-radius: var(--radius);
+  text-align: center;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
