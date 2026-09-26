@@ -1,0 +1,23 @@
+:root { color-scheme: dark; --bg: #020617; --ink: #e2e8f0; --muted: #94a3b8; --cyan: #22d3ee; --pink: #f472b6; --focus: #facc15; }
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; background: radial-gradient(ellipse at top, #1e1b4b, var(--bg) 60%); color: var(--ink); font: 1rem/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; overflow: hidden; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.stage { height: 100%; display: grid; grid-template-rows: auto 1fr auto; justify-items: center; gap: 0.5rem; padding: max(0.5rem, env(safe-area-inset-top)) 0.5rem max(0.5rem, env(safe-area-inset-bottom)); }
+.hud { display: flex; gap: 1.2rem; align-items: center; font: 600 0.85rem ui-monospace, "SF Mono", Menlo, monospace; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+.hud strong { color: var(--ink); font-size: 1rem; }
+#lives { color: var(--cyan); letter-spacing: 0.2em; }
+.screen { position: relative; height: 100%; aspect-ratio: 3 / 4; max-width: 100%; min-height: 0; }
+canvas { display: block; width: 100%; height: 100%; border-radius: 14px; background: #020617; box-shadow: 0 0 0 1px #1e293b, 0 30px 80px -30px #4f46e580; image-rendering: pixelated; }
+.overlay { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 0.8rem; padding: 1.5rem; text-align: center; border-radius: 14px; background: rgb(2 6 23 / 0.72); backdrop-filter: blur(2px); }
+.overlay[hidden] { display: none; }
+.overlay h1 { margin: 0; font: 900 clamp(1.8rem, 6vw, 2.6rem)/1 ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: 0.06em; text-transform: uppercase; background: linear-gradient(90deg, var(--cyan), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.overlay p { margin: 0; color: var(--muted); }
+#start { min-height: 3rem; padding: 0 2rem; border: 0; border-radius: 999px; background: var(--cyan); color: #04202a; font-family: inherit; font-weight: 900; font-size: 1.1rem; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
+.how { font-size: 0.85rem; }
+kbd { padding: 0.05rem 0.4rem; border: 1px solid #334155; border-bottom-width: 2px; border-radius: 4px; font: 0.85em ui-monospace, monospace; color: var(--ink); }
+.touch { display: none; gap: 0.6rem; width: min(100%, 26rem); }
+.touch button { flex: 1; min-height: 3.6rem; border: 1px solid #334155; border-radius: 14px; background: #0f172a; color: var(--ink); font-family: inherit; font-weight: 800; font-size: 1.2rem; touch-action: none; user-select: none; }
+.touch .fire { flex: 1.4; background: #0e3a47; color: var(--cyan); }
+@media (pointer: coarse) { .touch { display: flex; } .how { display: none; } }

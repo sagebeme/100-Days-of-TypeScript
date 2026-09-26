@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <title>Space Shooter</title>
+    <meta name="description" content="Defend the sky over Nairobi. Arrow keys to move, Space to fire." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23020617'/><path d='M16 6l7 18h-14z' fill='%2322d3ee'/></svg>" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="stage">
+      <div class="hud" aria-live="off">
+        <span>Score <strong id="score">0</strong></span>
+        <span>Wave <strong id="wave">1</strong></span>
+        <span id="lives" aria-label="Lives"></span>
+        <span>Best <strong id="best">0</strong></span>
+      </div>
+      <div class="screen">
+        <canvas id="canvas" width="480" height="640" aria-label="The game"></canvas>
+        <div class="overlay" id="overlay">
+          <h1 id="title">Space Shooter</h1>
+          <p id="message">Defend the sky over Nairobi.</p>
+          <button type="button" id="start">Start</button>
+          <p class="how"><kbd>←</kbd> <kbd>→</kbd> move · <kbd>Space</kbd> fire · <kbd>P</kbd> pause</p>
+        </div>
+      </div>
+      <div class="touch" aria-hidden="true">
+        <button type="button" data-key="left">◀</button>
+        <button type="button" data-key="fire" class="fire">FIRE</button>
+        <button type="button" data-key="right">▶</button>
+      </div>
+      <p class="visually-hidden" id="announce" aria-live="polite"></p>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
