@@ -9,5 +9,7 @@
     "plugins": [{ "name": "next" }]
   },
   "include": ["phase-6-fullstack-react/day-071-*/**/*.ts", "phase-6-fullstack-react/day-071-*/**/*.tsx", "phase-6-fullstack-react/day-074-*/**/*.ts", "phase-6-fullstack-react/day-074-*/**/*.tsx"],
-  "exclude": ["node_modules", "**/.next"]
+  // Day 74's solution/ holds only the files you write; it's checked in place of the starter's (CI copies
+  // it over, then checks). On its own it can't see the rest of the app.
+  "exclude": ["node_modules", "**/.next", "phase-6-fullstack-react/day-074-*/solution"]
 }
