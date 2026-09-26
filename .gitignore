@@ -19,3 +19,6 @@ jar.txt
 # Next.js build output (Days 71 and 74)
 .next/
 next-env.d.ts
+
+# Screenshots from failed browser tests (Day 72)
+test-results/
