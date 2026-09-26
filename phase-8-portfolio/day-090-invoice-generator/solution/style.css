@@ -1,0 +1,69 @@
+:root {
+  color-scheme: light;
+  --bg: #eef2ef; --surface: #ffffff; --ink: #14201a; --muted: #5a6a61; --line: #d9e2dc; --brand: #166534; --brand-ink: #fff; --warn: #b45309; --warn-soft: #fef3c7; --focus: #2563eb;
+}
+@media (prefers-color-scheme: dark) {
+  :root { color-scheme: dark; --bg: #0c120e; --surface: #141c17; --ink: #e8f0ea; --muted: #9eb1a5; --line: #26332b; --brand: #4ade80; --brand-ink: #052e16; --warn: #fbbf24; --warn-soft: #33270c; --focus: #93b4ff; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 0.95rem/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.bar { position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.8rem clamp(1rem, 3vw, 2rem); background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.bar h1 { margin: 0; font-size: 1.2rem; letter-spacing: -0.02em; }
+button.primary { min-height: 2.6rem; padding: 0 1.2rem; border: 0; border-radius: 999px; background: var(--brand); color: var(--brand-ink); font: inherit; font-weight: 800; cursor: pointer; }
+button.ghost { justify-self: start; min-height: 2.4rem; padding: 0 0.9rem; border: 1.5px dashed var(--line); border-radius: 10px; background: transparent; color: var(--ink); font: inherit; font-weight: 600; cursor: pointer; }
+.layout { display: grid; gap: 1.5rem; padding: 1.5rem clamp(1rem, 3vw, 2rem) 3rem; align-items: start; }
+@media (min-width: 64rem) { .layout { grid-template-columns: 26rem minmax(0, 1fr); } .preview { position: sticky; top: 4.5rem; } }
+.editor { display: grid; gap: 1rem; }
+fieldset { display: grid; gap: 0.6rem; margin: 0; padding: 1rem 1.1rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; min-width: 0; }
+legend { padding: 0 0.3rem; font-weight: 800; }
+label { display: grid; gap: 0.25rem; font-weight: 600; font-size: 0.85rem; color: var(--muted); min-width: 0; }
+input, select, textarea { width: 100%; min-height: 2.5rem; padding: 0.45rem 0.7rem; border: 1.5px solid var(--line); border-radius: 9px; background: var(--bg); color: var(--ink); font: inherit; font-size: 0.95rem; }
+textarea { resize: vertical; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.items { display: grid; gap: 0.6rem; }
+/* Two rows per item: the description gets the full width, the numbers share the second row. */
+.item { display: grid; grid-template-columns: 4.5rem 1fr 6.5rem 2.4rem; gap: 0.4rem; align-items: end; padding-bottom: 0.6rem; border-bottom: 1px dashed var(--line); }
+.item label:first-child { grid-column: 1 / -1; }
+.item label { font-size: 0.75rem; }
+.item button { height: 2.5rem; border: 0; border-radius: 9px; background: transparent; color: var(--muted); font-size: 1.1rem; cursor: pointer; }
+
+.problems { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
+.problems li { padding: 0.5rem 0.8rem; border-radius: 9px; background: var(--warn-soft); color: var(--warn); font-weight: 600; font-size: 0.85rem; }
+
+/* The paper: always black on white, like the printout it previews. */
+.preview { overflow-x: auto; }
+.paper { width: min(100%, 210mm); min-height: 297mm; margin: 0 auto; padding: 16mm 15mm; background: #fff; color: #1a1a1a; box-shadow: 0 20px 50px -30px rgb(0 0 0 / 0.5); border-radius: 4px; font: 10.5pt/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+.invoice .head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding-bottom: 8mm; border-bottom: 2px solid #166534; }
+.invoice h1 { margin: 0; font-size: 26pt; letter-spacing: -0.03em; color: #166534; }
+.invoice .number { margin: 0.2rem 0 0; font-weight: 700; color: #444; }
+.invoice .dates { display: grid; gap: 0.3rem; margin: 0; text-align: right; }
+.invoice .dates dt { font-size: 8pt; text-transform: uppercase; letter-spacing: 0.08em; color: #666; }
+.invoice .dates dd { margin: 0; font-weight: 700; }
+.invoice .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; margin: 8mm 0; }
+.invoice .party h3 { margin: 0 0 0.3rem; font-size: 8pt; text-transform: uppercase; letter-spacing: 0.08em; color: #666; }
+.invoice .party p { margin: 0 0 0.2rem; }
+.invoice .pin { color: #444; font-size: 9pt; }
+.invoice .lines { width: 100%; border-collapse: collapse; }
+.invoice .lines th { padding: 0 0 2mm; font-size: 8pt; text-transform: uppercase; letter-spacing: 0.06em; color: #666; text-align: left; border-bottom: 1px solid #ccc; }
+.invoice .lines th.num { text-align: right; }
+.invoice .lines td { padding: 2.5mm 0; border-bottom: 1px solid #eee; vertical-align: top; }
+.invoice .num { text-align: right; white-space: nowrap; padding-left: 4mm; font-variant-numeric: tabular-nums; }
+.invoice .totals { width: 75mm; margin: 6mm 0 0 auto; display: grid; gap: 1.5mm; }
+.invoice .totals div { display: flex; justify-content: space-between; font-variant-numeric: tabular-nums; }
+.invoice .totals dt { color: #555; }
+.invoice .totals dd { margin: 0; }
+.invoice .totals .grand { margin-top: 1.5mm; padding-top: 2.5mm; border-top: 2px solid #1a1a1a; font-weight: 800; font-size: 12.5pt; }
+.invoice .totals .grand dt { color: #1a1a1a; }
+.invoice .pay { margin-top: 10mm; padding: 4mm 5mm; border-radius: 3mm; background: #f0fdf4; border: 1px solid #bbf7d0; }
+.invoice .pay h3 { margin: 0 0 1mm; font-size: 10.5pt; color: #166534; }
+.invoice .pay p { margin: 0; }
+.invoice .notes { margin-top: 8mm; color: #555; }
+
+@media print {
+  @page { size: A4; margin: 0; }
+  body { background: #fff; }
+  .bar, .editor { display: none; }
+  .layout { display: block; padding: 0; }
+  .paper { width: 210mm; box-shadow: none; border-radius: 0; margin: 0; }
+}

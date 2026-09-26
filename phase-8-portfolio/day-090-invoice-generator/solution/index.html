@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Invoice Generator</title>
+    <meta name="description" content="Make a proper Kenyan invoice, with VAT and M-Pesa details, and print it or save it as a PDF." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23166534'/><path d='M10 8h12v16l-3-2-3 2-3-2-3 2z' fill='white'/></svg>" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="bar">
+      <h1>Invoice Generator</h1>
+      <button type="button" id="print" class="primary">Print or save as PDF</button>
+    </header>
+    <main class="layout">
+      <form class="editor" id="editor">
+        <fieldset>
+          <legend>From</legend>
+          <label>Business name <input name="fromName" /></label>
+          <label>Address <textarea name="fromAddress" rows="2"></textarea></label>
+          <div class="pair">
+            <label>KRA PIN <input name="fromPin" placeholder="A012345678Z" /></label>
+            <label>Email <input name="fromEmail" type="email" /></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Bill to</legend>
+          <label>Client <input name="toName" /></label>
+          <label>Address <textarea name="toAddress" rows="2"></textarea></label>
+          <label>Client's KRA PIN (optional) <input name="toPin" /></label>
+        </fieldset>
+        <fieldset>
+          <legend>Invoice</legend>
+          <div class="pair">
+            <label>Number <input name="number" /></label>
+            <label>Issued <input name="issued" type="date" /></label>
+          </div>
+          <div class="pair">
+            <label>Payment due
+              <select name="terms"><option value="7">in 7 days</option><option value="14" selected>in 14 days</option><option value="30">in 30 days</option></select>
+            </label>
+            <label>Discount % <input name="discount" inputmode="decimal" /></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Items</legend>
+          <div id="items" class="items"></div>
+          <button type="button" id="add-item" class="ghost">+ Add an item</button>
+        </fieldset>
+        <fieldset>
+          <legend>Payment</legend>
+          <div class="pair">
+            <label>M-Pesa paybill <input name="paybill" inputmode="numeric" /></label>
+            <label>Account <input name="account" placeholder="The invoice number" /></label>
+          </div>
+          <label>Notes <textarea name="notes" rows="2"></textarea></label>
+        </fieldset>
+        <ul class="problems" id="problems" aria-live="polite"></ul>
+      </form>
+      <section class="preview" aria-label="Preview">
+        <div class="paper" id="paper"></div>
+      </section>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
