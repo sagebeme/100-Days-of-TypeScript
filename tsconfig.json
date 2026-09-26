@@ -9,7 +9,7 @@
     "noImplicitOverride": true,
     "erasableSyntaxOnly": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["node"],
+    "types": ["node", "vite/client"],
     "skipLibCheck": true,
     "noEmit": true,
     "resolveJsonModule": true,
