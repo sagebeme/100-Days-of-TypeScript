@@ -70,7 +70,8 @@ describe.skipIf(chrome === null)("buying tickets, end to end", { timeout: 45_000
     await page.goBack();
     await page.goBack();
     await whatsOn.region.waitFor();
-    expect(await whatsOn.seatsFor("Gengetone Block Party")).toBe("Only 12 left");
+    // The list shows its cached count first, then refreshes (the order page marked it stale): wait for it.
+    await expect.poll(() => whatsOn.seatsFor("Gengetone Block Party"), { timeout: 10_000 }).toBe("Only 12 left");
   });
 
   it("lets the fan try again after cancelling on their phone, with the seats back on sale", async () => {

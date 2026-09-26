@@ -122,11 +122,12 @@ describe("the ticket page", () => {
     expect(save.getAttribute("aria-pressed")).toBe("true");
   });
 
-  it("loads the seat map only when it's asked for", async () => {
+  it("loads the seat map only when it's asked for", { timeout: 20_000 }, async () => {
     render(<TicketPage />);
     expect(screen.queryByRole("heading", { name: /Seat map/ })).toBeNull();
     await userEvent.click(screen.getByRole("button", { name: "Choose your seat" }));
-    expect(await screen.findByRole("heading", { name: /Seat map/ })).toBeTruthy();
+    // The seat map is a separate download: give it time, as a slow phone would need to.
+    expect(await screen.findByRole("heading", { name: /Seat map/ }, { timeout: 15_000 })).toBeTruthy();
     expect(screen.getByRole("button", { name: "Hide the seat map" }).getAttribute("aria-expanded")).toBe("true");
   });
 
