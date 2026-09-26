@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#ea580c" />
+    <title>Streaks</title>
+    <meta name="description" content="Keep your daily habits going, one day at a time. Works offline." />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icon.svg" />
+    <link rel="apple-touch-icon" href="./icon.svg" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="top">
+        <div>
+          <p class="today" id="today"></p>
+          <h1>Streaks</h1>
+        </div>
+        <p class="summary" id="summary" role="status"></p>
+      </header>
+
+      <ul class="habits" id="habits"></ul>
+      <p class="empty" id="empty" hidden>No habits yet. Add one below: small ones stick best.</p>
+
+      <form class="add" id="add">
+        <h2>New habit</h2>
+        <div class="add-row">
+          <label for="emoji" class="visually-hidden">Emoji</label>
+          <select id="emoji">
+            <option>💧</option><option>📚</option><option>🏃🏾</option><option>🧘🏾</option><option>🥗</option><option>💸</option><option>🎸</option><option>📝</option>
+          </select>
+          <label for="name" class="visually-hidden">Habit</label>
+          <input id="name" maxlength="40" placeholder="Drink 2 litres of water" required autocomplete="off" />
+          <button type="submit">Add</button>
+        </div>
+      </form>
+
+      <div class="toast" id="toast" role="status" hidden><span id="toast-text"></span><button type="button" id="undo">Undo</button></div>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
