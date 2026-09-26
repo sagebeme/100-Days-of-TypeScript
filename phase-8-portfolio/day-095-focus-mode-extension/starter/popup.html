@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Focus Mode</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="popup">
+    <header class="status" id="status">
+      <span class="dot" aria-hidden="true"></span>
+      <div><h1 id="state">Not focusing</h1><p id="detail"></p></div>
+    </header>
+    <div class="buttons" id="buttons">
+      <button type="button" data-minutes="25" aria-label="Focus for 25 minutes">25 min</button>
+      <button type="button" data-minutes="50" aria-label="Focus for 50 minutes">50 min</button>
+      <button type="button" id="stop" class="quiet" hidden>Stop</button>
+    </div>
+    <form id="list-form">
+      <label for="list">Sites to block during focus</label>
+      <textarea id="list" rows="5" spellcheck="false" aria-describedby="list-hint"></textarea>
+      <p class="hint" id="list-hint">One per line. Subdomains are blocked too.</p>
+      <p class="problems" id="problems" role="alert"></p>
+      <button type="submit" class="quiet">Save list</button>
+      <p class="saved" id="saved" role="status"></p>
+    </form>
+    <p class="schedule" id="schedule"></p>
+    <script type="module" src="./popup.ts"></script>
+  </body>
+</html>
