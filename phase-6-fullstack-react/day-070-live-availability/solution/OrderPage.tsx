@@ -1,6 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useApi } from "./ApiContext.tsx";
-import { orderQuery } from "./queries.ts";
+import { keys, orderQuery } from "./queries.ts";
 import { ErrorPanel } from "./pieces.tsx";
 import { formatKes } from "./format.ts";
 
@@ -8,6 +9,14 @@ import { formatKes } from "./format.ts";
 export function OrderPage({ id }: { id: number }) {
   const api = useApi();
   const { data: order, error, isPending, refetch } = useQuery(orderQuery(api, id));
+  const queryClient = useQueryClient();
+
+  // Once the order settles, seat counts have changed: a cancelled or failed payment gives its seats
+  // back. Without this, "Try again" shows the count from before, which is still "fresh" in the cache.
+  const settled = order !== undefined && order.status !== "pending";
+  useEffect(() => {
+    if (settled) void queryClient.invalidateQueries({ queryKey: keys.events });
+  }, [settled, queryClient]);
 
   if (isPending) return <p className="loading-line">Loading your order…</p>;
   if (error && !order) return <ErrorPanel message={error.message} onRetry={() => void refetch()} />;

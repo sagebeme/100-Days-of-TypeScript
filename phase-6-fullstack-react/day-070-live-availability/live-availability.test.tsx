@@ -201,3 +201,14 @@ describe("OrderPage", () => {
     expect(screen.getByRole("link", { name: "Try again" }).getAttribute("href")).toBe("#/events/1");
   });
 });
+
+describe("after an order settles", () => {
+  it("refreshes seat counts, because a cancelled payment gives its seats back", async () => {
+    const api = fakeApi({ getOrder: vi.fn(async () => ({ ...pending, status: "cancelled" as const, problem: "Cancelled" })) });
+    const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+    await queryClient.prefetchQuery(eventQuery(api, 1));
+    setup(<OrderPage id={9} />, api, queryClient);
+    await screen.findByRole("heading", { name: "Payment didn't go through" });
+    await waitFor(() => expect(queryClient.getQueryState(keys.event(1))?.isInvalidated).toBe(true));
+  });
+});
