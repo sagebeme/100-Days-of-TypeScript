@@ -1,0 +1,15 @@
+# Netlify: the course website in site/ is plain static files. There's nothing to install or build;
+# the one command below only checks that the day list is up to date.
+[build]
+  publish = "."
+  command = "node scripts/build-site-data.ts --check"
+
+[build.environment]
+  NODE_VERSION = "24"                 # runs .ts files directly, like the rest of the course
+  NPM_FLAGS = "--version"             # skip installing the course's dependencies: the site needs none
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"   # package.json lists Next.js for Days 71 and 74; this site isn't a Next app
+
+[[redirects]]
+  from = "/"
+  to = "/site/"
+  status = 302
