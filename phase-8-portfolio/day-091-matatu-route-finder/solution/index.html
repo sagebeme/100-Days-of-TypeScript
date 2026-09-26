@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Matatu Route Finder</title>
+    <meta name="description" content="Find the quickest (or simplest) matatu trip across Nairobi." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23facc15'/><rect x='6' y='10' width='20' height='11' rx='3' fill='%23111827'/><circle cx='11' cy='23' r='2.5' fill='%23111827'/><circle cx='21' cy='23' r='2.5' fill='%23111827'/></svg>" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header>
+        <h1>Matatu Route Finder</h1>
+        <p class="sub">Which matatus, where to change, how long and how much. <span class="disclaimer">A practice project: routes and fares are made up.</span></p>
+      </header>
+      <form class="search" id="search">
+        <label>From <select id="from"></select></label>
+        <button type="button" id="swap" class="swap" aria-label="Swap from and to">⇅</button>
+        <label>To <select id="to"></select></label>
+        <fieldset class="prefer">
+          <legend class="visually-hidden">Prefer</legend>
+          <label><input type="radio" name="prefer" value="fastest" checked /> Fastest</label>
+          <label><input type="radio" name="prefer" value="fewest" /> Fewest changes</label>
+        </fieldset>
+      </form>
+      <div class="results">
+        <section class="trip" id="trip" aria-live="polite"></section>
+        <figure class="map"><svg id="map" viewBox="-6 -6 112 112" role="img" aria-label="Map of the trip"></svg></figure>
+      </div>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
