@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Connect Four</title>
+    <meta name="description" content="Play Connect Four against a computer that thinks six moves ahead." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%233730a3'/><circle cx='11' cy='20' r='5' fill='%23f59e0b'/><circle cx='21' cy='20' r='5' fill='%232dd4bf'/></svg>" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="top">
+        <h1>Connect Four</h1>
+        <label class="level">
+          Computer
+          <select id="level">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </label>
+      </header>
+
+      <p class="status" id="status" role="status">Your turn. Drop a disc.</p>
+
+      <div class="game">
+        <div class="columns" id="columns" role="group" aria-label="Columns: use the arrow keys, then Enter"></div>
+        <div class="board" id="board" aria-hidden="true"></div>
+      </div>
+
+      <div class="legend">
+        <span><i class="disc" data-player="1"></i> You</span>
+        <span><i class="disc" data-player="2"></i> Computer</span>
+        <button type="button" id="restart">New game</button>
+      </div>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
