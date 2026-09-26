@@ -39,6 +39,18 @@ cd phase-1-terminal/day-001-gamer-tag
 
 Read the `README.md` in that folder, write your code in `starter/`, and run the tests.
 
+## The course website
+
+The `site/` folder is a website for the course: a landing page, the full syllabus, and a lesson viewer that shows each day's README with a checklist that saves your progress in your browser. Run it locally:
+
+```bash
+npm run site
+```
+
+It opens `http://localhost:8000/site/`. The site is plain static files that read the READMEs straight from the day folders, so there's nothing to build. After adding or renaming a day, refresh its list of days with `npm run site:data`. `npm run site:check` fails if the list is out of date.
+
+To put it online, import the repo into Vercel (`vercel.json` is already set up, and sends `/` to `/site/`), or turn on GitHub Pages for the `main` branch and open `/site/`.
+
 ## How each day works
 
 Every day is a folder that looks like this:

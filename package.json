@@ -10,7 +10,10 @@
     "dev": "vite",
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.next.json"
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.next.json",
+    "site": "vite --port 8000 --open /site/",
+    "site:data": "node scripts/build-site-data.ts",
+    "site:check": "node scripts/build-site-data.ts --check"
   },
   "devDependencies": {
     "@anthropic-ai/sdk": "^0.128.0",

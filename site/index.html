@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>100 Days of TypeScript</title>
+<meta name="description" content="A free course: one TypeScript project a day for 100 days, from a gamer tag generator to an AI agent in an app you built yourself. Every day has tests.">
+<meta property="og:title" content="100 Days of TypeScript">
+<meta property="og:description" content="One project a day for 100 days. Every day has tests that tell you when you got it right.">
+<meta name="theme-color" content="#2c3e50">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Pacifico&family=Source+Code+Pro:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="navbar" aria-label="Main">
+  <div class="container">
+    <a class="brand" href="index.html"><span class="ts" aria-hidden="true">TS</span><span class="word">100 Days</span><span class="sr-only"> of TypeScript: home</span></a>
+    <ul class="nav-links">
+      <li><a href="#demo">Why TypeScript</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#path">The path</a></li>
+      <li class="keep"><a href="syllabus.html">Syllabus</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="ribbon"><a href="https://github.com/sagebeme/100-Days-of-TypeScript">Fork me on GitHub</a></div>
+
+<main id="main">
+<header class="hero">
+  <div class="container">
+    <div>
+      <span class="kicker">Free · 100 projects · about an hour a day</span>
+      <h1><span class="script">One project a day</span>100 Days of TypeScript</h1>
+      <p class="lede">Start with a gamer tag generator in your terminal. Finish with an AI agent plugged into a ticketing app you built yourself. Every day has tests that tell you when you got it right.</p>
+      <div class="actions">
+        <a class="btn btn-sun" id="cta" href="day.html?day=1">Start Day 1 →</a>
+        <a class="btn btn-ghost" href="#path">See the path</a>
+      </div>
+      <p class="resume" id="resume" hidden></p>
+    </div>
+    <div class="window" aria-hidden="true">
+      <div class="bar"><i></i><i></i><i></i><b>day-001-gamer-tag/starter/gamer-tag.ts</b></div>
+<pre><span class="c">// Day 1: your first TypeScript function</span>
+<span class="k">export function</span> <span class="f">buildGamerTag</span>(
+  name: <span class="t">string</span>,
+  lucky: <span class="t">number</span>,
+): <span class="t">string</span> {
+  <span class="k">return</span> <span class="s">`xX_${</span>name<span class="s">}${</span>lucky<span class="s">}_Xx`</span>;
+}
+
+<span class="f">buildGamerTag</span>(<span class="s">"Amina"</span>, <span class="n">7</span>); <span class="c">// "xX_Amina7_Xx"</span></pre>
+      <div class="out good">$ npm test -- day-001<br>✓ gamer-tag.test.ts (4 tests)<br>Tests  4 passed (4)</div>
+    </div>
+  </div>
+</header>
+
+<section class="stats" aria-label="The course in numbers">
+  <ul class="container">
+    <li><b>100</b><span>Projects</span></li>
+    <li><b>8</b><span>Phases</span></li>
+    <li><b>8</b><span>Capstones</span></li>
+    <li><b>KES 0</b><span>Forever</span></li>
+  </ul>
+</section>
+
+<section class="band" id="demo" aria-labelledby="demo-title">
+  <div class="container">
+    <div class="section-head">
+      <span class="over">Why TypeScript?</span>
+      <h2 id="demo-title">Catch the bug before your users do</h2>
+    </div>
+    <div class="demo">
+      <div>
+        <h3 id="demo-heading">Six friends split a KES 4,800 bill</h3>
+        <p class="verdict" id="verdict"></p>
+        <p><a href="day.html?day=30">That's Day 30: Split the Bill for the Squad →</a></p>
+      </div>
+      <div>
+        <div class="tabs" role="tablist" aria-label="Language">
+          <button type="button" role="tab" id="tab-js" aria-selected="true" aria-controls="demo-panel">JavaScript</button>
+          <button type="button" role="tab" id="tab-ts" aria-selected="false" aria-controls="demo-panel" tabindex="-1">TypeScript</button>
+        </div>
+        <div class="window" id="demo-panel" role="tabpanel" aria-labelledby="tab-js">
+          <div class="bar" aria-hidden="true"><i></i><i></i><i></i><b id="demo-file">split.js</b></div>
+<pre><span class="k">function</span> <span class="f">withTip</span>(total<span id="ann-1"></span>, tip<span id="ann-2"></span>)<span id="ann-3"></span> {
+  <span class="k">return</span> total + tip;
+}
+<span class="k">const</span> total = input.value; <span class="c">// "4800" from the form</span>
+<span class="k">const</span> each = <span class="f">withTip</span>(<span id="arg">total</span>, <span class="n">480</span>) / <span class="n">6</span>;</pre>
+          <div class="out" id="demo-out" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band white" id="how" aria-labelledby="how-title">
+  <div class="container">
+    <div class="section-head">
+      <span class="over">How each day works</span>
+      <h2 id="how-title">Four steps. Every day.</h2>
+      <p>No comparing your code to someone else's. The tests say when you're done.</p>
+    </div>
+    <ul class="features">
+      <li>
+        <div class="icon" style="--c:#16a085"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h7"/></svg></div>
+        <h3>Read the brief</h3>
+        <p>A real thing people want: a matatu route finder, M-Pesa payments, a Kiswahili Wordle.</p>
+      </li>
+      <li>
+        <div class="icon" style="--c:#2980b9"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 5l-3 14"/></svg></div>
+        <h3>Write TypeScript</h3>
+        <p>Your code goes in <code>starter/</code>. Node 24 runs <code>.ts</code> files directly: no build step.</p>
+      </li>
+      <li>
+        <div class="icon" style="--c:#8e44ad"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M7 10l3 2-3 2M12 15h5"/></svg></div>
+        <h3>Run the tests</h3>
+        <p><code>npm test -- day-001</code> until everything's green. Then peek at <code>solution/</code>.</p>
+      </li>
+      <li>
+        <div class="icon" style="--c:#d35400"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg></div>
+        <h3>Tick it off</h3>
+        <p>Check off the day here. Your progress stays in this browser, so tomorrow you pick up where you left off.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="band" id="path" aria-labelledby="path-title">
+  <div class="container">
+    <div class="section-head">
+      <span class="over">Your path</span>
+      <h2 id="path-title">Eight phases, one at a time</h2>
+      <p>Each phase ends with a bigger project that uses everything before it. From Phase 5 on, one app grows with you: an event ticketing platform.</p>
+    </div>
+    <ol class="timeline" id="timeline"></ol>
+  </div>
+</section>
+
+<section class="band white" id="need" aria-labelledby="need-title">
+  <div class="container">
+    <div class="section-head">
+      <span class="over">What it costs</span>
+      <h2 id="need-title">Pick your plan</h2>
+      <p>There's only one plan. It's free.</p>
+    </div>
+    <div class="pricing">
+      <div class="plan">
+        <div class="head"><h3>Your setup</h3><div class="price">KES 0</div></div>
+        <ul>
+          <li>Node.js 24 or newer</li>
+          <li>VS Code, or any editor</li>
+          <li>Git, to save your work</li>
+        </ul>
+        <div class="foot"><a href="syllabus.html#setup">Setup steps</a></div>
+      </div>
+      <div class="plan featured">
+        <span class="popular" aria-hidden="true">Most popular</span>
+        <div class="head"><h3>The course</h3><div class="price">KES 0 <small>/ forever</small></div></div>
+        <ul>
+          <li>100 projects, each with tests</li>
+          <li>A solution for every day</li>
+          <li>8 capstone projects</li>
+          <li>Progress saved as you go</li>
+        </ul>
+        <div class="foot"><a class="btn btn-ts" id="cta-2" href="day.html?day=1">Start Day 1 →</a></div>
+      </div>
+      <div class="plan">
+        <div class="head"><h3>Your time</h3><div class="price">1 hr <small>/ day</small></div></div>
+        <ul>
+          <li>No JavaScript needed first</li>
+          <li>Terminal, then browser</li>
+          <li>Then backend, React and AI</li>
+        </ul>
+        <div class="foot"><a href="syllabus.html">See all 100 days</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" aria-labelledby="cta-title">
+  <div class="container">
+    <h2 id="cta-title">Your first day takes about an hour</h2>
+    <p id="cta-text">Day 1 is a gamer tag generator. By Day 100 you'll have a portfolio full of things you built.</p>
+    <a class="btn btn-sun" id="cta-3" href="day.html?day=1">Start Day 1 →</a>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="cols">
+      <div>
+        <h4>100 Days of TypeScript</h4>
+        <p>One project a day for 100 days, with tests that tell you when you got it right. Every project has a Nairobi flavour, from matatu routes to M-Pesa.</p>
+      </div>
+      <div>
+        <h4>Course</h4>
+        <ul>
+          <li><a href="syllabus.html">Full syllabus</a></li>
+          <li><a href="day.html?day=1">Day 1: Gamer Tag Generator</a></li>
+          <li><a href="day.html?day=100">Day 100: Your Portfolio</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Code</h4>
+        <ul>
+          <li><a href="https://github.com/sagebeme/100-Days-of-TypeScript">Source on GitHub</a></li>
+          <li><a href="https://nodejs.org">Get Node.js 24</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>Made with <span class="heart" aria-label="love">♥</span> and TypeScript in Nairobi.</span>
+      <span>Progress is saved only in this browser.</span>
+    </div>
+  </div>
+</footer>
+<a class="to-top" href="#top" aria-label="Back to top">↑</a>
+
+<script src="assets/days.js"></script>
+<script src="assets/progress.js"></script>
+<script src="assets/home.js"></script>
+</body>
+</html>

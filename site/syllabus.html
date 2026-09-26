@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Syllabus · 100 Days of TypeScript</title>
+<meta name="description" content="All 100 projects of 100 Days of TypeScript, phase by phase, and how to set up.">
+<meta name="theme-color" content="#2c3e50">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Pacifico&family=Source+Code+Pro:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="navbar" aria-label="Main">
+  <div class="container">
+    <a class="brand" href="index.html"><span class="ts" aria-hidden="true">TS</span><span class="word">100 Days</span><span class="sr-only"> of TypeScript: home</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#path">The path</a></li>
+      <li class="keep"><a href="syllabus.html" aria-current="page">Syllabus</a></li>
+      <li><a href="https://github.com/sagebeme/100-Days-of-TypeScript">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <ol class="crumbs"><li><a href="index.html">Home</a></li><li aria-current="page">Syllabus</li></ol>
+    <h1>The full syllabus</h1>
+    <p class="sub">100 projects in 8 phases. Each phase ends with a capstone that uses everything before it.</p>
+  </div>
+</header>
+
+<main id="main" class="container">
+  <div class="toolbar">
+    <label class="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M16 16l5 5"/></svg>
+      <span class="sr-only">Search the days</span>
+      <input type="search" id="q" placeholder="Search: M-Pesa, games, Zod, React…" autocomplete="off">
+    </label>
+    <nav class="jump" id="jump" aria-label="Jump to a phase"></nav>
+  </div>
+  <p id="count" class="sr-only" role="status"></p>
+
+  <div id="phases"></div>
+  <div class="panel empty" id="empty" hidden>Nothing matches that. Try "game", "api" or "M-Pesa".</div>
+
+  <section class="panel prose" id="setup" aria-labelledby="setup-title" style="margin:8px 0 64px">
+    <h2 id="setup-title" style="margin-top:0">Set up once, in about ten minutes</h2>
+    <ol>
+      <li><strong>Install Node.js 24 or newer</strong> from <a href="https://nodejs.org">nodejs.org</a>. Check with <code>node --version</code>: older versions can't run <code>.ts</code> files directly.</li>
+      <li><strong>Get the course:</strong>
+        <div class="code"><pre>git clone https://github.com/sagebeme/100-Days-of-TypeScript.git
+cd 100-Days-of-TypeScript
+npm install</pre></div>
+      </li>
+      <li><strong>Start Day 1:</strong> open <code>phase-1-terminal/day-001-gamer-tag</code>, write your code in <code>starter/</code>, and run <code>npm test -- day-001</code> until it's green.</li>
+      <li><strong>From Day 30</strong> projects run in the browser: <code>npm run dev -- phase-3-browser/day-030-split-the-bill/starter</code>, then open the address it prints.</li>
+    </ol>
+    <p style="margin:0">Commit your work every day. In three months you'll want to see how far you came.</p>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="bottom" style="margin:0;padding:0;border:0">
+      <span>Made with <span class="heart" aria-label="love">♥</span> and TypeScript in Nairobi.</span>
+      <span>Progress is saved only in this browser.</span>
+    </div>
+  </div>
+</footer>
+<a class="to-top" href="#top" aria-label="Back to top">↑</a>
+
+<script src="assets/days.js"></script>
+<script src="assets/progress.js"></script>
+<script src="assets/syllabus.js"></script>
+</body>
+</html>
