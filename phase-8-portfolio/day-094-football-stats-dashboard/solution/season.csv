@@ -1,0 +1,57 @@
+date,home,away,home_goals,away_goals,scorers
+2026-08-15,Mathare Rangers,Nakuru Flamingos,4,0,Luke Karanja|Mathare Rangers|17;Collins Maina|Mathare Rangers|65;Collins Maina|Mathare Rangers|77;Luke Karanja|Mathare Rangers|87
+2026-08-15,Kibera Lions,Eldoret Eagles,2,0,Kevin Muriuki|Kibera Lions|25;Kelvin Barasa|Kibera Lions|76
+2026-08-15,Rongai Rovers,Mombasa Mariners,5,1,Tom Rotich|Rongai Rovers|43;Steve Wanjala|Mombasa Mariners|54;Tom Rotich|Rongai Rovers|85;Tom Rotich|Rongai Rovers|87;Tom Rotich|Rongai Rovers|87;Tom Rotich|Rongai Rovers|89
+2026-08-15,Thika Falcons,Kisumu Sharks,2,1,Henry Kilonzo|Thika Falcons|17;Frank Korir|Thika Falcons|41;Ray Otieno|Kisumu Sharks|55
+2026-08-22,Mathare Rangers,Eldoret Eagles,2,0,Luke Karanja|Mathare Rangers|39;Dennis Wambua|Mathare Rangers|43
+2026-08-22,Nakuru Flamingos,Mombasa Mariners,1,1,Steve Wanjala|Mombasa Mariners|65;Noah Onyango|Nakuru Flamingos|79
+2026-08-22,Kibera Lions,Kisumu Sharks,0,4,Mark Njoroge|Kisumu Sharks|3;Mark Njoroge|Kisumu Sharks|17;Mark Njoroge|Kisumu Sharks|58;Chris Opiyo|Kisumu Sharks|90
+2026-08-22,Rongai Rovers,Thika Falcons,1,0,Joseph Omondi|Rongai Rovers|18
+2026-08-29,Mathare Rangers,Mombasa Mariners,4,0,Samuel Kamau|Mathare Rangers|7;Samuel Kamau|Mathare Rangers|13;Collins Maina|Mathare Rangers|32;Luke Karanja|Mathare Rangers|58
+2026-08-29,Eldoret Eagles,Kisumu Sharks,0,1,Mark Njoroge|Kisumu Sharks|14
+2026-08-29,Nakuru Flamingos,Thika Falcons,1,1,Michael Kariuki|Thika Falcons|3;Ian Mutua|Nakuru Flamingos|83
+2026-08-29,Kibera Lions,Rongai Rovers,2,2,Eric Mwangi|Rongai Rovers|12;Kevin Muriuki|Kibera Lions|54;Tony Kipchoge|Kibera Lions|62;James Makori|Rongai Rovers|73
+2026-09-05,Mathare Rangers,Kisumu Sharks,2,1,Luke Karanja|Mathare Rangers|38;Ray Otieno|Kisumu Sharks|43;Luke Karanja|Mathare Rangers|62
+2026-09-05,Mombasa Mariners,Thika Falcons,1,1,Peter Simiyu|Thika Falcons|8;Steve Wanjala|Mombasa Mariners|38
+2026-09-05,Eldoret Eagles,Rongai Rovers,3,0,George Wafula|Eldoret Eagles|12;Brian Gitau|Eldoret Eagles|22;George Wafula|Eldoret Eagles|50
+2026-09-05,Nakuru Flamingos,Kibera Lions,1,1,Kevin Muriuki|Kibera Lions|18;Victor Chege|Nakuru Flamingos|78
+2026-09-12,Mathare Rangers,Thika Falcons,4,1,Dennis Wambua|Mathare Rangers|17;Luke Karanja|Mathare Rangers|38;Samuel Kamau|Mathare Rangers|50;Luke Karanja|Mathare Rangers|61;Michael Kariuki|Thika Falcons|64
+2026-09-12,Kisumu Sharks,Rongai Rovers,2,2,Tom Rotich|Rongai Rovers|22;Mark Njoroge|Kisumu Sharks|29;James Makori|Rongai Rovers|37;Mark Njoroge|Kisumu Sharks|85
+2026-09-12,Mombasa Mariners,Kibera Lions,2,4,Tony Kipchoge|Kibera Lions|25;Kevin Muriuki|Kibera Lions|40;Oscar Kibet|Mombasa Mariners|57;Steve Wanjala|Mombasa Mariners|79;Kelvin Barasa|Kibera Lions|82;Tony Kipchoge|Kibera Lions|83
+2026-09-12,Eldoret Eagles,Nakuru Flamingos,0,2,Noah Onyango|Nakuru Flamingos|11;Noah Onyango|Nakuru Flamingos|14
+2026-09-19,Mathare Rangers,Rongai Rovers,3,0,Luke Karanja|Mathare Rangers|25;Luke Karanja|Mathare Rangers|54;Samuel Kamau|Mathare Rangers|72
+2026-09-19,Thika Falcons,Kibera Lions,1,1,Tony Kipchoge|Kibera Lions|11;Michael Kariuki|Thika Falcons|68
+2026-09-19,Kisumu Sharks,Nakuru Flamingos,3,0,Ray Otieno|Kisumu Sharks|9;Mark Njoroge|Kisumu Sharks|20;Chris Opiyo|Kisumu Sharks|63
+2026-09-19,Mombasa Mariners,Eldoret Eagles,1,0,Walter Kiplagat|Mombasa Mariners|78
+2026-09-26,Mathare Rangers,Kibera Lions,1,2,Luke Karanja|Mathare Rangers|30;Kevin Muriuki|Kibera Lions|58;Kevin Muriuki|Kibera Lions|59
+2026-09-26,Rongai Rovers,Nakuru Flamingos,0,0,
+2026-09-26,Thika Falcons,Eldoret Eagles,2,0,Henry Kilonzo|Thika Falcons|67;Frank Korir|Thika Falcons|85
+2026-09-26,Kisumu Sharks,Mombasa Mariners,4,0,Mark Njoroge|Kisumu Sharks|5;Mark Njoroge|Kisumu Sharks|26;Mark Njoroge|Kisumu Sharks|49;Chris Opiyo|Kisumu Sharks|69
+2026-10-03,Nakuru Flamingos,Mathare Rangers,0,2,Collins Maina|Mathare Rangers|11;Dennis Wambua|Mathare Rangers|70
+2026-10-03,Eldoret Eagles,Kibera Lions,0,1,Kevin Muriuki|Kibera Lions|76
+2026-10-03,Mombasa Mariners,Rongai Rovers,2,0,Moses Odhiambo|Mombasa Mariners|10;Steve Wanjala|Mombasa Mariners|82
+2026-10-03,Kisumu Sharks,Thika Falcons,1,1,Ray Otieno|Kisumu Sharks|11;Henry Kilonzo|Thika Falcons|51
+2026-10-10,Eldoret Eagles,Mathare Rangers,1,5,Luke Karanja|Mathare Rangers|15;Collins Maina|Mathare Rangers|21;George Wafula|Eldoret Eagles|31;Collins Maina|Mathare Rangers|33;Collins Maina|Mathare Rangers|58;Luke Karanja|Mathare Rangers|79
+2026-10-10,Mombasa Mariners,Nakuru Flamingos,2,3,Duncan Wekesa|Nakuru Flamingos|20;Walter Kiplagat|Mombasa Mariners|39;Noah Onyango|Nakuru Flamingos|51;Walter Kiplagat|Mombasa Mariners|52;Ian Mutua|Nakuru Flamingos|56
+2026-10-10,Kisumu Sharks,Kibera Lions,2,2,Mark Njoroge|Kisumu Sharks|8;Ray Otieno|Kisumu Sharks|43;Allan Ochieng|Kibera Lions|48;Tony Kipchoge|Kibera Lions|57
+2026-10-10,Thika Falcons,Rongai Rovers,4,0,Michael Kariuki|Thika Falcons|42;Michael Kariuki|Thika Falcons|53;Michael Kariuki|Thika Falcons|82;Peter Simiyu|Thika Falcons|89
+2026-10-17,Mombasa Mariners,Mathare Rangers,0,2,Collins Maina|Mathare Rangers|20;Collins Maina|Mathare Rangers|25
+2026-10-17,Kisumu Sharks,Eldoret Eagles,0,1,George Wafula|Eldoret Eagles|77
+2026-10-17,Thika Falcons,Nakuru Flamingos,0,1,Ian Mutua|Nakuru Flamingos|4
+2026-10-17,Rongai Rovers,Kibera Lions,1,2,Tony Kipchoge|Kibera Lions|2;James Makori|Rongai Rovers|10;Kelvin Barasa|Kibera Lions|14
+2026-10-24,Kisumu Sharks,Mathare Rangers,2,0,Paul Nyongesa|Kisumu Sharks|4;Chris Opiyo|Kisumu Sharks|89
+2026-10-24,Thika Falcons,Mombasa Mariners,2,2,Oscar Kibet|Mombasa Mariners|3;Frank Korir|Thika Falcons|9;Peter Simiyu|Thika Falcons|21;Moses Odhiambo|Mombasa Mariners|59
+2026-10-24,Rongai Rovers,Eldoret Eagles,0,1,George Wafula|Eldoret Eagles|22
+2026-10-24,Kibera Lions,Nakuru Flamingos,3,0,Kevin Muriuki|Kibera Lions|39;Kevin Muriuki|Kibera Lions|61;Allan Ochieng|Kibera Lions|76
+2026-10-31,Thika Falcons,Mathare Rangers,0,1,Luke Karanja|Mathare Rangers|53
+2026-10-31,Rongai Rovers,Kisumu Sharks,2,2,James Makori|Rongai Rovers|34;Mark Njoroge|Kisumu Sharks|41;Eric Mwangi|Rongai Rovers|48;Chris Opiyo|Kisumu Sharks|70
+2026-10-31,Kibera Lions,Mombasa Mariners,2,0,Kevin Muriuki|Kibera Lions|23;Kevin Muriuki|Kibera Lions|76
+2026-10-31,Nakuru Flamingos,Eldoret Eagles,1,3,Ian Mutua|Nakuru Flamingos|26;Cliff Kiprono|Eldoret Eagles|33;Cliff Kiprono|Eldoret Eagles|56;George Wafula|Eldoret Eagles|71
+2026-11-07,Rongai Rovers,Mathare Rangers,2,3,Tom Rotich|Rongai Rovers|7;Eric Mwangi|Rongai Rovers|19;Luke Karanja|Mathare Rangers|38;Collins Maina|Mathare Rangers|58;Collins Maina|Mathare Rangers|67
+2026-11-07,Kibera Lions,Thika Falcons,2,0,Allan Ochieng|Kibera Lions|27;Allan Ochieng|Kibera Lions|30
+2026-11-07,Nakuru Flamingos,Kisumu Sharks,0,1,Mark Njoroge|Kisumu Sharks|46
+2026-11-07,Eldoret Eagles,Mombasa Mariners,2,0,George Wafula|Eldoret Eagles|40;Felix Nyamweya|Eldoret Eagles|71
+2026-11-14,Kibera Lions,Mathare Rangers,0,0,
+2026-11-14,Nakuru Flamingos,Rongai Rovers,1,2,Noah Onyango|Nakuru Flamingos|7;James Makori|Rongai Rovers|28;Tom Rotich|Rongai Rovers|76
+2026-11-14,Eldoret Eagles,Thika Falcons,2,0,Brian Gitau|Eldoret Eagles|38;Brian Gitau|Eldoret Eagles|84
+2026-11-14,Mombasa Mariners,Kisumu Sharks,0,1,Mark Njoroge|Kisumu Sharks|26

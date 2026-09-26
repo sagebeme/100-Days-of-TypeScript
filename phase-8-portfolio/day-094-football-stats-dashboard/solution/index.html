@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>League Dashboard</title>
+    <meta name="description" content="Table, form, top scorers and the title race for a football season." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23047857'/><circle cx='16' cy='16' r='8' fill='white'/></svg>" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div>
+        <p class="eyebrow">Season 2026/27 · made-up league</p>
+        <h1>Mtaa Premier League</h1>
+      </div>
+      <label class="upload"><input type="file" id="file" accept=".csv,text/csv" /><span>Load your own season (CSV)</span></label>
+    </header>
+    <main class="grid">
+      <ul class="tiles" id="tiles"></ul>
+      <p class="errors" id="errors" role="alert" hidden></p>
+      <section class="card table-card" aria-labelledby="table-heading">
+        <h2 id="table-heading">Table</h2>
+        <div class="scroll"><table id="table"></table></div>
+        <p class="key"><span class="swatch champion"></span> Champions · <span class="swatch relegated"></span> Relegation</p>
+      </section>
+      <section class="card" aria-labelledby="race-heading">
+        <h2 id="race-heading">Title race</h2>
+        <svg id="race" viewBox="0 0 480 260" role="img"></svg>
+        <ul class="legend" id="legend"></ul>
+      </section>
+      <section class="card" aria-labelledby="scorers-heading">
+        <h2 id="scorers-heading">Top scorers</h2>
+        <ol class="scorers" id="scorers"></ol>
+      </section>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
