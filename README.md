@@ -49,7 +49,7 @@ npm run site
 
 It opens `http://localhost:8000/site/`. The site is plain static files that read the READMEs straight from the day folders, so there's nothing to build. After adding or renaming a day, refresh its list of days with `npm run site:data`. `npm run site:check` fails if the list is out of date.
 
-To put it online, import the repo into Vercel (`vercel.json` is already set up, and sends `/` to `/site/`), or turn on GitHub Pages for the `main` branch and open `/site/`.
+To put it online, import the repo into Netlify or Vercel. `netlify.toml` and `vercel.json` are already set up: there's nothing to install or build, and `/` goes to `/site/`. Or turn on GitHub Pages for the `main` branch and open `/site/`.
 
 ## How each day works
 
