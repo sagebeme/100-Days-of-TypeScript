@@ -31,7 +31,7 @@ That's **retrieval-augmented generation** (RAG).
 ## Two embedders, one interface
 
 - **`voyageEmbedder`** calls Voyage AI (`voyage-4`, 1024 numbers per text), the embedding models Anthropic recommends; Claude itself doesn't make embeddings. It understands *meaning*: "money back" finds the refunds page.
-- **`hashingEmbedder`** needs no model and no network. Every word and word pair is hashed into one of 1024 slots. It's how the tests run, and it shows you exactly what a real model adds. It matches **words**, not meanings: ask "can I bring someone to help me with my wheelchair?" and it finds nothing, because the accessibility page talks about "a companion who helps you". Voyage finds it.
+- **`hashingEmbedder`** needs no model and no network. Every word and word pair is hashed into one of 1024 slots. It's how the tests run, and it shows you exactly what a real model adds. It matches **words**, not meanings: ask "can I bring someone to help me with my wheelchair?" and it finds nothing, because the accessibility page talks about "a companion who helps you". An embedding model that understands meaning should find it: try it with Voyage and see.
 
 Building this turned up a lesson in hashing: with 512 slots, "What time do doors open?" missed the page that says "Doors usually open…". Too many words were landing in the same slots and cancelling each other out. 1024 slots fixed it.
 
@@ -46,7 +46,7 @@ Building this turned up a lesson in hashing: with 512 slots, "What time do doors
    ```
 
 4. `answer.ts`: `answerQuestion`, and checking the citations.
-5. Run the tests. Then, with keys, compare the two embedders on the wheelchair question.
+5. Run the tests. Then, if you have a Voyage key, compare the two embedders on the wheelchair question.
 
    ```bash
    npm test -- day-078
