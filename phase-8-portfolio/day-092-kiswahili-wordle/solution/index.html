@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Neno · a daily Kiswahili word game</title>
+    <meta name="description" content="Guess the five-letter Kiswahili word in six tries. A new word every day." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2316a34a'/><text x='16' y='23' font-size='19' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800'>N</text></svg>" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <button type="button" id="help" class="icon" aria-label="How to play">?</button>
+      <h1>Neno <span id="number"></span></h1>
+      <button type="button" id="stats-button" class="icon" aria-label="Statistics">▦</button>
+    </header>
+    <main class="game">
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      <div class="board" id="board" role="grid" aria-label="Your guesses"></div>
+      <div class="keys" id="keys" aria-label="Keyboard"></div>
+    </main>
+    <dialog id="result">
+      <h2 id="result-title"></h2>
+      <p class="meaning" id="meaning"></p>
+      <dl class="stats" id="stats"></dl>
+      <div class="spread" id="spread"></div>
+      <div class="dialog-actions"><button type="button" id="share" class="primary">Share</button><button type="button" id="close">Close</button></div>
+    </dialog>
+    <dialog id="rules">
+      <h2>How to play</h2>
+      <p>Guess the five-letter Kiswahili word in six tries. After each guess the tiles change colour:</p>
+      <ul>
+        <li><span class="tile mini" data-mark="correct">M</span> the letter is in the word, in that spot</li>
+        <li><span class="tile mini" data-mark="present">T</span> it's in the word, somewhere else</li>
+        <li><span class="tile mini" data-mark="absent">O</span> it isn't in the word</li>
+      </ul>
+      <p>A new word every day, the same for everyone, with its meaning when you're done.</p>
+      <div class="dialog-actions"><button type="button" class="primary" id="rules-close">Tucheze! Let's play</button></div>
+    </dialog>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
