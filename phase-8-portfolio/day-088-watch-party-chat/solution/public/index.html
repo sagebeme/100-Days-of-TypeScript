@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>Watch Party</title>
+    <meta name="description" content="Watch the match together: one clock, one chat, everyone in sync." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2316a34a'/><circle cx='16' cy='16' r='7' fill='white'/></svg>" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main class="join" id="join-screen">
+      <form id="join" class="join-card">
+        <h1>Watch Party</h1>
+        <p>Watch the match with your people: one clock, one chat, everyone in sync.</p>
+        <label for="name">Your name</label>
+        <input id="name" maxlength="20" autocomplete="nickname" required placeholder="Amina" />
+        <label for="room">Party</label>
+        <input id="room" maxlength="40" required placeholder="derby-night" />
+        <button type="submit">Join the party</button>
+        <p class="join-error" id="join-error" role="alert"></p>
+      </form>
+    </main>
+
+    <main class="party" id="party" hidden>
+      <section class="screen" aria-label="The match">
+        <div class="pitch" id="pitch">
+          <div class="scoreline"><span>Gor Mahia</span><strong id="clock">0:00</strong><span>AFC Leopards</span></div>
+          <p class="live" id="live">Paused</p>
+          <div class="floaters" id="floaters" aria-hidden="true"></div>
+        </div>
+        <div class="controls">
+          <button type="button" id="back" aria-label="Back 10 seconds">−10s</button>
+          <button type="button" id="toggle" class="play">Play</button>
+          <button type="button" id="forward" aria-label="Forward 10 seconds">+10s</button>
+          <p class="synced" id="synced" role="status"></p>
+        </div>
+      </section>
+
+      <aside class="chat" aria-label="Chat">
+        <header class="chat-head">
+          <h2 id="room-title">Party</h2>
+          <p class="people" id="people"></p>
+        </header>
+        <ol class="messages" id="messages" aria-live="polite"></ol>
+        <div class="reactions" id="reactions" role="group" aria-label="React"></div>
+        <form id="send" class="send">
+          <label for="text" class="visually-hidden">Message</label>
+          <input id="text" maxlength="500" autocomplete="off" placeholder="Say something…" />
+          <button type="submit">Send</button>
+        </form>
+        <p class="chat-error" id="chat-error" role="alert"></p>
+      </aside>
+    </main>
+    <script type="module" src="/client.ts"></script>
+  </body>
+</html>
