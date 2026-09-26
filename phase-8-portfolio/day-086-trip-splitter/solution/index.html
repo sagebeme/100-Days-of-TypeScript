@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Trip Splitter</title>
+    <meta name="description" content="Split a trip's costs with friends, and settle up in as few M-Pesa sends as possible." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230369a1'/><path d='M8 20h16M16 8v16' stroke='white' stroke-width='3' stroke-linecap='round'/></svg>" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="top">
+        <label for="trip" class="visually-hidden">Trip name</label>
+        <input id="trip" class="trip-name" value="Diani weekend" maxlength="50" />
+        <div class="people" id="people"></div>
+        <form id="add-person" class="add-person">
+          <label for="person" class="visually-hidden">Add someone</label>
+          <input id="person" placeholder="Add someone" maxlength="20" autocomplete="off" />
+          <button type="submit" aria-label="Add person">+</button>
+        </form>
+      </header>
+
+      <div class="columns">
+        <section class="card">
+          <h2>Add an expense</h2>
+          <form id="expense" class="expense-form">
+            <div class="field grow"><label for="description">What for</label><input id="description" placeholder="Fuel to Diani" required maxlength="60" /></div>
+            <div class="field"><label for="amount">Amount (KES)</label><input id="amount" inputmode="numeric" placeholder="6,500" required /></div>
+            <div class="field"><label for="paid-by">Paid by</label><select id="paid-by"></select></div>
+            <fieldset class="field full">
+              <legend>Split</legend>
+              <div class="segmented" id="mode">
+                <label><input type="radio" name="mode" value="equal" checked /> Equally</label>
+                <label><input type="radio" name="mode" value="shares" /> By shares</label>
+                <label><input type="radio" name="mode" value="exact" /> Exact amounts</label>
+              </div>
+              <div class="split-people" id="split-people"></div>
+            </fieldset>
+            <p class="form-error full" id="expense-error" role="alert"></p>
+            <button type="submit" class="primary full">Add expense</button>
+          </form>
+
+          <h2 class="list-heading">Expenses <span id="total"></span></h2>
+          <ul class="expenses" id="expenses"></ul>
+        </section>
+
+        <aside class="side">
+          <section class="card">
+            <h2>Balances</h2>
+            <ul class="balances" id="balances"></ul>
+          </section>
+          <section class="card settle">
+            <h2>Settle up</h2>
+            <ol class="transfers" id="transfers"></ol>
+            <button type="button" id="copy" class="secondary">Copy for WhatsApp</button>
+            <p class="copied" id="copied" role="status"></p>
+          </section>
+        </aside>
+      </div>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
