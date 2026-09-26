@@ -1,0 +1,9 @@
+{
+  "name": "slugo",
+  "version": "2.3.1",
+  "description": "Turn any title into a clean URL slug. Tiny, no dependencies.",
+  "type": "module",
+  "exports": "./src/index.ts",
+  "license": "MIT",
+  "keywords": ["slug", "slugify", "url", "transliterate"]
+}
