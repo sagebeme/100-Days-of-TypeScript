@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Typing Race</title>
+    <meta name="description" content="Race your own best time typing a passage about Nairobi." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230f766e'/><text x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='monospace' font-weight='700'>Aa</text></svg>" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="top">
+        <h1>Typing Race</h1>
+        <p class="sub">Beat your ghost: your own best run on today's passage.</p>
+      </header>
+
+      <section class="track" aria-label="Race progress">
+        <div class="lane" data-who="you">
+          <span class="lane-name">You</span>
+          <div class="lane-road"><span class="runner" id="you-runner"></span></div>
+        </div>
+        <div class="lane" data-who="ghost" id="ghost-lane">
+          <span class="lane-name" id="ghost-name">Ghost</span>
+          <div class="lane-road"><span class="runner" id="ghost-runner"></span></div>
+        </div>
+      </section>
+
+      <section class="board" id="board">
+        <label for="typing" class="visually-hidden">Type the passage</label>
+        <input id="typing" autocomplete="off" autocapitalize="off" spellcheck="false" autocorrect="off" />
+        <p class="passage" id="passage" aria-hidden="true"></p>
+        <p class="hint" id="hint">Start typing to begin. The clock starts on your first key.</p>
+      </section>
+
+      <dl class="stats" aria-live="off">
+        <div><dt>WPM</dt><dd id="wpm">0</dd></div>
+        <div><dt>Accuracy</dt><dd id="accuracy">100%</dd></div>
+        <div><dt>Time</dt><dd id="time">0.0s</dd></div>
+      </dl>
+
+      <section class="result" id="result" hidden aria-live="polite">
+        <p class="result-badge" id="badge"></p>
+        <p class="result-wpm"><strong id="result-wpm">0</strong> words per minute</p>
+        <p class="result-detail" id="result-detail"></p>
+        <div class="result-actions">
+          <button type="button" id="again" class="primary">Race again</button>
+          <button type="button" id="next">Next passage</button>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
