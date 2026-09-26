@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Project Board</title>
+    <meta name="description" content="A kanban board you can use with a mouse, a finger or a keyboard." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234338ca'/><rect x='7' y='8' width='5' height='16' rx='1.5' fill='white'/><rect x='14' y='8' width='5' height='10' rx='1.5' fill='white'/><rect x='21' y='8' width='5' height='13' rx='1.5' fill='white'/></svg>" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <h1>Tikiti launch</h1>
+      <div class="tools">
+        <label class="search"><span class="visually-hidden">Search cards</span><input id="search" type="search" placeholder="Search cards" /></label>
+        <div class="filters" id="filters" role="group" aria-label="Filter by label"></div>
+      </div>
+      <p class="help">Drag cards, or focus one and press <kbd>Space</kbd>, move it with the arrow keys, and <kbd>Space</kbd> again to drop.</p>
+    </header>
+    <main class="board" id="board"></main>
+    <p class="visually-hidden" id="announce" aria-live="assertive"></p>
+    <div class="toast" id="toast" role="alert" hidden></div>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
