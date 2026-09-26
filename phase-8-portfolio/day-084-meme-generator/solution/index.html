@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Meme Generator</title>
+    <meta name="description" content="Make a meme from your own photo or a background, and download it." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23db2777'/><text x='16' y='22' font-size='15' text-anchor='middle' fill='white' font-family='Impact,sans-serif'>LOL</text></svg>" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="top">
+        <h1>Meme Generator</h1>
+        <p>Your photo or a background, your words, one download. Nothing leaves your device.</p>
+      </header>
+      <div class="editor">
+        <figure class="preview">
+          <canvas id="canvas" width="800" height="800" role="img" aria-label="Meme preview"></canvas>
+        </figure>
+        <form class="controls" id="controls">
+          <fieldset>
+            <legend>Picture</legend>
+            <div class="backgrounds" id="backgrounds"></div>
+            <label class="upload">
+              <input type="file" id="upload" accept="image/*" />
+              <span>Use your own photo…</span>
+            </label>
+          </fieldset>
+          <div class="field">
+            <label for="top">Top text</label>
+            <textarea id="top" rows="2">When the matatu leaves</textarea>
+          </div>
+          <div class="field">
+            <label for="bottom">Bottom text</label>
+            <textarea id="bottom" rows="2">just as you reach the stage</textarea>
+          </div>
+          <fieldset class="options">
+            <legend>Style</legend>
+            <label><input type="checkbox" id="caps" checked /> CAPITALS</label>
+            <label><input type="radio" name="ink" value="white" checked /> White</label>
+            <label><input type="radio" name="ink" value="black" /> Black</label>
+          </fieldset>
+          <button type="button" id="download" class="primary">Download PNG</button>
+          <p class="note" id="note" role="status"></p>
+        </form>
+      </div>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
