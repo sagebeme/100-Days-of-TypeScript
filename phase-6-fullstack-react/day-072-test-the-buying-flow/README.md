@@ -65,5 +65,6 @@ Find everything by **role and accessible name**, the way a person (or a screen r
 
 - **The tests are skipped** — no Chrome was found. Install Chrome or Chromium, or set `CHROME_PATH`.
 - **"strict mode violation: resolved to 2 elements"** — a locator matched more than one thing. Narrow it down: find the card first, then the link inside it.
+- **A test passes on your machine but fails now and then on a slower one** — something waited for the wrong thing. The classic case here: `openEvent` waiting for "a level-1 heading" instead of the one with the event's title. The list page has its own heading, so the wait passes before the event page has loaded. Wait for something only the next page has.
 - **Timeouts on the order page** — the payment only settles when the test calls `/settle`, and the page takes up to 2 seconds to notice. Wait for the heading; don't check once.
 - **Still stuck?** Read `solution/pages.ts`, then close it and write your own from memory.

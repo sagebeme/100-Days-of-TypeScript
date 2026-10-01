@@ -38,9 +38,10 @@ export class WhatsOnPage {
 
   async openEvent(title: string): Promise<EventPage> {
     await this.card(title).getByRole("link", { name: title }).click();
-    const event = new EventPage(this.page);
-    await event.heading.waitFor();
-    return event;
+    // Wait for THIS event's heading. The list page has a level-1 heading of its own, so waiting
+    // for "a heading" can pass before the app has even left the list.
+    await this.page.getByRole("heading", { level: 1, name: title }).waitFor();
+    return new EventPage(this.page);
   }
 }
 
