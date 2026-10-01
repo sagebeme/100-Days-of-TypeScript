@@ -43,7 +43,8 @@ export class WhatsOnPage {
     return todo(`WhatsOnPage.seatsFor(${title})`);
   }
 
-  // TODO: click the card's link, then wait for the event page's heading. Return an EventPage.
+  // TODO: click the card's link, then wait for the level-1 heading named `title`. Return an EventPage.
+  // (Not just "a level-1 heading": the list page has one too, so that wait can pass too early.)
   async openEvent(title: string): Promise<EventPage> {
     return todo(`WhatsOnPage.openEvent(${title})`);
   }
