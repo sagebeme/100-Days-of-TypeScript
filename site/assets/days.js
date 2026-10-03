@@ -67,7 +67,7 @@ window.TS_PHASES = [
 ];
 
 window.TS_DAYS = [
-  {"day":1,"phase":1,"title":"Gamer Tag Generator","topic":"","capstone":false,"path":"phase-1-terminal/day-001-gamer-tag","brief":"Every serious gamer has a tag. Write a function that turns a real name and a lucky number into one, wrapped in the classic xX_..._Xx bracket."},
+  {"day":1,"phase":1,"title":"M-Pesa SMS Builder","topic":"","capstone":false,"path":"phase-1-terminal/day-001-mpesa-sms","brief":"Send money on M-Pesa and a text arrives a second later: a transaction code, the word \"Confirmed\", the amount, and who got it. Write a function that builds that confirmation from its three parts."},
   {"day":2,"phase":1,"title":"How Far Does 1 GB Go?","topic":"","capstone":false,"path":"phase-1-terminal/day-002-gigabyte-math","brief":"You've just topped up a data bundle. Before it runs out, you want to know: how many minutes of video does it actually buy you? Write a function that does the maths."},
   {"day":3,"phase":1,"title":"Event Ticket Pricer","topic":"","capstone":false,"path":"phase-1-terminal/day-003-ticket-pricer","brief":"A weekend event has three ticket types, each a different cut of the base price: early bird, student, and VIP. Write a function that prices a ticket by type."},
   {"day":4,"phase":1,"title":"Sheng vs Gen Z Slang Quiz","topic":"","capstone":false,"path":"phase-1-terminal/day-004-slang-quiz","brief":"A quiz that picks a random slang word — Sheng like \"noma\" and \"mbogi\", or Gen Z like \"rizz\" and \"no cap\" — and asks the player what it means. The picking part is today's problem: write a function that grabs a random…"},

@@ -1,6 +1,6 @@
 # 100 Days of TypeScript
 
-One project a day, for 100 days. You start with a gamer tag generator in your terminal and finish with an AI agent plugged into an app you built yourself.
+One project a day, for 100 days. You start by building an M-Pesa confirmation text in your terminal and finish with an AI agent plugged into an app you built yourself.
 
 Every day ships with tests. You run `npm test` and the tests tell you when you got it right, instead of you comparing your code to someone else's solution.
 
@@ -34,7 +34,7 @@ npm install
 Then start Day 1:
 
 ```bash
-cd phase-1-terminal/day-001-gamer-tag
+cd phase-1-terminal/day-001-mpesa-sms
 ```
 
 Read the `README.md` in that folder, write your code in `starter/`, and run the tests.
@@ -56,11 +56,11 @@ To put it online, import the repo into Netlify or Vercel. `netlify.toml` and `ve
 Every day is a folder that looks like this:
 
 ```
-day-001-gamer-tag/
+day-001-mpesa-sms/
 ├── README.md            what to build, and the steps to get there
 ├── starter/             your code goes here
 ├── solution/            look after you've tried it
-└── gamer-tag.test.ts    the tests that say when you're done
+└── mpesa-sms.test.ts    the tests that say when you're done
 ```
 
 The routine:

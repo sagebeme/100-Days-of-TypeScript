@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>100 Days of TypeScript</title>
-<meta name="description" content="One TypeScript project a day for 100 days, from a gamer tag generator to an AI agent in an app you built yourself. Every day has tests.">
+<meta name="description" content="One TypeScript project a day for 100 days, from an M-Pesa SMS builder to an AI agent in an app you built yourself. Every day has tests.">
 <meta property="og:title" content="100 Days of TypeScript">
 <meta property="og:description" content="One project a day for 100 days. Every day has tests that tell you when you got it right.">
 <meta name="theme-color" content="#2c3e50">
@@ -36,7 +36,7 @@
     <div>
       <span class="kicker">100 projects · 8 phases · about an hour a day</span>
       <h1><span class="script">One project a day</span>100 Days of TypeScript</h1>
-      <p class="lede">Start with a gamer tag generator in your terminal. Finish with an AI agent plugged into a ticketing app you built yourself. Every day has tests that tell you when you got it right.</p>
+      <p class="lede">Start by building an M-Pesa confirmation text in your terminal. Finish with an AI agent plugged into a ticketing app you built yourself. Every day has tests that tell you when you got it right.</p>
       <div class="actions">
         <a class="btn btn-sun" id="cta" href="day.html?day=1">Start Day 1 →</a>
         <a class="btn btn-ghost" href="#path">See the path</a>
@@ -44,17 +44,20 @@
       <p class="resume" id="resume" hidden></p>
     </div>
     <div class="window" aria-hidden="true">
-      <div class="bar"><i></i><i></i><i></i><b>day-001-gamer-tag/starter/gamer-tag.ts</b></div>
+      <div class="bar"><i></i><i></i><i></i><b>day-001-mpesa-sms/starter/mpesa-sms.ts</b></div>
 <pre><span class="c">// Day 1: your first TypeScript function</span>
-<span class="k">export function</span> <span class="f">buildGamerTag</span>(
+<span class="k">export function</span> <span class="f">buildConfirmation</span>(
+  code: <span class="t">string</span>,
+  amount: <span class="t">number</span>,
   name: <span class="t">string</span>,
-  lucky: <span class="t">number</span>,
 ): <span class="t">string</span> {
-  <span class="k">return</span> <span class="s">`xX_${</span>name<span class="s">}${</span>lucky<span class="s">}_Xx`</span>;
+  <span class="k">const</span> sent = <span class="s">`Ksh${</span>amount<span class="s">}.00 sent to ${</span>name<span class="s">}`</span>;
+  <span class="k">return</span> <span class="s">`${</span>code<span class="s">} Confirmed. ${</span>sent<span class="s">}.`</span>;
 }
 
-<span class="f">buildGamerTag</span>(<span class="s">"Amina"</span>, <span class="n">7</span>); <span class="c">// "xX_Amina7_Xx"</span></pre>
-      <div class="out good">$ npm test -- day-001<br>✓ gamer-tag.test.ts (4 tests)<br>Tests  4 passed (4)</div>
+<span class="f">buildConfirmation</span>(<span class="s">"QFT1ABC2DE"</span>, <span class="n">500</span>, <span class="s">"Amina"</span>);
+<span class="c">// "QFT1ABC2DE Confirmed. Ksh500.00 sent to Amina."</span></pre>
+      <div class="out good">$ npm test -- day-001<br>✓ mpesa-sms.test.ts (4 tests)<br>Tests  4 passed (4)</div>
     </div>
   </div>
 </header>
@@ -186,7 +189,7 @@
 <section class="cta" aria-labelledby="cta-title">
   <div class="container">
     <h2 id="cta-title">Your first day takes about an hour</h2>
-    <p id="cta-text">Day 1 is a gamer tag generator. By Day 100 you'll have a portfolio full of things you built.</p>
+    <p id="cta-text">Day 1 builds an M-Pesa confirmation text. By Day 100 you'll have a portfolio full of things you built.</p>
     <a class="btn btn-sun" id="cta-3" href="day.html?day=1">Start Day 1 →</a>
   </div>
 </section>
@@ -203,7 +206,7 @@
         <h4>Course</h4>
         <ul>
           <li><a href="syllabus.html">Full syllabus</a></li>
-          <li><a href="day.html?day=1">Day 1: Gamer Tag Generator</a></li>
+          <li><a href="day.html?day=1">Day 1: M-Pesa SMS Builder</a></li>
           <li><a href="day.html?day=100">Day 100: Your Portfolio</a></li>
         </ul>
       </div>
