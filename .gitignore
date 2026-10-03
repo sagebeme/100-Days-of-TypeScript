@@ -1,4 +1,6 @@
 node_modules/
+# This repo uses npm (package-lock.json); a pnpm install's lockfile stays local
+pnpm-lock.yaml
 dist/
 coverage/
 *.log
