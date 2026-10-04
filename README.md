@@ -31,6 +31,10 @@ cd 100-Days-of-TypeScript
 npm install
 ```
 
+Prefer pnpm? `pnpm install` works too, and every `npm run ...` / `npm test` command below works as `pnpm run ...` / `pnpm test`. The repo's lockfile is npm's (`package-lock.json`), so a `pnpm-lock.yaml` stays on your machine: `.gitignore` keeps it out of commits.
+
+If you move the project between Windows and Linux or macOS, run the install again on the new system. Some tools download a different native binary for each one, so a `node_modules` folder made on Windows won't run tests on Linux.
+
 Then start Day 1:
 
 ```bash
