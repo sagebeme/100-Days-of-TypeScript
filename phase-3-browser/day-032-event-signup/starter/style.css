@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=Inter:wght@400;600&display=swap");
 /* ------------------------------------------------------------------
    Design tokens: every colour, size and speed is named once, here.
    The dark theme only swaps the tokens; no other rule changes.
@@ -383,3 +384,25 @@ textarea:focus-visible {
     grid-template-columns: 1fr;
   }
 }
+
+/* ------------------------------------------------------------------
+   Theme: a rooftop at night. City lights below, tickets with notches.
+   ------------------------------------------------------------------ */
+:root, :root:where(*) {
+  --font: "Inter", system-ui, sans-serif;
+  --page: #0d0b1f; --surface: #17142f; --surface-muted: #201c40; --line: #2f2a5a;
+  --ink: #f2efff; --muted: #a9a3d1; --accent: #ff4fa3; --accent-hover: #ff73b6; --on-accent: #1a0010; --accent-soft: #3a1838;
+  --focus: #7cf3ff; --shadow: 0 18px 40px -20px rgb(255 79 163 / 0.45);
+}
+@media (prefers-color-scheme: dark) { :root { --page: #0d0b1f; --surface: #17142f; --ink: #f2efff; } }
+body {
+  background:
+    radial-gradient(circle at 12% 92%, rgb(255 210 120 / 0.35) 0 2px, transparent 3px) 0 0 / 46px 30px,
+    radial-gradient(circle at 70% 85%, rgb(124 243 255 / 0.25) 0 2px, transparent 3px) 0 0 / 61px 37px,
+    linear-gradient(180deg, #0d0b1f 0%, #251a52 70%, #3b2470 100%) fixed;
+}
+h1 { font-family: "Unbounded", system-ui, sans-serif; font-weight: 800; background: linear-gradient(90deg, #ffd27a, #ff4fa3); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.event-kicker { color: #7cf3ff; }
+.ticket { position: relative; border-style: dashed; }
+.ticket::before, .ticket::after { content: ""; position: absolute; top: 50%; width: 14px; height: 14px; border-radius: 50%; background: var(--page); transform: translateY(-50%); }
+.ticket::before { left: -8px; } .ticket::after { right: -8px; }

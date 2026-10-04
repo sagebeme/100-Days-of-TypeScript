@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,600&family=Nunito:wght@400;800&display=swap");
 /* ------------------------------------------------------------------
    Design tokens: every colour, size and speed is named once, here.
    The dark theme only swaps the tokens; no other rule changes.
@@ -340,3 +341,24 @@ textarea:focus-visible {
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
+
+/* ------------------------------------------------------------------
+   Theme: the Swahili coast. Ocean teal, sand, and a kanga-striped card.
+   ------------------------------------------------------------------ */
+:root {
+  --font: "Nunito", system-ui, sans-serif;
+  --page: #f3ead8; --surface: #fffaf0; --surface-muted: #f7efdc; --line: #e1d3b5;
+  --ink: #1c2b33; --muted: #5d6b70; --accent: #0f7c8c; --accent-hover: #0b6371; --on-accent: #fff; --accent-soft: #d8eef0;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --page: #0e1e24; --surface: #13292f; --surface-muted: #183339; --line: #234850; --ink: #f1e9d6; --muted: #a8bcbf; --accent: #3fb8c7; --on-accent: #062126; }
+}
+body { background: linear-gradient(180deg, var(--page) 0 70%, color-mix(in srgb, var(--accent) 18%, var(--page)) 100%) fixed; }
+h1 { font-family: "Lora", Georgia, serif; }
+.flashcard {
+  border: 10px solid transparent; border-radius: 6px;
+  border-image: repeating-linear-gradient(45deg, #e76f51 0 10px, #f4a261 10px 20px, #2a9d8f 20px 30px) 10;
+  box-shadow: 0 24px 40px -24px rgb(28 43 51 / 0.6);
+}
+.prompt, .answer { font-family: "Lora", Georgia, serif; }
+.grade-right { background: #2a9d8f; color: #fff; } .grade-wrong { background: #e76f51; color: #fff; }

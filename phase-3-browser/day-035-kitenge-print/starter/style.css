@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Righteous&family=Mulish:wght@400;700&display=swap");
 /* ------------------------------------------------------------------
    Design tokens: every colour, size and speed is named once, here.
    The dark theme only swaps the tokens; no other rule changes.
@@ -277,3 +278,20 @@ textarea:focus-visible {
   height: auto;
   border-radius: var(--radius-md);
 }
+
+/* ------------------------------------------------------------------
+   Theme: a fabric shop. A printed selvedge across the top, a swing tag toolbar.
+   ------------------------------------------------------------------ */
+:root {
+  --font: "Mulish", system-ui, sans-serif;
+  --page: #fbf3e6; --surface: #fffaf2; --surface-muted: #f6ead5; --line: #e8d4b4;
+  --ink: #3a1f0f; --muted: #7a5b45; --accent: #c1440e; --accent-hover: #a2380b; --on-accent: #fff; --accent-soft: #fbe2d0;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --page: #1e140d; --surface: #2a1d13; --surface-muted: #33251a; --line: #4a3423; --ink: #f6e7d2; --muted: #c9ae93; --accent: #f08a4b; --on-accent: #2a1305; }
+}
+body { border-top: 18px solid; border-image: repeating-linear-gradient(90deg, #c1440e 0 18px, #f2a541 18px 36px, #1f6f78 36px 54px, #3a1f0f 54px 72px) 18; }
+h1 { font-family: "Righteous", system-ui, sans-serif; letter-spacing: 0.02em; }
+.toolbar.card { position: relative; border: 2px dashed var(--accent); }
+.toolbar.card::before { content: ""; position: absolute; top: 50%; left: -7px; width: 12px; height: 12px; border-radius: 50%; background: var(--page); border: 2px solid var(--accent); transform: translateY(-50%); }
+.fabric { border-radius: 4px; box-shadow: 0 30px 50px -30px rgb(58 31 15 / 0.7), inset 0 0 0 1px rgb(0 0 0 / 0.08); }

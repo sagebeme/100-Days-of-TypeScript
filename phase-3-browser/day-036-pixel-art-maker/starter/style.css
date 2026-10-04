@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap");
 /* ------------------------------------------------------------------
    Design tokens: every colour, size and speed is named once, here.
    The dark theme only swaps the tokens; no other rule changes.
@@ -325,3 +326,23 @@ input[type="color"] {
   font-size: 0.8125rem;
   resize: vertical;
 }
+
+/* ------------------------------------------------------------------
+   Theme: an 8-bit studio. Pixel type, stepped "pixel" borders, arcade colours.
+   ------------------------------------------------------------------ */
+:root {
+  --font: "VT323", ui-monospace, monospace;
+  --page: #2b1e4a; --surface: #f4f1ff; --surface-muted: #e3dcff; --line: #1a1230;
+  --ink: #1a1230; --muted: #4c3f73; --accent: #39d98a; --accent-hover: #5bf2a6; --on-accent: #0b2a1b; --accent-soft: #c9f7df;
+  --radius-sm: 0; --radius-md: 0; --radius-lg: 0;
+}
+@media (prefers-color-scheme: dark) { :root { --page: #120c22; } }
+body { font-size: 1.3rem; background: conic-gradient(#2b1e4a 25%, #31235a 0 50%, #2b1e4a 0 75%, #31235a 0) 0 0 / 32px 32px; }
+h1 { font-family: "Press Start 2P", ui-monospace, monospace; font-size: clamp(1.1rem, 4vw, 1.8rem); line-height: 1.5; color: #ffd166; text-shadow: 3px 3px 0 #1a1230; }
+.tagline { color: #e3dcff; }
+.card {
+  border: 0;
+  box-shadow: 0 -4px 0 0 var(--line), 0 4px 0 0 var(--line), -4px 0 0 0 var(--line), 4px 0 0 0 var(--line),
+              8px 8px 0 0 rgb(0 0 0 / 0.35);
+}
+.button { font-family: "Press Start 2P", ui-monospace, monospace; font-size: 0.7rem; border-radius: 0; box-shadow: inset -3px -3px 0 rgb(0 0 0 / 0.25); }

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap");
 /* ------------------------------------------------------------------
    Design tokens: every colour, size and speed is named once, here.
    The dark theme only swaps the tokens; no other rule changes.
@@ -284,3 +285,26 @@ textarea:focus-visible {
   display: grid;
   place-items: center;
 }
+
+/* ------------------------------------------------------------------
+   Theme: a till receipt. Monospaced type, a paper roll, a torn edge.
+   ------------------------------------------------------------------ */
+:root {
+  --font: "Courier Prime", ui-monospace, "Courier New", monospace;
+  --page: #e9e4d8; --surface: #fffdf7; --surface-muted: #f6f1e4; --line: #d9d0bd;
+  --ink: #222; --muted: #6b6457; --accent: #222; --accent-hover: #000; --on-accent: #fffdf7; --accent-soft: #efe9da;
+  --radius-sm: 2px; --radius-md: 2px; --radius-lg: 2px;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --page: #1c1b18; --surface: #fffdf7; --surface-muted: #f6f1e4; --line: #d9d0bd; --ink: #222; --muted: #6b6457; }
+}
+body { background: repeating-linear-gradient(0deg, transparent 0 22px, rgb(0 0 0 / 0.03) 22px 23px), var(--page); }
+.app-header h1 { text-transform: uppercase; letter-spacing: 0.12em; text-align: center; }
+.app-header h1::before, .app-header h1::after { content: " ★ "; color: var(--muted); }
+.card, .result { position: relative; border: 0; box-shadow: 0 10px 22px -14px rgb(0 0 0 / 0.45); }
+.card::after, .result::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -10px; height: 10px;
+  background: linear-gradient(-45deg, transparent 6px, var(--surface) 0) 0 0 / 12px 10px,
+              linear-gradient(45deg, transparent 6px, var(--surface) 0) 0 0 / 12px 10px;
+}
+.result { border-top: 2px dashed var(--ink); }

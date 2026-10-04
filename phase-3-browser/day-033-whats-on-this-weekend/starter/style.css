@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600&display=swap");
 /* ------------------------------------------------------------------
    Design tokens: every colour, size and speed is named once, here.
    The dark theme only swaps the tokens; no other rule changes.
@@ -357,3 +358,22 @@ textarea:focus-visible {
 #retry {
   justify-self: start;
 }
+
+/* ------------------------------------------------------------------
+   Theme: a gig-poster zine. Yellow paper, black ink, stickers.
+   ------------------------------------------------------------------ */
+:root {
+  --font: "Space Grotesk", system-ui, sans-serif;
+  --page: #ffe14d; --surface: #fffbea; --surface-muted: #fff3b0; --line: #111;
+  --ink: #111; --muted: #3d3a2a; --accent: #111; --accent-hover: #e63946; --on-accent: #ffe14d; --accent-soft: #fff3b0;
+  --radius-sm: 0; --radius-md: 0; --radius-lg: 0; --shadow: 6px 6px 0 #111;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --page: #191714; --surface: #24211b; --surface-muted: #2e2a22; --line: #ffe14d; --ink: #ffe14d; --muted: #e8d98a; --accent: #ffe14d; --on-accent: #111; --shadow: 6px 6px 0 #ffe14d; }
+}
+h1 { font-family: "Anton", Impact, sans-serif; font-size: clamp(2.6rem, 9vw, 4.4rem); text-transform: uppercase; letter-spacing: 0.01em; line-height: 0.95; transform: rotate(-1.5deg); }
+.tagline { display: inline-block; padding: 0.2rem 0.6rem; background: #e63946; color: #fff; transform: rotate(1deg); }
+.events > * { border: 3px solid var(--line); box-shadow: var(--shadow); }
+.events > *:nth-child(3n + 2) { transform: rotate(0.6deg); }
+.events > *:nth-child(3n) { transform: rotate(-0.6deg); }
+.button { border: 3px solid var(--line); font-weight: 700; text-transform: uppercase; }
