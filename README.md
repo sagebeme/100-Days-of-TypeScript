@@ -150,6 +150,10 @@ Day 27 goes into this properly. Until then, just avoid `enum`.
 
 Tick a phase off when its tests pass. Commit your work daily: in three months you'll want to see how far you came.
 
+## Reference
+
+- [HTTP: methods and status codes](reference/http.md): every method, safe or idempotent, `PUT` vs `PATCH`, and the status codes from `1xx` to `5xx`, with an example from the ticketing API for each. Keep it open from Day 43.
+
 ## Getting unstuck
 
 1. **Read the error.** TypeScript errors say which line and which type. That's usually the whole answer.

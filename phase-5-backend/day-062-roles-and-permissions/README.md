@@ -39,6 +39,10 @@ And a few rules that aren't about roles at all: a draft is invisible to everyone
    npm test -- day-062
    ```
 
+## Reference
+
+Every method and status code, with when to use each: [HTTP: methods and status codes](../../reference/http.md).
+
 ## When you're stuck
 
 - **Organisers can edit each other's events** — a role guard says "organisers may edit events", not "this organiser may edit this event". Ownership needs the policy, with the event loaded.

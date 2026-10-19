@@ -67,6 +67,10 @@ Welcome to Phase 4. Until now your code only talked to itself. From today it tal
    node phase-4-internet/day-043-fit-check/starter/cli.ts Kisumu -0.0917 34.768
    ```
 
+## Reference
+
+Every method and status code, with when to use each: [HTTP: methods and status codes](../../reference/http.md).
+
 ## When you're stuck
 
 - **`fetch` didn't throw, but the data is nonsense** — a `400` or `500` is still a successful *network* request. Check `response.status` before you read the body.

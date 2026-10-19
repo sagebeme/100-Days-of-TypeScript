@@ -60,6 +60,10 @@ You'll build it with nothing but Node's built-in `http` module: no framework. To
 
    Watch the log line appear in the first terminal for every request. Try the errors on purpose.
 
+## Reference
+
+Every method and status code, with when to use each: [HTTP: methods and status codes](../../reference/http.md).
+
 ## When you're stuck
 
 - **The request hangs forever** — a code path never calls `response.end()`. Every branch must send exactly one response.
