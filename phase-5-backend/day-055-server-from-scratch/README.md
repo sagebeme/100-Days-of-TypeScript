@@ -64,6 +64,22 @@ You'll build it with nothing but Node's built-in `http` module: no framework. To
 
 Every method and status code, with when to use each: [HTTP: methods and status codes](../../reference/http.md).
 
+## Check yourself
+
+1. The router has `GET /stages/:id` and nothing else at that path. What does `router.find("DELETE", "/stages/kencom")` return, and what does the server answer?
+2. Why count the bytes as the body arrives instead of trusting the `Content-Length` header?
+3. Predict the output: `router.find("GET", "/stages/kencom%20stage").params`
+4. A handler throws a `TypeError` because of a bug. What does the client see, and why not the error message?
+
+<details><summary>Answers</summary>
+
+1. `{ handler: null, params: {}, allowed: ["GET"] }`. The path exists but not for that method, so the answer is `405 Method Not Allowed` with `Allow: GET`. A path nothing matches at all gives `404`.
+2. The header is written by the sender, and a sender can lie, or leave it out and stream forever. Counting as you go stops reading at the limit, whatever the header said.
+3. `{ id: "kencom stage" }`. Each path parameter is decoded with `decodeURIComponent`.
+4. A `500` with a generic message, while the real error is logged for you. Error messages and stack traces describe your code, and that's for you, not for strangers on the internet.
+
+</details>
+
 ## When you're stuck
 
 - **The request hangs forever** — a code path never calls `response.end()`. Every branch must send exactly one response.

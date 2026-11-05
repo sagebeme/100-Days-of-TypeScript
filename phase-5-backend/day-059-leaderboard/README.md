@@ -52,6 +52,22 @@ Read the three files in `starter/migrations/`. The third one (`ALTER TABLE ... A
    node phase-5-backend/day-059-leaderboard/starter/main.ts
    ```
 
+## Check yourself
+
+1. You notice a typo in `0001_create_players.sql`, which has already run. Why not just fix the file? What does `migrate` do if you do?
+2. Why does each migration run between `BEGIN` and `COMMIT`?
+3. Best scores are Amina 30, Baraka 30, Chebet 20 and Dan 10. Predict each player's rank.
+4. Amina submits as `"Amina"` and later as `"amina"`. How many players are there, and what makes that happen?
+
+<details><summary>Answers</summary>
+
+1. Databases that already ran the old version would stay different from new ones that run the fixed file. `migrate` compares checksums and throws `0001_create_players.sql was edited after it ran. Put the change in a new migration instead.`
+2. So a migration runs completely or not at all. If its third statement fails, `ROLLBACK` undoes the first two, instead of leaving a half-built table behind.
+3. 1, 1, 3 and 4. Ties share a rank, and the next player's rank skips the tied places.
+4. One player with two scores. The `name` column is `COLLATE NOCASE UNIQUE`, so the second insert conflicts and is skipped, and the lookup ignores case too.
+
+</details>
+
 ## When you're stuck
 
 - **`FOREIGN KEY constraint failed` never happens, even for a player that doesn't exist** — SQLite ignores `REFERENCES` unless `PRAGMA foreign_keys = ON` is set. `db.ts` does it; check you're using `openDatabase`.

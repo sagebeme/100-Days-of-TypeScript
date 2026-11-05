@@ -46,6 +46,22 @@ The schema also *tidies*. It turns what was typed (`z.input`: `"0712 345 678"`) 
 
 **Registration order is focus order.** React Hook Form puts the cursor on the first bad field *in the order fields were registered*. Inputs inside a `Field` render prop register when `Field` renders, which is *after* anything written directly in the form, so the checkbox would win. Register all four at the top of the component, in page order.
 
+## Check yourself
+
+1. The same `CheckoutSchema` runs in the browser and on the server. Why check on the server at all if the form already checks?
+2. Predict the output: `CheckoutSchema.parse({ name: "Amina", email: " Amina@Example.com ", phone: "0712-345-678", agree: true })`
+3. What's the difference between `z.input<typeof CheckoutSchema>` and `z.output<typeof CheckoutSchema>` for `phone`?
+4. Why does the form check on submit and then on every change, instead of checking each box as it loses focus?
+
+<details><summary>Answers</summary>
+
+1. Anyone can send anything to an API, without your form. The browser's checks are for the fan's convenience; the server's are for safety. Sharing one schema means they can't disagree.
+2. `{ name: "Amina", email: "amina@example.com", phone: "254712345678", agree: true }`. The schema tidies as it checks: trimmed and lower-cased email, one form of phone number.
+3. The input is the phone as typed (`"0712 345 678"`). The output is what's stored (`"254712345678"`). The form holds the first; everything after the check sees only the second.
+4. Clicking Pay makes the email box lose focus first. Its error appears, the button moves down under the finger, and the click misses. Checking on submit avoids that; re-checking on change clears each error as soon as it's fixed.
+
+</details>
+
 ## When you're stuck
 
 - **The phone always fails** — remove spaces and dashes *before* matching, and allow `0`, `254` or `+254` in front of a number starting with 7 or 1.

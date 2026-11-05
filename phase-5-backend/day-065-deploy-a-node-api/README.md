@@ -54,6 +54,22 @@ The `Dockerfile` builds an image that runs anywhere containers run. One way to p
 
 **About the database file.** SQLite keeps everything in one file, so that file must live on a *persistent disk* that survives deploys, mounted at `/data`. Many hosts' free plans have no persistent disk and wipe the filesystem on every deploy, which would wipe your data too. Check your host's current plans before you trust real data to it. The other common choice is a hosted database, which Phase 6 doesn't need but real projects often do.
 
+## Check yourself
+
+1. Why should a production server *refuse to start* when `SESSION_SECRET` is missing or weak, instead of falling back to a default?
+2. Predict the output: `redact({ user: { name: "A", passwordHash: "x" }, headers: { Authorization: "Bearer y" }, passengers: 14 })`
+3. What's the difference between `/health/live` and `/health/ready`, and why does `ready` answer `503` while shutting down?
+4. A deploy sends `SIGTERM`. Why not just `process.exit()` straight away?
+
+<details><summary>Answers</summary>
+
+1. A server that won't start is an obvious 30-second fix. One that runs with a guessable secret lets anyone forge sessions, and nobody notices until it's too late.
+2. `{ user: { name: "A", passwordHash: "[redacted]" }, headers: { Authorization: "[redacted]" }, passengers: 14 }`. Any key *containing* a secret word is hidden, however deep. `passengers` contains "pass" but not "password", so it stays.
+3. Live means "the process is running": if it stops answering, the platform restarts the app. Ready means "send traffic here". While shutting down, `503` tells the platform to move new traffic to the new copy.
+4. People halfway through a request, like buying a ticket, would be cut off. A graceful shutdown stops taking new requests, lets current ones finish (up to a time limit), closes the database, then exits.
+
+</details>
+
 ## When you're stuck
 
 - **Shutdown always hits the timeout** — keep-alive connections. After a request finishes, its connection stays open and idle; `server.close()` waits for it. Keep calling `closeIdleConnections()` while you wait.

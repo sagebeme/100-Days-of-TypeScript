@@ -48,6 +48,22 @@ checkout(sol, 1, "BOGUS")        →  { ok: false, error: InvalidPromoError }
    npm test -- day-021
    ```
 
+## Check yourself
+
+1. Why does `checkout` return a `Result` instead of throwing when an event is sold out?
+2. Predict the output: `checkout(sol, 6, "BOGUS")` with `sol.remaining` at 5. Which error comes back?
+3. Predict the output: `checkout({ name: "Sol Fest", priceKes: 999, remaining: 5 }, 3, "nairobi10")`
+4. Predict the output: `parseQuantity(" 3 ")` and `parseQuantity("2.5")`
+
+<details><summary>Answers</summary>
+
+1. Sold out is a normal outcome, not a bug. A `Result` puts both outcomes in the return type, so the caller has to check `ok` before reading `value`. A thrown error is easy to forget to catch.
+2. A `SoldOutError`. Stock is checked first, so the bad promo code is never looked at.
+3. `{ ok: true, value: { eventName: "Sol Fest", quantity: 3, total: 2697 } }`. 999 × 3 = 2997, less 10% is 2697.3, rounded to 2697. The code matches because it's upper-cased before the lookup.
+4. `3`: `Number(" 3 ")` ignores the spaces. `"2.5"` throws `TypeError: Invalid quantity: 2.5`, because it isn't a whole number.
+
+</details>
+
 ## When you're stuck
 
 - **"Type 'unknown' is not assignable..."** — you can't use an `unknown` value until you've narrowed it. Check `typeof input === "number"` or `error instanceof Error` first.

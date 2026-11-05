@@ -42,6 +42,22 @@ npx vite phase-8-portfolio/day-092-kiswahili-wordle/starter
 - Hard mode: letters you've found must be used in later guesses.
 - Sheng mode, with its own words.
 
+## Check yourself
+
+1. Predict the output: `score("mtoto", "tumbo")`
+2. Predict the keyboard after that one guess: `keyboard(["mtoto"], "tumbo")`
+3. Predict `puzzleNumber` at `2026-01-01T20:59:59Z` and at `2026-01-01T21:00:00Z`.
+4. Why are the answers put in order by a shuffle with a fixed seed, instead of `Math.random()` or the word list's own order?
+
+<details><summary>Answers</summary>
+
+1. `["present", "present", "absent", "absent", "correct"]`. The last `o` is green, so there's no `o` left for the first one, and only one `t` can be yellow.
+2. `{ m: "present", t: "present", o: "correct" }`: green beats yellow beats grey, so `o` shows green.
+3. `1` and `2`. 21:00 UTC is midnight in Nairobi, so a new puzzle starts there, wherever the player is.
+4. Everyone must get the same word on the same day, so it can't be random per player. And alphabetical order would let players guess what's coming next.
+
+</details>
+
 ## When you're stuck
 
 - **`mtoto` for `tumbo` gives too many yellows** — two passes. First mark the greens and count the answer's letters that *weren't* matched. Then go left to right: a letter is yellow only while its count is above 0, and each yellow takes one off.

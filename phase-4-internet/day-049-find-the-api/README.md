@@ -62,6 +62,22 @@ What robots.txt says to FitCheckBot/1.0 (you@example.com):
 - Never collect personal data (names, phone numbers, profiles) just because you can see it.
 - If a site offers an official API or a data export, use that. Tomorrow's scraper is for when there isn't one.
 
+## Check yourself
+
+1. Why look for a JSON API in the Network tab before writing an HTML scraper?
+2. Predict the output: `pathPattern("/api/products/1234/reviews")`
+3. `robots.txt` says `User-agent: *`, `Disallow: /api/`, `Allow: /api/products`. Predict `isAllowed(groups, "FitCheckBot/1.0", "/api/products/12")` and `isAllowed(groups, "FitCheckBot/1.0", "/api/reviews/1")`.
+4. Predict the output: `matches("/*.pdf$", "/files/menu.pdf")` and `matches("/*.pdf$", "/files/menu.pdf?x=1")`
+
+<details><summary>Answers</summary>
+
+1. The data is already there as clean JSON: faster to get, it doesn't break when the page's design changes, and it's lighter on the site than downloading whole pages.
+2. `"/api/products/:id/reviews"`. Number-only segments become `:id`, so every product counts as one endpoint.
+3. `true` and `false`. Both rules match the first path, and the **longest** matching rule wins, so `Allow: /api/products` beats `Disallow: /api/`. Only the `Disallow` matches the second.
+4. `true` and `false`. `*` matches anything, and `$` means the path must end there, so the query string stops it matching.
+
+</details>
+
 ## When you're stuck
 
 - **`/api/products?page=2` is disallowed, but there's an `Allow: /api/products`** — you took the first matching rule. The *longest* matching pattern wins, whatever order the lines are in.

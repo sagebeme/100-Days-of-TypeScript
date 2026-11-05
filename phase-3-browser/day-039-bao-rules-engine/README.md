@@ -80,6 +80,27 @@ play(createBao(), 0).steps  →  [ { kind: "lift",    player: 0, hole: 0, seeds:
    node phase-3-browser/day-039-bao-rules-engine/starter/cli.ts
    ```
 
+## Check yourself
+
+1. Why write the rules with no screen at all?
+2. Predict the output: `facingHole(0)`, `facingHole(5)`, `facingHole(9)` and `nextHole(15)`
+3. Predict the output:
+   ```ts
+   const start = createBao();
+   const result = play(start, 0);
+   console.log(start.sides[0][0], result.state.sides[0][0], result.state.turn);
+   ```
+4. One test checks that every move leaves 64 seeds on the board. Why is that worth testing?
+
+<details><summary>Answers</summary>
+
+1. Every rule can be tested with a few numbers instead of clicks, and the same engine can sit under a terminal game, a web page or a computer player (the next two days use it for both).
+2. `7`, `2`, `null` (outer holes face nothing) and `0`: `% 16` turns the 16 holes into a loop.
+3. `2 0 1`. `play` copies both sides, so the old state still has its 2 seeds in hole 0. In the new state hole 0 has been lifted, and it's player 1's turn.
+4. Seeds are only ever moved, never made or destroyed. A bug in sowing, relaying or capturing almost always breaks that total, so one simple check catches a whole family of mistakes.
+
+</details>
+
 ## When you're stuck
 
 - **Seeds appear or disappear** — the "always 64 seeds" test will catch it. Check that every seed you take out of a hole goes into your hand, and that every seed you sow comes out of it.

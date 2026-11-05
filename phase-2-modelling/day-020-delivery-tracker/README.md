@@ -47,6 +47,22 @@ describeStatus({ kind: "cancelled", reason: "Restaurant closed" })
    npm test -- day-020
    ```
 
+## Check yourself
+
+1. Why is a discriminated union better here than one object with optional `restaurant`, `rider`, `deliveredAt` and `reason` fields?
+2. What does `tsc` say about `case "cancelled": return status.rider;`?
+3. You add `{ kind: "delayed"; reason: string }` to the union. How does `const unreachable: never = status` make `describeStatus` fail to compile?
+4. `minutesRemaining` has no `default` and nothing after the `switch`, yet `tsc` doesn't complain about a missing return. Why not?
+
+<details><summary>Answers</summary>
+
+1. Each state carries exactly its own fields, and once you check `kind`, TypeScript knows which ones exist. With optional fields, nothing stops a "cancelled" order with a rider and no reason.
+2. "Property 'rider' does not exist on type '{ kind: "cancelled"; reason: string; }'." Inside that case, `status` has been narrowed to the cancelled shape.
+3. In `default`, `status` is whatever cases you didn't handle. With four handled, that's `never`. With "delayed" unhandled, it's the delayed shape, which can't be assigned to `never`, so the line fails and points at the switch you forgot.
+4. Every `kind` has a `case` that returns, so `tsc` knows the end of the function can't be reached. (Compare Day 3, where an `if`/`else if` chain didn't get the same credit.)
+
+</details>
+
 ## When you're stuck
 
 - **"Property 'rider' does not exist on type..."** — you're reading a field outside the `case` that guarantees it. Move the read inside `case "on-the-way":`.

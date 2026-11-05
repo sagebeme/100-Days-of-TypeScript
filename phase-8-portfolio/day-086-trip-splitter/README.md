@@ -41,6 +41,22 @@ npx vite phase-8-portfolio/day-086-trip-splitter/starter
 - Currencies: a trip to Kampala in UGX, settled in KES at a fixed rate.
 - Sync between phones: put Day 57's API behind it.
 
+## Check yourself
+
+1. Predict the output: `divide(1000, { A: 1, B: 1, C: 1 })`, `divide(10, { A: 1, B: 1, C: 1 })` and `divide(1000, { A: 1, B: 2 })`
+2. Why whole shillings with `Math.floor` and a leftover, instead of `Math.round(total * weight / sum)` for each person?
+3. The balances are Amina +3000, Baraka −1000, Chege −2500, Wanjiru +500. Predict `settleUp`.
+4. Predict what `divide(100, { A: 0 })` does.
+
+<details><summary>Answers</summary>
+
+1. `{ A: 334, B: 333, C: 333 }`, `{ A: 4, B: 3, C: 3 }` (equal fractions: the leftover goes in the order given) and `{ A: 333, B: 667 }`.
+2. Rounding each part on its own can make the parts add up to a shilling more or less than was paid. Rounding everyone down and handing out the leftover always adds back up exactly.
+3. Chege sends Amina 2500, Baraka sends Amina 500, and Baraka sends Wanjiru 500: three sends for four people. The biggest debtor pays the biggest creditor each time.
+4. It throws `Nobody to split it between`. People with weight 0 are dropped first, and then nobody's left.
+
+</details>
+
 ## When you're stuck
 
 - **The parts don't add up to the total** — `Math.round` on each share can give one shilling too many or too few. `Math.floor` them all, then give the shillings left over, one each, to the people with the biggest fractional parts.

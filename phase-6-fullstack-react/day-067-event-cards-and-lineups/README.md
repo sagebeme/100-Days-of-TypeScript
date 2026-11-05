@@ -55,6 +55,22 @@ A React component is a function from **props** to what's on screen. TypeScript c
    npm test -- day-067
    ```
 
+## Check yourself
+
+1. `PriceTag` takes `{ priceKes: number }`. What happens when someone writes `<PriceTag price="800" />`, and why is that better than plain JavaScript?
+2. Why `key={event.id}` on each card instead of `key={index}`?
+3. Predict the output: `formatKes(0)`, `formatKes(2500)` and `formatWhen("2026-12-12T18:00:00+03:00")`
+4. Predict the output: `availability({ status: "published", available: 25, capacity: 500 })`
+
+<details><summary>Answers</summary>
+
+1. It doesn't compile: `price` isn't one of its props, the required `priceKes` is missing, and `"800"` is a string anyway. Plain JavaScript would render and show the customer "KES NaN".
+2. The id belongs to the event and never changes. An index belongs to a *position*, so when the list is sorted or filtered React would keep a card's state with the wrong event.
+3. `"Free"`, `"KES 2,500"` and `"Sat 12 Dec · 6:00 pm"`, always in Nairobi time whatever the phone's time zone.
+4. `{ tone: "low", label: "Only 25 left" }`. "Low" is 10% of capacity or 20 seats, whichever is more: here 50.
+
+</details>
+
 ## When you're stuck
 
 - **The date is an hour or three off** — pass `timeZone: "Africa/Nairobi"`. Without it you get the time zone of whoever's computer runs it.

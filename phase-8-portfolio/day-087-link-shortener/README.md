@@ -50,6 +50,22 @@ node phase-8-portfolio/day-087-link-shortener/starter/main.ts
 - A stats page for owners, with a chart.
 - Check new links against a list of known scam sites before shortening them.
 
+## Check yourself
+
+1. Predict `urlProblem(url, "fupi.example")` for `tikiti.example/events`, `javascript:alert(1)`, `https://fupi.example/abc` and `https://tikiti.example/e/2`.
+2. Why does the redirect answer `302` and not `301`?
+3. Why does a wrong token get the same `404` as a link that doesn't exist, rather than `403`?
+4. Predict `referrerSite("https://web.whatsapp.com/send?x=1")`, `referrerSite("https://www.google.com/search?q=1")` and `referrerSite(undefined)`. Why keep only that much?
+
+<details><summary>Answers</summary>
+
+1. `That isn't a complete link. It should start with https://`, `Only http and https links can be shortened`, `That's already a short link`, and `null` (no problem).
+2. Browsers cache a `301` forever and stop asking the shortener, so clicks would stop being counted, and the link could never be changed or deleted.
+3. A different answer would tell an attacker which endings exist, and let them test keys against them. One answer for both gives nothing away.
+4. `"web.whatsapp.com"`, `"google.com"` (the `www.` goes) and `null`, counted as `direct`. The full address can say who someone is or what they searched for. The site's name is enough for the owner.
+
+</details>
+
 ## When you're stuck
 
 - **`tikiti.example/events` is accepted** — `new URL()` throws on it, which is how you know it isn't a complete link. Catch that and return the "complete link" message, then check `protocol` is `http:` or `https:`, then the host.

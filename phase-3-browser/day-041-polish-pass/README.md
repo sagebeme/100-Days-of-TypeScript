@@ -49,6 +49,22 @@ Rider Rush works. Today it starts to feel finished. The gap between "works" and 
    - Open DevTools, turn on **device emulation**, and play with touch.
    - Switch to another tab mid-ride, then come back.
 
+## Check yourself
+
+1. Why work out sounds and announcements with `eventsBetween(before, after)` instead of playing sounds inside `update`?
+2. Predict the output: `togglePause(createGame()).status` and `start({ ...game, status: "paused" }).status`
+3. Why is the audio opened on the first sound, not when the page loads?
+4. Predict the output: `commandForKey("Escape")` and `commandForKey("toString")`
+
+<details><summary>Answers</summary>
+
+1. `update` stays a pure, silent function that tests can run thousands of times. Sound, screen-reader text and anything else just compare two states, so game logic and effects never get tangled.
+2. `"ready"` both times. You can't pause a ride that hasn't started, and `start` does nothing while paused (that's `togglePause`'s job). Each function only allows its own moves between states.
+3. Browsers block sound until the person has pressed something on the page. Opening it before that fails, or stays silent.
+4. `"pause"` and `null`. `Object.hasOwn` ignores names every object inherits, like `toString`.
+
+</details>
+
 ## When you're stuck
 
 - **No sound at all** — the browser blocks sound until you've pressed something. Sounds only play after Start, and check Mute isn't on.

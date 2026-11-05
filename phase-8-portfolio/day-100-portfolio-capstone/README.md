@@ -65,6 +65,22 @@ The code is the easy part. Write the content like it matters, because it's what 
 npm test -- day-100
 ```
 
+## Check yourself
+
+1. Predict the output: `tagSlug("Next.js")`, `tagSlug("Café Life")` and `tagSlug("C++")`
+2. With `basePath: "/portfolio/"` and `url: "https://you.github.io/"`, predict `href(site, "/projects/tikiti/")` and `absolute(site, "style.css")`. Why never write a bare `/` in a link?
+3. Why does `validateProjects` return a list of problems instead of throwing at the first one?
+4. Why at most three featured projects, and why does a project page tell *the problem*, *what I built* and *how it went* rather than list the stack?
+
+<details><summary>Answers</summary>
+
+1. `"next-js"`, `"cafe-life"` and `"c"`.
+2. `"/portfolio/projects/tikiti/"` and `"https://you.github.io/portfolio/style.css"`. A GitHub Pages project site lives under `/portfolio/`, so a bare `/` would point outside it, at a page that isn't there.
+3. You fix them all in one go instead of one build per mistake. Each problem names the project (for example `Tikiti App: slug must be lower-case words joined by dashes…`).
+4. When everything stands out, nothing does. And the person reading remembers the problem you solved and how it went, not the list of tools.
+
+</details>
+
 ## When you're stuck
 
 - **Only the first problem is reported** — don't throw inside `validateProjects`. Push each problem onto a list, keep checking, and return them all. A project with no slug is named `project 5` (its place in the list).
@@ -85,3 +101,7 @@ npm test -- day-100
 Then keep going. Every project from here on gets a page.
 
 **Congratulations on 100 days.**
+
+## Phase recap
+
+Before you go, read the [Phase 8 recap](../RECAP.md): the big ideas of the last twenty days, a self-test, and the next project, which is yours to choose.

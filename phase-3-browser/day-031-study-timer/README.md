@@ -69,6 +69,25 @@ Two things Vite does **not** do: it doesn't check your types (that's still `npm 
 
    Open `starter/dist/assets/`. That one `.js` file is all your TypeScript, with the types removed and the code squeezed small. `dist/` is ignored by git.
 
+## Check yourself
+
+1. Why is `tick` a pure function that returns a new state, instead of code that updates the page every second?
+2. Predict the output: `formatClock(249)` and `formatClock(0)`
+3. Predict the output, with 25-minute focus and 5-minute break settings:
+   ```ts
+   tick({ phase: "focus", secondsLeft: 1, running: true, sessionsDone: 0 }, settings)
+   ```
+4. You write `const x: number = "oops";` in `timer.ts` and save. Does the page under `npm run dev` show an error?
+
+<details><summary>Answers</summary>
+
+1. It can be tested without a page or a real clock: give it a state, check the next one. The page code just calls it and draws the result.
+2. `"04:09"` and `"00:00"`.
+3. `{ phase: "break", secondsLeft: 300, running: true, sessionsDone: 1 }`. Reaching 0 ends the focus session, counts it, and starts a full break that keeps running.
+4. No. Vite strips the types without checking them, so the page runs. Only `npm run typecheck` (or your editor) reports it.
+
+</details>
+
 ## When you're stuck
 
 - **The timer runs twice as fast after pressing Start twice** — each press started a new interval. Keep the interval id in a variable and clear it when you pause.

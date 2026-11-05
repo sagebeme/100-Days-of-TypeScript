@@ -47,6 +47,22 @@ For all of them, this page is broken in about twenty ways. None of them show up 
 
 The audit can't tell that "Image 1" is a useless alt text, or that the tab order makes no sense. Nothing beats trying it yourself: with the keyboard only, with a screen reader (TalkBack on Android, VoiceOver on a Mac or iPhone), and on a slow connection.
 
+## Check yourself
+
+1. Predict the output: `contrastRatio("#ffffff", "#000000")`, `contrastRatio("#999999", "#ffffff")` and `contrastRatio("#767676", "#ffffff")`. Which grey can you use for body text?
+2. The Buy button is a `<div onClick>` with `tabindex="1"`. Name the two problems.
+3. Why give every `<img>` a `width` and `height`, even when CSS sizes it?
+4. What does `React.lazy(() => import("./SeatMap.tsx"))` change about the first download?
+
+<details><summary>Answers</summary>
+
+1. `21`, about `2.85` and about `4.54`. Body text needs 4.5:1, so `#767676` passes and `#999999` doesn't.
+2. A `<div>` isn't a button: Enter doesn't press it, and a screen reader doesn't announce it as one. And a positive `tabindex` jumps it to the front of the keyboard order, scrambling the rest. Use a real `<button>`, which needs neither fix.
+3. The browser can reserve the space before the image arrives, so the page doesn't jump and make you tap the wrong thing.
+4. The seat map goes into its own file, downloaded only when someone taps "Choose your seat". Fans who never tap it never download it, so the first download stays small (the test holds it under 75 KB gzipped).
+
+</details>
+
 ## When you're stuck
 
 - **Contrast is slightly off** — linearise each channel *before* weighting it, and add 0.05 to both luminances.

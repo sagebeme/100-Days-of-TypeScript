@@ -56,6 +56,22 @@ npm test -- day-025
 
 Add one more behaviour of your own, the TDD way. For example: `lookup` should also find a word when the dictionary entry has capital letters (`"Poa"`), or `search` should match part of a word. Write a new `it(...)` at the bottom of `sheng-dictionary.test.ts` **first**, run it and watch it fail, and only then change the code to make it pass.
 
+## Check yourself
+
+1. Why run a new test and watch it fail before writing the code?
+2. Predict the output: `search(entries, "   ")`
+3. The dictionary holds `poa`, `ganji` and `noma`. Predict `wordOfTheDay(entries, 4).word`.
+4. Why does `wordOfTheDay` sort `[...entries]` instead of calling `entries.sort(...)`?
+
+<details><summary>Answers</summary>
+
+1. A test you've never seen fail might not test anything (a typo in a name, an assertion that can't fail). Red first proves it can catch the mistake it's there for.
+2. `[]`. The query is trimmed to `""`, and an empty query matches nothing on purpose (otherwise every meaning would "contain" it).
+3. `"noma"`. Sorted, the words are `ganji`, `noma`, `poa`, and 4 % 3 = 1.
+4. `sort` changes the array in place. Sorting a copy leaves the caller's dictionary in the order they gave it.
+
+</details>
+
 ## When you're stuck
 
 - **A test passes before you've written any code** — check that you're running the right day, and read what the test really asserts. A test that can't fail isn't helping you.

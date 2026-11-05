@@ -55,6 +55,22 @@ $ curl -X POST localhost:3058/vendors -H 'Content-Type: application/json' -d '{"
    curl -i -X POST localhost:3058/vendors -H 'Content-Type: application/json' -d '{"name":"","priceKes":-5}'
    ```
 
+## Check yourself
+
+1. When does the API answer `400`, when `415`, and when `422`?
+2. Predict the result: `VendorPatchSchema.safeParse({ prize: 90 })` and `VendorPatchSchema.safeParse({})`
+3. Why does `validate("json", …)` check the `Content-Type` header itself?
+4. Predict the output: `VendorQuerySchema.parse({ limit: "5" })` and the error from `VendorQuerySchema.safeParse({ sort: "distance" })`
+
+<details><summary>Answers</summary>
+
+1. `400`: the request itself is broken, like JSON that won't parse. `415`: it isn't JSON at all. `422`: it's readable JSON, but the values break the rules.
+2. Both fail. The first: `Unrecognized key: "prize"` (`.strict()` turns the typo into an error instead of ignoring it) and `Send at least one field to change`. The second: `Send at least one field to change`.
+3. Hono quietly treats a body that isn't JSON as `{}`. Without the check, a form post or plain text would turn into a confusing list of "required" errors instead of a clear `415`.
+4. `{ limit: 5, offset: 0 }` (query strings are text, so `limit` is coerced to a number and `offset` defaults), and `sort: sort=distance needs near`.
+
+</details>
+
 ## When you're stuck
 
 - **`c.req.valid("json")` is `never` or `any`** — the `validate(...)` middleware must be in the same `.post(...)` call as the handler, before it.

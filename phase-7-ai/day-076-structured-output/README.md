@@ -54,6 +54,22 @@ Notice the `null` and the `missing` list. A draft that admits what it doesn't kn
    node phase-7-ai/day-076-structured-output/starter/extract.ts < my-flyer.txt
    ```
 
+## Check yourself
+
+1. Structured output already makes the model answer in the schema's shape. Why does `extractEvent` still run `EventDraftSchema.safeParse` on the reply?
+2. Predict the output: `describeIssues` on a draft with `genre: "techno"` and a tier priced at `-5`
+3. The draft starts at 18:00 and ends at 17:00 on the same day, has two tiers called "Regular" and "regular ", and `capacity: null`. Predict `checkDraft(draft, now)` for a `now` a week before.
+4. Why does the first message say `Today is Saturday 5 December 2026` instead of leaving the model to work out the date?
+
+<details><summary>Answers</summary>
+
+1. Only the shape is guaranteed. Some rules, such as lengths, number limits and even the genre list, reach the model only as hints in a description. So the code checks the reply, and if it fails, the model gets its exact mistakes and one more try.
+2. Two lines: `genre: Invalid option: expected one of "afrobeats"|"benga"|"gengetone"|"jazz"|"comedy"|"rhumba"|"other"` and `tiers.0.priceKes: Too small: expected number to be >=0`
+3. `["It ends before it starts", "Two ticket types have the same name", "How many people can the venue hold?"]`. Names are compared trimmed and lower-cased.
+4. A model doesn't know today's date, so "jumamosi hii" (this Saturday) would be a guess. The date is worked out in Nairobi time, because 22:30 UTC on Friday is already Saturday in Nairobi.
+
+</details>
+
 ## When you're stuck
 
 - **"this Saturday" becomes last Saturday, or a year ago** — the model only knows today's date if you tell it, in the first message.

@@ -50,6 +50,22 @@ toSvg(grid, 20)                 →  '<svg xmlns="http://www.w3.org/2000/svg" wi
 
 5. Draw something, export it, paste the SVG into a file called `sticker.svg`, and open it in your browser.
 
+## Check yourself
+
+1. Why use pointer events instead of mouse events plus touch events?
+2. `paint` returns the *same* grid (`===`) when nothing changes. What uses that?
+3. Predict the output: `cellFromPoint(320, 5, 20, 16)` and `cellFromPoint(319.9, 5, 20, 16)`
+4. Spot the bug: `createGrid` is written as `Array(size).fill(Array(size).fill(""))`. What happens after `grid[0][0] = "red"`?
+
+<details><summary>Answers</summary>
+
+1. One set of events (`pointerdown`, `pointermove`, `pointerup`) covers a mouse, a finger and a stylus, so you write the drawing code once.
+2. Undo. A stroke saves the grid first, and if the grid at the end is still the same object, the stroke changed nothing and that Undo entry is thrown away.
+3. `null` (column 16 is off a 16-cell board) and `{ row: 0, col: 15 }`.
+4. Every row turns red in column 0. `fill` puts the *same* inner array in every row, so the rows aren't separate. `Array.from` with a function makes a new array per row.
+
+</details>
+
 ## When you're stuck
 
 - **Dragging on a phone scrolls the page** — add `touch-action: none` to the board's CSS. It's already in `index.html`; check you didn't remove it.

@@ -48,9 +48,25 @@ id-5 POST /stages/kencom/reports 413 0.6ms
 
 ## Things to notice
 
-- **Order matters.** `requestId` runs first, so every later middleware and handler can use the id. Move `logRequests` above it and the log lines lose their ids.
+- **Order matters.** `requestId` runs first, so every later middleware and handler can use the id. A middleware above it that reads the id before its own `await next()` gets `undefined`. (`logRequests` reads it on the way out, after `requestId` has run, so it would still work there; reading it on the way in would not.)
 - **Hono answers a wrong method with 404**, where your Day 55 server gave a 405 with an `Allow` header. Frameworks make choices for you. (Hono has a `method-not-allowed` middleware if you want the 405 back.)
 - **CORS is a browser rule, not security.** It stops *other websites* from calling your API through a visitor's browser. `curl` ignores it completely, so never rely on it to protect anything.
+
+## Check yourself
+
+1. Middleware A and B each log, call `await next()`, then log again, and the handler logs too. Predict the order of the lines.
+2. `logRequests` reads `c.get("requestId")` *after* `await next()`. If you register it above `requestId`, does its log line still have the id? What kind of middleware would lose it?
+3. Predict the status of `DELETE /stages/kencom` on today's Hono app. How is that different from Day 55?
+4. Your API sends `Access-Control-Allow-Origin` only for your own website. Does that stop someone with `curl` calling it?
+
+<details><summary>Answers</summary>
+
+1. `A in, B in, handler, B out, A out`. Code before `await next()` runs on the way in, code after it on the way out, like the layers of an onion.
+2. Yes. `requestId` runs inside `logRequests`'s `next()`, so the id is set by the time the log line is written. A middleware that reads the id *before* its own `await next()` and sits above `requestId` gets `undefined`, which is why `requestId` goes first.
+3. `404`. Hono answers an unknown method like an unknown path. Day 55 gave `405` with an `Allow` header. Frameworks make choices for you.
+4. No. CORS is a rule browsers follow to stop *other websites* calling your API through a visitor's browser. `curl` ignores it, so it protects nothing on its own.
+
+</details>
 
 ## When you're stuck
 

@@ -45,6 +45,22 @@ npx vite phase-8-portfolio/day-083-connect-four-ai/starter
 - An "undo" button, and a hint button that shows what the computer would play.
 - A transposition table: remember positions already scored.
 
+## Check yourself
+
+1. Predict the output: `evaluate(emptyBoard(), 1)`, `landingRow(emptyBoard(), 3)`, and what's in `old[5][3]` after `const next = drop(old, 3, 1)` on an empty board.
+2. Bottom row `XXX.OO.`, with an O above the first X. Predict `bestMove(board, 1, 1)` for X, and `bestMove(board, 2, 3)` for O.
+3. Why must a win found sooner score higher (`WIN + depth`) than one found later?
+4. Why does trying the columns centre-out make hard mode so much faster?
+
+<details><summary>Answers</summary>
+
+1. `0` (my windows minus theirs, and nobody has any), `5` (row 0 is the top, so the disc falls to the bottom row), and `0`: `drop` returns a new board and leaves the old one alone.
+2. Both are `3`. X takes the win in column 3, and O plays there to block it.
+3. Otherwise every winning line scores the same, and the computer can wander around a win it could take now, sometimes until it loses the chance.
+4. Centre moves are usually best, and alpha-beta can skip the rest of a position's moves once `alpha >= beta`. The better the first move tried, the more it skips. It only skips moves that can't do better than one already found.
+
+</details>
+
 ## When you're stuck
 
 - **The old board changes after `drop`** — copy the rows (`board.map((row) => [...row])`) and change the copy. Row 0 is the top, so the disc lands on the highest-numbered empty row.

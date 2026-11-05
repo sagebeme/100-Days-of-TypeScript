@@ -63,6 +63,22 @@ The Day 66 API (`server/`, with its migrations as a module so Next can bundle th
 
 **Don't let the database decide what the page looks like while it's being built.** `next build` would try to prerender pages, and prerendering would need the database and the production secrets on the build machine. Pages that read the session (all of these, through the layout) are rendered per request, so the build needs neither.
 
+## Check yourself
+
+1. Why does `getServer` keep the server on `globalThis` instead of in a plain module variable?
+2. How can Day 66's whole Hono API run inside Next.js with a few lines in `route.ts`?
+3. Server components call `server/queries.ts` directly instead of `fetch("/api/...")`. What does that save, and what keeps the two from disagreeing about who may see what?
+4. Why does the layout reading the session cookie on the server mean no flash of "Log in" before your name appears?
+
+<details><summary>Answers</summary>
+
+1. Next's dev server reloads modules on every save. A module variable would be lost each time and every save would open another database connection; `globalThis` survives the reload.
+2. A Hono app is a function from a `Request` to a `Response`, and so is a Next route handler. `handle` just passes the request to `api.fetch`.
+3. A round trip over HTTP to its own server. Both use the same functions and the same `policy.ts` rules, so a page and the API can't give different answers.
+4. The page is built on the server already knowing who you are, so the HTML arrives with your name in it. A client-side check would first render "Log in", then swap it once JavaScript had asked.
+
+</details>
+
 ## When you're stuck
 
 - **"Cannot find module" for `node:sqlite` in the browser** — a client component imported something from `server/`. Only `import type` from there in a `"use client"` file.
@@ -74,3 +90,7 @@ The Day 66 API (`server/`, with its migrations as a module so Next can bundle th
 ## Phase 6 done
 
 Eight days ago this was an API with no face. Now it's a fast, accessible web app: typed components, a cart with real rules, forms that share the API's schema, live data, pages that load before the spinner would have, tests that click through the whole journey, and a check that it works on a cheap phone. Phase 7 hands it to an AI.
+
+## Phase recap
+
+Before you move on, read the [Phase 6 recap](../RECAP.md): the phase's big ideas on one page, a short self-test, and one project to build with no steps.

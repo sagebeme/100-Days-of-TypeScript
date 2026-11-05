@@ -34,6 +34,22 @@ calculateFantasyPoints([
 npm test -- day-006
 ```
 
+## Check yourself
+
+1. What's the difference between `for (const player of players)` and `for (let i = 0; i < players.length; i++)`?
+2. Predict the output: `calculateFantasyPoints([{ goals: 1, assists: 2, cleanSheet: true }])`
+3. Predict the output: `calculateFantasyPoints([])`
+4. Spot the bug: the function starts with `const total = 0;`. What happens?
+
+<details><summary>Answers</summary>
+
+1. `for...of` gives you each value (the player object) directly. The counting loop gives you index numbers, and you read `players[i]` yourself. Use `for...of` when you don't need the index.
+2. `14`: 1 × 4 + 2 × 3 + 4 for the clean sheet.
+3. `0`. The loop body never runs, so `total` stays at its starting value.
+4. `total += ...` fails to compile: "Cannot assign to 'total' because it is a constant." A running total has to be a `let`.
+
+</details>
+
 ## When you're stuck
 
 - **"Property 'goals' does not exist on type..."** — check the parameter type matches the shape you're actually looping over: an array of objects with `goals`, `assists`, and `cleanSheet`.

@@ -48,6 +48,22 @@ Two ideas matter more than any API:
 - **Messages that don't shove.** The message line keeps its height when it's empty, so the total doesn't jump down when "Up to 4 VIP per order" appears. It's a `role="status"` live region, so screen readers announce it.
 - **Disabled, not hidden.** Checkout is visible but disabled when the cart is empty: the fan can see where they're heading.
 
+## Check yourself
+
+1. Spot the bug: the reducer handles `increment` with `state.quantities[action.tier.id]++; return state;`. Why does the screen not change?
+2. Why is the total worked out by `summarise` on every render instead of being kept in the state?
+3. The cart has 2 × Group of 4 (8 people). The fan presses "Add one Regular" three times. Predict the quantities and the message after each press.
+4. Predict the result of pressing "Add one Early bird" when Early bird has 0 available.
+
+<details><summary>Answers</summary>
+
+1. It changes the old object and hands the same object back. React compares by identity, sees the same state, and doesn't re-render. Return a new object with new `quantities` instead.
+2. Everything in it comes from the quantities. A stored total has to be updated in every place the quantities change, and it goes stale the first time someone forgets.
+3. Regular 1 (9 people), Regular 2 (10 people), then nothing changes and the message is `Up to 10 people per order`.
+4. `{ quantities: {}, message: "Early bird is sold out" }`. The tightest limit wins, and it says why.
+
+</details>
+
 ## When you're stuck
 
 - **Clicking does nothing** — the reducer returns `state` untouched, or you changed `state.quantities` in place. Build a new object with `{ ...state.quantities }`.

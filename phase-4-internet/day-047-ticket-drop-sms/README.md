@@ -71,6 +71,22 @@ One non-GSM character switches the **whole** message to UCS-2. A 140-character a
 
 Going live means a real (non-sandbox) app and username, a sender ID, and airtime on the account. Only text people who asked for it.
 
+## Check yourself
+
+1. Predict the output: `smsInfo("a".repeat(140))` and `smsInfo("a".repeat(139) + "’")` (the last character is a curly apostrophe)
+2. Predict the output: `smsInfo("a".repeat(159) + "€")`. Why isn't it 160 characters and one part?
+3. Predict the output: `chunk(list, 100).map((batch) => batch.length)` for a list of 250 numbers
+4. Africa's Talking answered `201`. Why does the code still look at each recipient's `statusCode`?
+
+<details><summary>Answers</summary>
+
+1. GSM-7, 140 long, 1 part; then UCS-2, 140 long, **3** parts. One character outside GSM-7 switches the whole message to UCS-2, where one SMS holds 70 and each part 67. That's why `toGsmFriendly` swaps `’` for `'`.
+2. `{ encoding: "GSM-7", length: 161, parts: 2 }`. `€` is in GSM-7's *extended* table, which costs two units (an escape plus the character).
+3. `[100, 100, 50]`.
+4. A request can succeed while some numbers in it fail: a wrong number, a blocked sender, no balance. Only the per-recipient results say who actually got the text.
+
+</details>
+
 ## When you're stuck
 
 - **A 401** — the username must match the key: `sandbox` for a sandbox key, your app's username for a live one.

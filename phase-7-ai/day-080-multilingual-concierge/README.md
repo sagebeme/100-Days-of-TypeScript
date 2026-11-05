@@ -68,6 +68,22 @@ This day uses your code from Days 77 (tools), 78 (retrieval) and 79 (evals), imp
    node phase-7-ai/day-080-multilingual-concierge/starter/run-evals.ts
    ```
 
+## Check yourself
+
+1. "Doh yangu itarudi kama event imecancelliwa?" shares no words with the refunds page. How does the concierge still find the right paragraph?
+2. Why is the off-topic reply a fixed phrase from `PHRASES` instead of a model call?
+3. A ticket conversation is under way, and the fan writes "Ndio, 0712 345 678". The understanding step says it's `other`. Which route does `send` take, and why?
+4. How does `repliesInLanguage` decide whether a reply came back in the right language?
+
+<details><summary>Answers</summary>
+
+1. The understanding step also rewrites the question in plain English, as `searchQuery`, and that's what gets searched. The answer is still written for the original message, in Sheng.
+2. Nothing in it needs thinking, so a fixed reply is instant, free and the same every time. The model is only called when it adds something.
+3. `tickets`. Once there's ticket history, every message stays on that route unless it's clearly a help question: on its own "Ndio" looks off-topic, but here it's the answer to "Shall I buy them?".
+4. It runs the same `understand` step on the concierge's reply and compares the language it finds with the language the case was asked in.
+
+</details>
+
 ## When you're stuck
 
 - **Sheng questions find nothing in the help centre** — search with `searchQuery`, not the message.
@@ -87,3 +103,7 @@ Six days ago Tikiti had no AI in it. Now it has a concierge that:
 - speaks the way its fans do.
 
 Phase 8 is yours: twenty projects, a brief and a test suite each, and no walkthrough.
+
+## Phase recap
+
+Before you move on, read the [Phase 7 recap](../RECAP.md): the phase's big ideas on one page, a short self-test, and one project to build with no steps.

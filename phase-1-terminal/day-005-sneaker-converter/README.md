@@ -28,6 +28,27 @@ convertPriceToKes(20, 129)   →  2580
 npm test -- day-005
 ```
 
+## Check yourself
+
+1. What does writing `: number` as the return type buy you?
+2. Predict the output: `convertPriceToKes(19.99, 129)`
+3. Spot the bug:
+   ```ts
+   export function usToEuSize(usSize: number): number {
+     usSize + 33;
+   }
+   ```
+4. Why two functions instead of one `convert(size, price, rate)`?
+
+<details><summary>Answers</summary>
+
+1. The compiler checks that every path through the function returns a number, and anyone calling it can see what comes back without reading the body.
+2. `2579`. 19.99 × 129 is 2578.7099999999996 (floating point), and `Math.round` takes it to 2579.
+3. It works out the sum and throws it away: there's no `return`. Because the return type says `number`, `tsc` catches it: "A function whose declared type is neither 'undefined', 'void', nor 'any' must return a value."
+4. They do unrelated jobs. Each one is easier to name, test and reuse on its own, and a size has nothing to do with an exchange rate.
+
+</details>
+
 ## When you're stuck
 
 - **"A function whose declared type is neither 'void' nor 'any' must return a value"** — you have a code path (often an early `return` you forgot, or just a missing `return` keyword) that doesn't return a `number`. Check every line ends the function with `return`.

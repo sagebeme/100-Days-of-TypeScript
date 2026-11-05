@@ -47,6 +47,22 @@ formatWhen(event)                 →  "Sat 20:00"
    npm test -- day-033
    ```
 
+## Check yourself
+
+1. The server answers `404 Not Found`. Does `await fetch(url)` throw? What does `fetchEvents` do about it?
+2. Predict the output: `weekendDates("2026-10-04")` (a Sunday) and `weekendDates("2026-10-05")` (a Monday)
+3. Why build the list with `createElement` and `textContent` instead of `` innerHTML = `<h2>${event.title}</h2>` ``?
+4. Predict the output: `formatPrice(0)`
+
+<details><summary>Answers</summary>
+
+1. No. `fetch` only throws when the network fails. A 404 is a successful *response*, so `fetchEvents` checks `response.ok` and throws `Request failed: 404` itself.
+2. `["2026-10-03", "2026-10-04"]` (on a Sunday, yesterday and today) and `["2026-10-10", "2026-10-11"]` (the coming weekend).
+3. `textContent` always shows text as text. With `innerHTML`, a title like `<img src=x onerror=…>` from the server would become real HTML and run code on your page.
+4. `"KES 0"`. Only `null` means free. `0` is a number, so it's formatted as a price.
+
+</details>
+
 ## When you're stuck
 
 - **`Property 'title' does not exist on type 'unknown'`** — good, that's TypeScript refusing to trust the network. Check with `isEventItem` first.

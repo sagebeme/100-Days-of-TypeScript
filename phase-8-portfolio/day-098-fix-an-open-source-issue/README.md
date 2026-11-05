@@ -40,6 +40,22 @@ Documentation fixes count too. A confusing sentence in a README that you underst
 - `slugo` has no benchmark. Tomorrow is Day 99: would your fix make it slower? Measure it.
 - Add a `locale` option: German `ä` → `ae`, Swedish `ä` → `a`. Write the proposal as an issue first. A new option is a design discussion, not just a PR.
 
+## Check yourself
+
+1. Follow `"Jazz 🎷 Night"` through the old `slugify`: spaces become dashes, then everything else is dropped. Predict the result, and say why issues #12, #19 and #24 share one cause.
+2. Predict the old result for `slugify("Jioni Jazz Night", { separator: "." })`, and say why.
+3. Why is #21 answered in `REPLIES.md` and not fixed, and why is #24 listed as `Fixes #24` in the pull request?
+4. Why must the slugs made by 2.3.1 keep coming out exactly the same after the fix?
+
+<details><summary>Answers</summary>
+
+1. `"jazz--night"`. The emoji sits between two spaces, so deleting it leaves two dashes side by side. The same order of steps leaves a dash at the end of a cut slug (#19), and #24 is #12 again. The fix finds the words first, then joins them.
+2. `"jionijazznight"`. The spaces become dots, then "drop everything that isn't a letter, digit, `_` or `-`" deletes the dots too.
+3. #21 isn't a bug: `lowercase: false` is the option that keeps capitals. #24 is a duplicate of #12, so the same change closes it, and `Fixes #24` makes GitHub close it when the PR is merged.
+4. They're people's URLs, already shared and printed. A slug that changes breaks every link to it.
+
+</details>
+
 ## When you're stuck
 
 - **Every patch fixes one example and breaks another** — step back to `src/slugify.ts` and follow `"Jazz 🎷 Night"` through it line by line. Look at the *order* things happen in: what's left between the two spaces once the emoji is deleted? And what does the "drop everything else" line do to a `.` separator?

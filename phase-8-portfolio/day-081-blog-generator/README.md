@@ -60,6 +60,22 @@ npx vite preview --outDir phase-8-portfolio/day-081-blog-generator/starter/dist 
 - "Next and previous post" links at the bottom of each post.
 - Publish it for real, and send the link to someone.
 
+## Check yourself
+
+1. Predict the output: ``inline("Use `**not bold**` and **bold**")``
+2. Predict the output: `inline("[click](javascript:alert) and [ok](https://a.b?x=1&y=2)")`
+3. Predict the output: `slugify("Café & Nyama Choma: 2026!")`, and `readingMinutes` for a post of 450 words and for one of a single word.
+4. Spot the bug: `formatDate` does `new Date("2026-11-14").getDate()` in local time. Why can a post dated 14 November show 13 November?
+
+<details><summary>Answers</summary>
+
+1. ``Use <code>**not bold**</code> and <strong>bold</strong>``. Code spans are taken out first, so nothing inside them is formatted.
+2. ``click and <a href="https://a.b?x=1&amp;y=2">ok</a>``. A `javascript:` link keeps only its text, and the `&` is escaped because the whole line is escaped before any tags are built.
+3. `"cafe-nyama-choma-2026"`; `3` (450 ÷ 200, rounded up) and `1` (never less than 1).
+4. `"2026-11-14"` is read as midnight UTC, which is still 13 November anywhere west of Greenwich. Read it as noon UTC (`T12:00:00Z`) and format it in UTC.
+
+</details>
+
 ## When you're stuck
 
 - **`**bold**` gets turned into `<strong>` inside backticks** — take the code spans out first (swap each for a placeholder), do bold, emphasis and links on what's left, then put the code back.

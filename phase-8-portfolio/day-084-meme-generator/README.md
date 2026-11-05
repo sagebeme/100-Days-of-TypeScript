@@ -42,6 +42,22 @@ npx vite phase-8-portfolio/day-084-meme-generator/starter
 - Paste a picture from the clipboard.
 - Share straight to WhatsApp with the Web Share API (`navigator.share` with files).
 
+## Check yourself
+
+1. With the tests' fake `measure` (each character is 0.6 × the font size wide), predict `wrapText("  when   the matatu leaves  ", 60, 10, measure)`.
+2. Predict `wrapText("supercalifragilistic", 60, 10, measure)` and `wrapText("", 60, 10, measure)`.
+3. Why does `layout.ts` take a `measure` function instead of calling the canvas's `measureText` itself?
+4. Predict `fileName([{ text: "When the MATATU leaves!" }])` and `fileName([{ text: "  " }])`.
+
+<details><summary>Answers</summary>
+
+1. `["when the", "matatu", "leaves"]`. At 6px a character, a line holds 10, and runs of spaces are one gap.
+2. `["supercalif", "ragilistic"]`: a word too long for any line is cut, not allowed to run off. And `[]`: an empty caption has no lines at all.
+3. So the rules can be tested with no browser and a predictable width. The page passes the real canvas; the tests pass the fake.
+4. `"when-the-matatu-leaves.png"` and `"meme.png"`.
+
+</details>
+
 ## When you're stuck
 
 - **Extra spaces end up in a line** — split on runs of whitespace (`text.trim().split(/\s+/)`), and treat an empty caption as no lines at all.

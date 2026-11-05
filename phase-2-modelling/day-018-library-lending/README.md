@@ -38,6 +38,22 @@ library.checkOut("Oxford Atlas", "Kip")      →  throws "Oxford Atlas is refere
    npm test -- day-018
    ```
 
+## Check yourself
+
+1. Which relationship is composition and which is inheritance in today's code?
+2. What does `tsc` say if you leave out `override` on `ReferenceBook`'s `checkOut`, and why does this repo ask for it?
+3. `Library.checkOut` only knows it holds `Book`s. Why does checking out the atlas still throw `"Oxford Atlas is reference only"`?
+4. Predict the output: `new ReferenceBook("Oxford Atlas", "Various") instanceof Book` and `library.kindOf(new Book("Kitchen Table Stories", "W. Otieno"))`
+
+<details><summary>Answers</summary>
+
+1. A `Library` *has* books (composition: it keeps them in `#books`). A `ReferenceBook` *is* a book (inheritance: `extends Book`).
+2. "This member must have an 'override' modifier because it overrides a member in the base class 'Book'." `noImplicitOverride` is on in `tsconfig.json`, so replacing a parent's method is always on purpose, and renaming the parent's method can't silently leave an orphan behind.
+3. Which method runs is decided by the object, not by the variable's type. The object is a `ReferenceBook`, so its own `checkOut` runs.
+4. `true` (a reference book is still a book) and `"lending"`.
+
+</details>
+
 ## When you're stuck
 
 - **"This member must have an 'override' modifier"** — when a subclass replaces something from its parent, TypeScript wants you to say so: `override checkOut(...)`. It catches typos in the name.

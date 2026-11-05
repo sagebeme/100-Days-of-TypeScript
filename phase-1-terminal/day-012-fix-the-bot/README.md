@@ -40,6 +40,22 @@ The code in `starter/fix-the-bot.ts` has **two bugs**, and they're different kin
 4. Read what the failing test says it *expected* versus what it *got*, and trace through the loop by hand with a small input like `("hi", 2)` until you find the difference.
 5. Fix the second bug. Tests pass.
 
+## Check yourself
+
+1. Which of the two bugs did `tsc` find, and what did its message suggest?
+2. Why can't the compiler find the other bug?
+3. Predict the output of the broken loop (`i <= repeatCount`) for `craftReply("hi", 2).message`.
+4. Predict the output: `craftReply("yo", 3).mood` (fixed version)
+
+<details><summary>Answers</summary>
+
+1. The returned object used `mod` instead of `mood`. `tsc` says 'mod' does not exist in type 'BotReply' and asks "Did you mean to write 'mood'?"
+2. `i <= repeatCount` is perfectly valid code with the right types. It just loops once too often. Only running it (a test) shows the wrong answer.
+3. `"hihihi"`. The loop runs for i = 0, 1 and 2: three times, not two.
+4. `"happy"`. The rule is *more than* 3, and `3 > 3` is false.
+
+</details>
+
 ## When you're stuck
 
 - **The type checker lists errors in other days' files** — ignore those; only fix errors pointing at `day-012-fix-the-bot`.

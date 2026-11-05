@@ -128,6 +128,22 @@ They all read the same `package.json` and fill `node_modules`. They differ in sp
 
    Then pick a dependency in `package.json`, read its range, and use your `allows` function, or `npm outdated`, to work out whether `npm install` would upgrade it.
 
+## Check yourself
+
+1. `firstAboveOrDefault` could be written `return firstAbove(numbers, threshold) || fallback;`. What would that return for `([0, 5], -1, 99)`, and why is that wrong?
+2. Predict the output: `allows("^5.0.2", "5.9.0")`, `allows("^0.45.3", "0.46.0")` and `allows("~1.2.3", "1.3.0")`
+3. What's the difference between `npm install` and `npm ci`, and which one belongs in CI?
+4. Why do you commit the lockfile but never `node_modules`?
+
+<details><summary>Answers</summary>
+
+1. `99`. The real answer is `0`, but `0` is falsy, so `||` swaps it for the fallback. Comparing with `=== undefined` only replaces a value that is actually missing.
+2. `true`, `false`, `false`. `^` allows anything up to the next major, except before 1.0, where it stops at the next minor. `~` allows patches only.
+3. `npm install` may update the lockfile to match `package.json`. `npm ci` deletes `node_modules`, installs exactly what the lockfile says, and fails if the two disagree. CI uses `npm ci`, so it tests exactly the versions you committed.
+4. The lockfile is small and records the exact versions, so every machine installs the same thing. `node_modules` is huge, can always be rebuilt from the lockfile, and holds binaries built for one operating system.
+
+</details>
+
 ## When you're stuck
 
 - **`npm run typecheck` says "Type 'number | undefined' is not assignable to type 'number'"** — that's `strict` protecting you. You returned something that might be `undefined` from a function that promised a `number`. Check for `undefined` first.

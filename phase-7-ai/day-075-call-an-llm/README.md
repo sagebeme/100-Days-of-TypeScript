@@ -47,6 +47,22 @@ One HTTP request to Anthropic's Messages API, made with the official SDK (`@anth
    node phase-7-ai/day-075-call-an-llm/starter/chat.ts
    ```
 
+## Check yourself
+
+1. The fan's second message is "and for a group?". Why does `Conversation` send the first question and the first answer again, instead of just the new message?
+2. Spot the bug: `return message.content[0].text;`. Name two ways it goes wrong.
+3. Predict the output: `costKes({ input_tokens: 1180, output_tokens: 52 })` and `costKes({ input_tokens: 0, output_tokens: 1_000_000 })`
+4. Why does `explainError` use `error instanceof Anthropic.RateLimitError` rather than checking whether `error.message` contains "rate limit"?
+
+<details><summary>Answers</summary>
+
+1. The API remembers nothing between calls. Each request has to carry the whole conversation, the model's own replies included, or "for a group?" means nothing.
+2. It doesn't compile: the first block might not be text, so narrow with `block.type === "text"`, and a reply can have several text blocks. It also ignores `stop_reason`, so a refusal or an answer cut off at `max_tokens` would be shown as if it were a real answer.
+3. `0.93` and `3225`. That's $0.0072 and $25 at 129 shillings to the dollar, rounded to the cent.
+4. The error classes are part of the SDK's contract. Message text is for people, and it can change in any release without warning.
+
+</details>
+
 ## When you're stuck
 
 - **`Property 'text' does not exist`** — a content block could be text, thinking, a tool call... Narrow it first: `block.type === "text"`.

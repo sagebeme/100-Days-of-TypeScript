@@ -51,6 +51,22 @@ Open the address it prints, usually `http://localhost:5173`. Press `Ctrl+C` in t
    npm test -- day-030
    ```
 
+## Check yourself
+
+1. `root.querySelector("#total")` returns `Element | null`. Why isn't that enough to read `.value`, and what does `getElement` do about it?
+2. Predict the output: `"4800" + 480`. What does that say about `input.value`?
+3. Predict the output: `splitBill(1000, 3, 0)`
+4. `update()` checks for empty boxes before it calls `splitBill`. What would the page show while the boxes are still empty if it didn't?
+
+<details><summary>Answers</summary>
+
+1. `null` means nothing matched, and plain `Element` has no `.value` (only some elements do). `getElement` throws a clear error for a missing element, and uses `instanceof HTMLInputElement` to check the kind, which narrows the type so `.value` exists.
+2. `"4800480"`. `+` with a string joins text. `input.value` is always a string, even in `<input type="number">`, so convert it with `Number(...)` first.
+3. `{ tip: 0, grandTotal: 1000, perPerson: 334 }`. 1000 / 3 is 333.33…, rounded **up** so the bill isn't left short.
+4. `Number("")` is `0`, so `splitBill` would throw and the page would greet you with "Enter a total above 0" before you'd typed anything.
+
+</details>
+
 ## When you're stuck
 
 - **`Object is possibly 'null'`** — that's the point of today. `querySelector` might find nothing. Use `getElement`, which checks and throws.

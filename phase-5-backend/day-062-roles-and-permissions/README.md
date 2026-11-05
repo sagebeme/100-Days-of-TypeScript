@@ -43,6 +43,22 @@ And a few rules that aren't about roles at all: a draft is invisible to everyone
 
 Every method and status code, with when to use each: [HTTP: methods and status codes](../../reference/http.md).
 
+## Check yourself
+
+1. When does the API answer `401`, when `403`, and why does a fan asking for someone's *draft* get `404`?
+2. Predict the output, for a published event with `organiserId: 2`: `can({ id: 3, role: "organiser" }, { do: "edit-event", event })` and `can({ id: 2, role: "organiser" }, { do: "delete-event", event })`
+3. Why can't `requireRole("organiser")` on the route be the whole check for editing an event?
+4. Why is "there's always at least one admin" checked *before* a role change rather than after?
+
+<details><summary>Answers</summary>
+
+1. `401`: I don't know who you are (not logged in). `403`: I know who you are, and you can't do this. A `403` on a draft would confirm it exists, so it gets the same `404` as an event that doesn't.
+2. `false` and `false`. Organiser 3 doesn't own it. Organiser 2 does, but a published event can only be cancelled, never deleted: people may have planned around it.
+3. A role guard only knows *what kind* of user you are. Editing depends on *which* event: an organiser may edit their own and not anyone else's. That's why the rule lives in `can`, which sees the event.
+4. Once the last admin has demoted themselves, nobody is left who could put it right. An invariant is protected by refusing the change that would break it.
+
+</details>
+
 ## When you're stuck
 
 - **Organisers can edit each other's events** — a role guard says "organisers may edit events", not "this organiser may edit this event". Ownership needs the policy, with the event loaded.

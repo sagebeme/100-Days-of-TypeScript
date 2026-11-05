@@ -41,6 +41,22 @@ help-centre concierge: 10/12 passed (83%)
 - **Keep the cases that caught bugs.** Every bug a fan finds becomes a case, so it can't come back quietly.
 - **Watch the cost.** An eval you're afraid to run because it's expensive won't get run.
 
+## Check yourself
+
+1. Before a change, cases a, b and c score pass, fail, pass. After it, they score fail, pass, pass. The pass rate hasn't moved. Predict `compareRuns(before, after)`, and say which list you read first.
+2. The system throws on one case. What does `runEval` do, and what does `formatReport` print for it?
+3. Why is the LLM judge told to give its `reasoning` before its `pass`, and why does a reply it can't parse count as a fail?
+4. A case has no checks that apply to it. Does it pass? Why?
+
+<details><summary>Answers</summary>
+
+1. `{ regressions: ["a"], fixes: ["b"], stillFailing: [], change: 0 }`. Regressions come first: an unchanged score hid a case that used to pass.
+2. It records that case as a failure with the error and carries on with the rest. The report line is `✗ d: crashed: boom` (with that case's id and error).
+3. A verdict written first can only be explained afterwards; written last, it follows from the reasoning. And a judge that can't decide mustn't let a bad answer through silently.
+4. Yes. `[].every(...)` is `true`, so a case where nothing applied passes, as long as the system gave an answer.
+
+</details>
+
 ## When you're stuck
 
 - **Results come out in the wrong order** — workers finish in any order. Write each result into its case's slot.

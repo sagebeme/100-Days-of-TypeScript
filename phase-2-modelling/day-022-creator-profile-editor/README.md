@@ -38,6 +38,22 @@ Also: object spread (`{ ...profile }`) to copy without mutating, and why **types
    npm run typecheck
    ```
 
+## Check yourself
+
+1. Why derive `ProfileUpdate` and `PublicProfile` from `CreatorProfile` instead of writing them out?
+2. Predict the output: `updateProfile(profile, { bio: undefined }).bio`
+3. Spot the bug: `return { ...profile, ...update };`. The types say it's fine. What goes wrong when `update` comes from a JSON body like `{ "followers": 999 }`?
+4. In `const { id, createdAt, ...rest } = profile;`, what's in `rest`?
+
+<details><summary>Answers</summary>
+
+1. One source of truth. Add a field to `CreatorProfile` and the derived types follow, instead of three hand-written types drifting apart.
+2. The old bio. `undefined` fields are skipped, so they don't erase anything.
+3. Types don't exist at runtime. The spread copies every key the object really has, so `followers` becomes 999. Copying only the three editable fields by name is what keeps it out.
+4. Everything except `id` and `createdAt`: `handle`, `displayName`, `bio` and `followers`. That's exactly `PublicProfile`.
+
+</details>
+
 ## When you're stuck
 
 - **`npm run typecheck` says "Unused '@ts-expect-error' directive"** — the test expected the compiler to reject something, and your type let it through. `ProfileUpdate` is probably still the placeholder, or `PublicProfile` still includes `id`.

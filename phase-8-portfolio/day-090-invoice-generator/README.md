@@ -44,6 +44,22 @@ Print one to PDF and check it looks right on paper.
 - A QR code that opens the M-Pesa payment on a phone.
 - Quotes that turn into invoices with one click.
 
+## Check yourself
+
+1. Predict the output: `0.1 + 0.2`. What does the invoice keep money in instead, and why?
+2. Predict the output: `formatKes(10_860_000)`, `formatKes(-950_000)`, `parseKes("85,000")`, `parseKes("KES 1,234.5")` and `parseKes("1.234")`
+3. Existing numbers are `INV-2025-0007`, `INV-2026-0001` and `INV-2026-0003`. Predict `nextNumber(existing, 2026)`, and why it isn't worked out from the count.
+4. Predict `dueDate("2026-11-06", 30)`. On that due date itself, is the invoice due or overdue?
+
+<details><summary>Answers</summary>
+
+1. `0.30000000000000004`. Whole cents, as integers, so every sum is exact and an invoice is never a cent out.
+2. `"KES 108,600.00"`, `"−KES 9,500.00"` (a real minus sign, in front), `8500000`, `123450` and `null`: three digits after the point isn't a price.
+3. `"INV-2026-0004"`: the highest number used that year, plus 1. A count would give `0003` again here, because `0002` is missing, and a number must never repeat.
+4. `"2026-12-06"`. It's still due; it's overdue only once today is *after* the due date.
+
+</details>
+
 ## When you're stuck
 
 - **A total is a cent out** — round each line on its own (`Math.round` of quantity × unit price), take that line's discount off and round it, then work out its VAT and round that. Add up the rounded lines; never round the sum.

@@ -28,6 +28,22 @@ fitsInXPost("a".repeat(281)) →  false
 npm test -- day-007
 ```
 
+## Check yourself
+
+1. Why does each part of a long SMS hold 153 characters, not 160?
+2. Predict the output: `smsParts("a".repeat(306))` and `smsParts("a".repeat(307))`
+3. Why do you need the `text.length <= 160` check? What would `Math.ceil(160 / 153)` give on its own?
+4. Predict the output: `"👋".length`
+
+<details><summary>Answers</summary>
+
+1. Once a message is split, 7 characters of every part go on a header that lets the phone stitch the parts back together.
+2. `2` and `3`. 306 is exactly 2 × 153, and one more character needs a third part.
+3. `2`, which is wrong: a 160-character text fits in one SMS. A single text has no header, so it gets the full 160.
+4. `2`. `.length` counts UTF-16 code units, and most emoji take two. (Real SMS counts emoji differently again, which is one reason this exercise sticks to plain letters.)
+
+</details>
+
 ## When you're stuck
 
 - **`smsParts` returns `0` for long text** — check you're using `Math.ceil`, not `Math.floor`. A 200-character text needs 2 parts (`200 / 153 ≈ 1.3`, rounded *up*), not 1.

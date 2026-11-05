@@ -59,6 +59,22 @@ The page has changed: nothing matches article.product-card. Update SELECTORS in 
 
 `cli.ts` also accepts a URL. Before you point it at a real shop, go through Day 49's checklist: look for an API first, read `robots.txt`, check the terms of use, and fetch at most once a day. A price tracker needs one request a day, not one a second.
 
+## Check yourself
+
+1. Why parse the page with a real HTML parser and `querySelector` instead of a regular expression over the HTML?
+2. Predict the output: `parsePrice("KSh 12,499")`, `parsePrice("KES 1,999.00")`, `parsePrice("Ksh. 850")` and `parsePrice("Call for price")`
+3. Why does the CLI run `missingSelectors` *before* it records anything?
+4. Predict the output: the same product at KES 100 is recorded on 2026-09-25, then again on 2026-09-26. How many points does its history have?
+
+<details><summary>Answers</summary>
+
+1. HTML can be written many ways that mean the same thing: attributes in a different order, line breaks, `&amp;`. A parser understands all of them. A regex breaks on the first surprise.
+2. `12499`, `1999`, `850` and `null`.
+3. After a redesign the selectors find nothing, or the wrong thing. Checking first stops the tracker quietly saving rubbish (or nothing) for weeks; it fails loudly and tells you to update `SELECTORS`.
+4. One: `[{ date: "2026-09-25", priceKes: 100 }]`. `record` only stores a change, so the history stays small and every point means something.
+
+</details>
+
 ## When you're stuck
 
 - **Every price is `null`** — print the text you're parsing. Often there's a non-breaking space between `KSh` and the number; `\s` in your regex matches it.

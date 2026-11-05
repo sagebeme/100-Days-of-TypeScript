@@ -57,6 +57,22 @@ normalizePhone("12345")           →  null
    npm test -- day-032
    ```
 
+## Check yourself
+
+1. `data.get("email")` returns `FormDataEntryValue | null`. What are the possibilities, and why can't you call `.trim()` on it straight away?
+2. Predict the output: `normalizePhone("0712-345-678")`, `normalizePhone("254 712 345 678")` and `normalizePhone("0812345678")`
+3. Why does `parseSignup` collect every error instead of returning at the first one?
+4. What do `aria-invalid="true"` and `aria-describedby` add that a red error message doesn't?
+
+<details><summary>Answers</summary>
+
+1. A `string`, a `File` (forms can upload files) or `null` (no field with that name). Only a string has `.trim()`, so you check `typeof value === "string"` first.
+2. `"+254712345678"`, `"+254712345678"` and `null`. Spaces and dashes are removed first. A Kenyan mobile number starts with 7 or 1 after the 0, so `08…` doesn't fit.
+3. So the person sees every problem at once and fixes them in one go, instead of submitting again and again to find the next one.
+4. A screen reader can't see red. `aria-invalid` says the field has a problem, and `aria-describedby` points to the message, so it's read out with the field.
+
+</details>
+
 ## When you're stuck
 
 - **`Argument of type 'FormDataEntryValue' is not assignable to parameter of type 'string'`** — the value could be a `File`. Check `typeof value === "string"` first.

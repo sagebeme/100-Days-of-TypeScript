@@ -32,6 +32,34 @@ addSong(playlist, song)  →  a NEW playlist with the song added; the old one is
    npm test -- day-016
    ```
 
+## Check yourself
+
+1. Why `String(seconds).padStart(2, "0")`? What would `formatDuration(61)` print without it?
+2. Predict the output: `formatDuration(59)` and `formatDuration(3600)`
+3. Spot the bug:
+   ```ts
+   export function addSong(playlist: Playlist, song: Song): Playlist {
+     playlist.songs.push(song);
+     return playlist;
+   }
+   ```
+4. Predict the output:
+   ```ts
+   const a: Playlist = { name: "Mix", songs: [] };
+   const b = { ...a };
+   b.songs.push({ title: "Melanin", artist: "Sauti Sol", durationSeconds: 200 });
+   console.log(a.songs.length);
+   ```
+
+<details><summary>Answers</summary>
+
+1. So one-digit seconds get a leading zero. Without it, 61 seconds prints `"1:1"`, which reads as one minute and one *tenth*.
+2. `"0:59"` and `"60:00"`. Minutes don't roll over into hours.
+3. It changes the playlist it was given. Any other code holding the original now sees the extra song too. Return a new object instead: `{ ...playlist, songs: [...playlist.songs, song] }`.
+4. `1`. Spread is a *shallow* copy: `b.songs` is the very same array as `a.songs`. That's why `addSong` spreads the `songs` array as well as the playlist.
+
+</details>
+
 ## When you're stuck
 
 - **`"9:5"` instead of `"9:05"`** — you forgot `padStart`. It's a string method, so convert the number first with `String(...)`.

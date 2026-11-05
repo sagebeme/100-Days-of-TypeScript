@@ -46,6 +46,22 @@ So the page awaits the event first, and calls `notFound()` before anything is se
    curl -I localhost:3000/events/99      # HTTP/1.1 404
    ```
 
+## Check yourself
+
+1. The event page is a server component that `await`s its data. What does the phone receive, and what doesn't it receive?
+2. The first version had a `loading.tsx` for event pages. Why did `/events/99` then answer `200 OK`, and how does the page make it a real `404`?
+3. `LiveSeats` starts with `useState(initial)` and only then polls. Why not start empty and fetch?
+4. Why does the JSON-LD script replace every `<` with `<`?
+
+<details><summary>Answers</summary>
+
+1. Finished HTML, with the data already in it. It doesn't get that component's JavaScript, or a loading spinner: only `LiveSeats`, the client island, ships code.
+2. `loading.tsx` makes Next start streaming the page, status line included, before it knows whether the event exists, and the status can't be changed once sent. The page awaits the event first and calls `notFound()` before anything goes out; only "More events" streams afterwards.
+3. The server already put the right number in the page, so there's no loading flash, and it works before any JavaScript arrives. Polling just keeps it fresh (and stops while the tab is hidden).
+4. An event title containing `</script>` would otherwise end the script tag early and let the rest of the title run as HTML. `<` is still `<` to a JSON reader.
+
+</details>
+
 ## When you're stuck
 
 - **"params should be awaited"** — since Next 15, `params` is a Promise: `const { id } = await params`.

@@ -61,6 +61,22 @@ Once it's live:
 3. On your phone, open the link and use *Add to Home Screen*. It opens full-screen, with your icon.
 4. Send the link to three friends. Tell them your best score.
 
+## Check yourself
+
+1. What goes wrong on GitHub Pages without `base: "./"` in `vite.config.ts`?
+2. Predict the output: `shareText(1)` and `shareText(0)`
+3. The player opens the share sheet and closes it. The browser rejects with an `AbortError`. What does `shareScore` return, and does it try the clipboard?
+4. Why change `og:image` to a full `https://` address once the game is live?
+
+<details><summary>Answers</summary>
+
+1. The build links to `/assets/…`, the root of the site. On `you.github.io/rider-rush/` that points outside your folder, so the page loads with no JavaScript or CSS. `./` makes every link relative to the page.
+2. `"I dodged 1 car in Rider Rush. Can you beat me?"` and `"I dodged 0 cars in Rider Rush. Can you beat me?"`
+3. `"cancelled"`, and no. Closing the sheet is the player's choice, not a failure, so nothing else happens and no message is shown.
+4. Many apps that draw link previews ignore a relative image path, so the card shows up without a picture.
+
+</details>
+
 ## When you're stuck
 
 - **A blank page after deploying, and 404s in the console for `/assets/…`** — the build still uses absolute paths. Check `base: "./"` and build again.
@@ -73,3 +89,7 @@ Once it's live:
 ## Phase 3 is done
 
 In 14 days you went from a link-in-bio page to two games you can send to anyone: HTML and CSS, a typed DOM, Vite, forms, `fetch`, `localStorage`, Canvas, pointer events, a game loop, a rules engine, animation, sound, accessibility, and a real deployment. Phase 4 takes your code off the page and onto the internet: APIs, secrets, and a bot that messages you every morning.
+
+## Phase recap
+
+Before you move on, read the [Phase 3 recap](../RECAP.md): the phase's big ideas on one page, a short self-test, and one project to build with no steps.
