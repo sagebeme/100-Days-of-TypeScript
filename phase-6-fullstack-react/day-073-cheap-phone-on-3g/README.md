@@ -57,9 +57,9 @@ The audit can't tell that "Image 1" is a useless alt text, or that the tab order
 <details><summary>Answers</summary>
 
 1. `21`, about `2.85` and about `4.54`. Body text needs 4.5:1, so `#767676` passes and `#999999` doesn't.
-2. A `<div>` can't be reached with Tab or pressed with Enter, and has no button role for a screen reader. A positive `tabindex` jumps it to the front of the keyboard order and scrambles the rest. Use a real `<button>`.
+2. A `<div>` isn't a button: Enter doesn't press it, and a screen reader doesn't announce it as one. And a positive `tabindex` jumps it to the front of the keyboard order, scrambling the rest. Use a real `<button>`, which needs neither fix.
 3. The browser can reserve the space before the image arrives, so the page doesn't jump and make you tap the wrong thing.
-4. The seat map goes into its own file, downloaded only when someone taps "Choose your seat". Most fans never do, so the first download stays small (the test holds it under 75 KB gzipped).
+4. The seat map goes into its own file, downloaded only when someone taps "Choose your seat". Fans who never tap it never download it, so the first download stays small (the test holds it under 75 KB gzipped).
 
 </details>
 

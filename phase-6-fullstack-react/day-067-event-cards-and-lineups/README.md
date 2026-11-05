@@ -64,7 +64,7 @@ A React component is a function from **props** to what's on screen. TypeScript c
 
 <details><summary>Answers</summary>
 
-1. It fails to compile twice over: `price` isn't a prop, and the required `priceKes` is missing. Plain JavaScript would render and show the customer "KES NaN".
+1. It doesn't compile: `price` isn't one of its props, the required `priceKes` is missing, and `"800"` is a string anyway. Plain JavaScript would render and show the customer "KES NaN".
 2. The id belongs to the event and never changes. An index belongs to a *position*, so when the list is sorted or filtered React would keep a card's state with the wrong event.
 3. `"Free"`, `"KES 2,500"` and `"Sat 12 Dec · 6:00 pm"`, always in Nairobi time whatever the phone's time zone.
 4. `{ tone: "low", label: "Only 25 left" }`. "Low" is 10% of capacity or 20 seats, whichever is more: here 50.
