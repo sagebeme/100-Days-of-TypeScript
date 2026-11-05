@@ -48,6 +48,22 @@ Open it in two browser windows and chat with yourself.
 - Typing indicators ("Baraka is typing…").
 - Deploy it (Day 65), and watch a real match with friends.
 
+## Check yourself
+
+1. Predict the output: `cleanName("  Amina\n\tWanjiru   Kamau   Otieno  ")` and `cleanName("\u0007 ")`
+2. The stream is `{ playing: true, position: 60, updatedAt: 1000 }`. Predict `positionAt` at `now = 31000`, and again if `playing` were `false`.
+3. Why store `{ playing, position, updatedAt }` instead of a clock that ticks every second on the server?
+4. Why does `welcome` include the server's time?
+
+<details><summary>Answers</summary>
+
+1. `"AminaWanjiru Kamau O"`: control characters go (without leaving a space), runs of spaces become one, then it's cut to 20 and trimmed again. And `"Guest"`, because nothing's left.
+2. `90` (60 plus 30 seconds of playing) and `60`.
+3. Nothing has to tick, and anyone can work out where the stream is at any moment, including someone who joins late. A running clock would have to be updated and sent constantly.
+4. Phones' clocks drift. The page works out the difference between its clock and the server's, so everyone's match clock agrees.
+
+</details>
+
 ## When you're stuck
 
 - **A name ends in a space after cutting it to 20 characters** — trim again after `slice(0, 20)`. Remove control characters (`/\p{Cc}/gu`, which includes newlines) before squeezing the spaces.

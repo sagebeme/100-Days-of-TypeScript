@@ -63,6 +63,22 @@ The bot token and the public key are different things. The public key isn't secr
 - Tikiti can be slow. Answer with a *deferred* response (type 5) straight away, then send the real reply by editing the original message through the webhook.
 - Make Day 66's 409 answer include `checkedInAt`, so the bot can say when the ticket got in.
 
+## Check yourself
+
+1. Why does the bot check an Ed25519 signature on every request, and what does Discord do if a badly signed request doesn't get a 401?
+2. Spot the bug: `app.ts` reads the body with `await c.req.json()`, then verifies `JSON.stringify(body)`. Why do good requests fail?
+3. Predict the output: `seats(0)`, `seats(12)`, `seats(20)`, `seats(21)` and `seats(412)`
+4. A fan (not staff) types `/checkin`. What happens, and why is the role checked before calling Tikiti?
+
+<details><summary>Answers</summary>
+
+1. Anyone can POST to the endpoint, so the signature is the only proof a request really came from Discord. Discord tests this itself and won't save the endpoint until a badly signed request is refused.
+2. The signature covers the raw bytes exactly as sent. Parsing and re-stringifying can change spacing, key order or escapes, so the check fails. Read `c.req.text()`, verify, then parse.
+3. `"Sold out"`, `"Only 12 left"`, `"Only 20 left"`, `"21 left"` and `"412 left"`.
+4. They get a private refusal (`flags: 64`). Tikiti is never asked, so a fan can't use the bot to test ticket codes or let anyone in.
+
+</details>
+
 ## When you're stuck
 
 - **`verifyDiscordRequest` throws on a bad key or signature** — check the shapes before you touch `node:crypto`: a signature is 128 hex characters, a public key 64, a timestamp only digits. Return `false` for anything else.

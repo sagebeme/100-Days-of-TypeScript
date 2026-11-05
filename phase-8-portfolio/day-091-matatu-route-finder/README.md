@@ -45,6 +45,22 @@ npx vite phase-8-portfolio/day-091-matatu-route-finder/starter
 - "Leave by" times, using how often each route runs.
 - Real stage positions on a real map, with OpenStreetMap.
 
+## Check yourself
+
+1. Predict the output: push 5, 1, 4, 2 and 3 into a `MinHeap` built with `(a, b) => a < b`, then pop until it's empty, then pop once more.
+2. Why does the search run over (stage, which matatu you're on) instead of just stages?
+3. Why can the same state come out of the queue twice, and what does the planner do about it?
+4. With `fewestChanges`, each boarding costs 30 extra minutes. Why does that go only into the cost the search sorts by, and not into the trip's minutes?
+
+<details><summary>Answers</summary>
+
+1. `1, 2, 3, 4, 5`, then `undefined`: an empty heap has nothing to give.
+2. A stage alone can't tell staying on the 45 from getting off and boarding the 46, so changes would be free. With the matatu in the state, boarding costs the wait and the fare, and getting off is free.
+3. A heap can't lower an item's cost, so a cheaper way to a state is pushed again. When an entry pops that costs more than the best recorded for that state, it's skipped.
+4. The 30 minutes is only a preference that makes simpler trips win. The trip should still report the real minutes and fares the rider will spend.
+
+</details>
+
 ## When you're stuck
 
 - **`pop` comes back in the wrong order** — after `push`, swap the new item up while it's smaller than its parent (`(i - 1) >> 1`). For `pop`, move the last item to the top and swap it down with its smaller child (`2i + 1`, `2i + 2`) until neither is smaller.

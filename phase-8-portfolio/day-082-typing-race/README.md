@@ -57,6 +57,22 @@ npx vite phase-8-portfolio/day-082-typing-race/starter
 - Race a friend's run: encode a run in the URL and share the link.
 - Passages in Kiswahili.
 
+## Check yourself
+
+1. The passage is `"abc"`. The keys are `a` at 1000, `x` at 1200, `Backspace` at 1300, `b` at 1400, `Shift` at 1450 and `c` at 1500. Predict `typed`, `finishedAt`, and how many keystrokes are recorded.
+2. Predict the stats for that run: WPM, raw WPM and accuracy.
+3. Why is accuracy worked out by replaying the keystrokes, instead of comparing the final `typed` with the passage?
+4. Why does `passageFor` use `Math.floor(date.getTime() / 86_400_000)`?
+
+<details><summary>Answers</summary>
+
+1. `"abc"`, `1500`, and 5 keystrokes (`Shift` is ignored before it's recorded), each timed from the first key: 0, 200, 300, 400 and 500 ms.
+2. `72`, `96` and `75`. That's 3 correct characters ÷ 5 in half a second, 4 characters typed (`x` included), and 3 good key presses out of 4.
+3. By the end the mistake is fixed, so `typed` is perfect and would always say 100%. Each key press has to be judged when it happened.
+4. It's the whole number of days since 1970, so it's the same all day and changes at midnight. Everyone racing that day gets the same passage.
+
+</details>
+
 ## When you're stuck
 
 - **Shift or an arrow key gets typed** — those keys arrive as names (`"Shift"`, `"ArrowLeft"`). Only a one-character key or `"Backspace"` does anything; ignore the rest before recording a keystroke.

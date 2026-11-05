@@ -43,6 +43,22 @@ npx vite phase-8-portfolio/day-093-space-shooter/starter
 - A mystery ship across the top, worth a random bonus.
 - Record the keys and seed of a great game, and replay it.
 
+## Check yourself
+
+1. Why does the seed live in the world, and what breaks if one `Math.random()` slips into `update`?
+2. Predict `advance(world, keys, 0.04, 0)`: how many steps, and how much carries over? And for an `elapsed` of 5 seconds after a pause?
+3. Predict `overlaps` for two 10 × 10 boxes centred 10px apart, and 9px apart.
+4. Why is `update(world, keys)` a function that returns a new world, with no canvas and no clock?
+
+<details><summary>Answers</summary>
+
+1. The same seed and the same keys then play exactly the same game, which is what makes tests and replays possible. One `Math.random()` gives a different game every run.
+2. 2 steps, with about 0.0067 seconds carried over (0.04 minus two 1/60 s steps). And 15 steps, because a long pause catches up at most a quarter of a second.
+3. `false` (edges touching don't overlap) and `true`.
+4. Then the game's rules can be tested a step at a time, and they run the same on a 30, 60 or 144 Hz screen. The page only draws whatever world it's given.
+
+</details>
+
 ## When you're stuck
 
 - **The same seed plays two different games** — every random roll must come from `random(world.seed)`, and the new seed must go back into the world you return. One `Math.random()` anywhere breaks it.

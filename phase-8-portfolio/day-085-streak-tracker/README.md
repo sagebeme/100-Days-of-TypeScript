@@ -54,6 +54,22 @@ Then, in Chrome's DevTools, open Application → Service workers, tick "Offline"
 - Export and import habits as a file, so they survive a new phone.
 - "Freeze" days: one missed day a week that doesn't break a streak.
 
+## Check yourself
+
+1. Predict the output: `localDay(new Date("2026-11-05T21:30:00Z"), "Africa/Nairobi")` and the same moment in `"UTC"`.
+2. Predict the output: `addDays("2026-12-31", 1)`, `addDays("2026-03-01", -1)` and `daysBetween("2026-11-01", "2026-11-06")`
+3. Check-ins run from 1 to 5 November. Predict `currentStreak(checkins, "2026-11-06")` and `currentStreak(checkins, "2026-11-07")`.
+4. Predict `strategyFor` for: the page (`mode: "navigate"`), `/assets/index-a1B2c3D4.js`, a `POST` to the app, and a stylesheet from another site.
+
+<details><summary>Answers</summary>
+
+1. `"2026-11-06"` and `"2026-11-05"`. At 00:30 in Nairobi it's already the next day.
+2. `"2027-01-01"`, `"2026-02-28"` and `5`.
+3. `5`, because today isn't over, so not having checked in yet doesn't break the streak. Then `0`, because 6 November was missed.
+4. `network-first` (so updates arrive, with the cache as a fallback offline), `cache-first` (a hashed file never changes), `network-only` and `network-only`: the worker leaves those alone.
+
+</details>
+
 ## When you're stuck
 
 - **Late-night check-ins land on the wrong day** — `toISOString()` gives the UTC date. Use `Intl.DateTimeFormat` with the `timeZone` (the `"en-CA"` locale formats dates as `YYYY-MM-DD`), or its `formatToParts`.

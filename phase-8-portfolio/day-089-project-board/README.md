@@ -46,6 +46,22 @@ Unplug your mouse and move a card from To do to Done.
 - Due dates, with overdue cards highlighted.
 - Real-time sharing between teammates, with Day 88's WebSockets.
 
+## Check yourself
+
+1. Doing holds cards a, b and c, its limit is 3, and card d is in To do. Predict `reduce` when d moves into Doing, and whether the board that comes back is the same object.
+2. Predict `reduce` moving c to position 0 of Doing.
+3. Predict `moveBy(board, "a", "up")` for the top card of Doing, and `moveBy(board, "a", "right")`.
+4. Why does `load` upgrade version 1 boards instead of starting fresh when the shape is old?
+
+<details><summary>Answers</summary>
+
+1. The error `Doing is full (3 at most). Finish something first.`, and yes, the very same board: a refused action changes nothing.
+2. No error, and Doing is `["c", "a", "b"]`. A full column can still reorder its own cards: only cards coming from another column count against the limit.
+3. `null` (it's at the top edge), and `{ type: "move", cardId: "a", toColumnId: "done", toIndex: 0 }`: left and right keep the same position.
+4. Those are people's tasks. Losing them because the app changed would be far worse than a few lines of upgrade code. Each `{ id, text }` task becomes a card titled `text`, in the same order.
+
+</details>
+
 ## When you're stuck
 
 - **"never changes the board it was given" fails** — `push` and `splice` on the old `cardIds` change the board you were given. Build new arrays and objects (`[...ids]`, `{ ...board.cards }`) and return those.

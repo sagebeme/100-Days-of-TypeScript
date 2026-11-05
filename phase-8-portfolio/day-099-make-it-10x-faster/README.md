@@ -39,6 +39,22 @@ The speed test prints both times. The ratio is measured in the same process, the
 - The report is now linear. Make it *incremental*: keep running totals as orders come in, so the dashboard never recomputes the season.
 - Try it with a million orders. What's the slow part now? (Hint: memory.)
 
+## Check yourself
+
+1. The orders double and the report takes four times as long. What does that tell you, and what kind of line do you look for?
+2. Why profile before changing anything, and which view do you read first?
+3. The profile points at `Intl.DateTimeFormat`. What's the fix, and why does it help so much?
+4. Spot the bug in a faster version: the event rows are built by grouping the orders in a `Map`. Which event goes missing?
+
+<details><summary>Answers</summary>
+
+1. Something is n²: work that grows with the square of the input. Look for `find`, `filter` or `includes` inside a loop over another list, and build a `Map` or `Set` once instead.
+2. The slow part is rarely where you'd guess, and guessing first is how a day's work makes it 10% faster. The bottom-up view, by *self* time.
+3. Create one formatter, once, outside the function, and reuse it. A formatter is slow to create and quick to use, and the original made a new one for every order.
+4. An event nobody bought has no orders, so it never gets a row. Build the rows from `season.events`, with `topBuyer: null` for an event with no orders.
+
+</details>
+
 ## When you're stuck
 
 - **You don't know where to start** — profile before you change anything (the command is at the top of `bench.ts`), and look at the bottom-up view's *self* time. Guessing first is how a day of work makes it 10% faster.

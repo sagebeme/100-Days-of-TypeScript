@@ -47,6 +47,22 @@ While designing, `npx vite phase-8-portfolio/day-095-focus-mode-extension/starte
 - A "5 more minutes" button on the blocked page that's deliberately slow: type a sentence first.
 - Count how many times each site was blocked this week, and show it in the popup.
 
+## Check yourself
+
+1. Predict `parseBlocklist("https://www.YouTube.com/watch?v=x\n*.reddit.com/r/kenya, x.com tiktok.com youtube.com youtube")`.
+2. With `youtube.com` blocked, predict `isBlocked` for `https://m.youtube.com/x`, `https://notyoutube.com`, `https://youtube.com.evil.example` and `chrome://extensions`.
+3. A Friday 22:00–02:00 session. Is focus on at 01:00 on Saturday? At 01:00 on Friday?
+4. Why redirect pages with `declarativeNetRequest` rules instead of watching every request in the extension?
+
+<details><summary>Answers</summary>
+
+1. `{ domains: ["reddit.com", "tiktok.com", "x.com", "youtube.com"], problems: ['"youtube" isn\'t a website'] }`. Sorted, with no repeats, and `www.`, `*.`, paths and capitals are gone.
+2. `true`, `false`, `false` and `false`. It's blocked only when the host *is* the domain or ends with `"." + domain`, and only `http` and `https` pages count.
+3. Yes: an end before the start runs past midnight, into the day after a listed day. No: Thursday isn't listed, so Friday's small hours aren't covered.
+4. Chrome applies the rules itself, so the extension never sees your browsing. It asks for less permission, and anyone can read exactly what it blocks.
+
+</details>
+
 ## When you're stuck
 
 - **`notyoutube.com` gets blocked** — `host.endsWith("youtube.com")` matches it. Block when the host *is* the domain, or ends with `"." + domain`.

@@ -91,6 +91,22 @@ node phase-5-backend/day-066-event-ticketing-api/starter/simulate-callback.ts ws
 - Print each ticket's QR code in the terminal with block characters (`▀▄█`).
 - Publish it: a `bin` entry in a `package.json`, so `npm install -g` gives people a real `tikiti` command.
 
+## Check yourself
+
+1. Predict the output: `closest("evnets", COMMAND_NAMES)`, `closest("BUY", COMMAND_NAMES)` and `closest("purchase", COMMAND_NAMES)`
+2. Predict the output: `visibleWidth("\x1b[1mJioni 🎷\x1b[0m")`, and `"Jioni 🎷".length`.
+3. Predict `shouldColor` for `{ NO_COLOR: "" }` at a terminal, `{ NO_COLOR: "1" }` at a terminal, and `{ FORCE_COLOR: "1" }` piped to a file.
+4. Why does the "Waiting for M-Pesa… 12s" line go to stderr and not stdout?
+
+<details><summary>Answers</summary>
+
+1. `"events"` (two edits away), `"buy"` (lowercased first) and `null`: nothing is within two edits, so no suggestion is better than a wrong one.
+2. `7` and `8`. Colour codes take no room, and the emoji is two UTF-16 units but one character on screen.
+3. `true` (the rule is "set and not empty"), `false` and `true`.
+4. Stdout is for the result, so `tikiti order 12 --json | jq` gets clean JSON. Progress and problems are for the person watching, and stderr still reaches their screen.
+
+</details>
+
 ## When you're stuck
 
 - **`--jsn` is accepted, or a stray word is ignored** — call `parseArgs` with `strict: true` and `allowPositionals: true`, catch its error and rethrow it as a `UsageError` starting with `tikiti <command>:`. Then check how many positionals the command takes.

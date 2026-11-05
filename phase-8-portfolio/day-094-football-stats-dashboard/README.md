@@ -39,6 +39,22 @@ npx vite phase-8-portfolio/day-094-football-stats-dashboard/starter
 - "What if" mode: change a result and watch the table move.
 - The table as it stood on any matchday, with a slider.
 
+## Check yourself
+
+1. Predict the output: `niceTicks(34)`, `niceTicks(1200)` and `niceTicks(7)`
+2. Line 4 of a CSV has `one` as the home score. Why test the text with `/^\d+$/` instead of using `Number` or `parseInt`?
+3. A line says Simba 1–0 Kifaru, scored by `Ian|Chui|10`. Predict the error.
+4. Two players called Ian score 8 each, one for Simba and one for Chui. Why must the top scorers count them apart, and how?
+
+<details><summary>Answers</summary>
+
+1. `[0, 10, 20, 30, 40]`, `[0, 500, 1000, 1500]` and `[0, 2, 4, 6, 8]`.
+2. `Number("")` is `0` and `parseInt("1x")` is `1`, so bad scores would quietly pass as numbers. The error is `Line 4: the score must be whole numbers`.
+3. `` Line N: can't read the scorer "Ian|Chui|10" `` (with that line's number): Chui isn't in the match.
+4. They're different players, and adding them together would invent a 16-goal striker. Key the count on player and team, like `` `${player}|${team}` ``.
+
+</details>
+
 ## When you're stuck
 
 - **The line numbers in the errors are off** — count every line of the file, header and blank lines included, from 1. Skip blank lines, but don't renumber.
