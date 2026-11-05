@@ -42,6 +42,22 @@ Then comes the part that makes today different: **how do you know your tests are
    First, make the test-kit checks pass. Then add scenarios until every mutant is caught.
 4. Only once they're all caught, open `starter/mutants.ts` and read what the bugs were. Did your scenarios catch them for the reason you expected?
 
+## Check yourself
+
+1. Your scenarios all pass against the real app. Why isn't that enough to say they're good tests?
+2. One mutant makes drafts visible to everyone. Sketch a scenario that would catch it.
+3. Why does every test get its own `:memory:` database?
+4. Scenarios only talk HTTP, never the database. What does that buy you?
+
+<details><summary>Answers</summary>
+
+1. A test that can't fail proves nothing. What counts is whether it *fails* when the code is wrong, which is what running it against mutants checks.
+2. An organiser creates a draft; a fan (or someone not logged in) asks for it with `GET`; expect `404`. Against the mutant the fan gets `200`, so the scenario fails and the mutant is caught.
+3. So tests can't affect each other. They can run in any order, and a failure in one never comes from data another one left behind.
+4. They test what a real client sees. You can rewrite the code inside, even the database layer, and the scenarios still work, and still mean something.
+
+</details>
+
 ## When you're stuck
 
 - **Tests pass alone but fail together** — something is shared between them. Every kit needs its own database, clock and cookies.

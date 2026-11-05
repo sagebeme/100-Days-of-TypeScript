@@ -39,6 +39,22 @@ Today's tests are **attacks**. Right now, 15 of them succeed. Your job is to clo
 
 The `DROP TABLE` attack fails even in the starter, by luck: `node:sqlite` runs one statement at a time. Many database drivers happily run `x'; DROP TABLE reviews; --` as two statements. Don't rely on luck; the fix for HOLE 1 closes it properly.
 
+## Check yourself
+
+1. Why does `WHERE body LIKE '%${q}%'`, glued together with a template string, let `' OR 1=1 --` return every review, and what's the fix?
+2. You escape every review with `escapeHtml`. Why also send a Content Security Policy?
+3. With a limit of 5 per account per 15 minutes, predict `allowed` for six login attempts in a row, and `retryAfterSeconds` for one more attempt a minute later.
+4. Spot the bug: `PATCH /me` runs `db.update(users).set(await c.req.json())`. What can an attacker send?
+
+<details><summary>Answers</summary>
+
+1. The search text becomes part of the SQL itself: the quote closes the string, `OR 1=1` matches every row, and `--` comments out the rest. Keep the query's text fixed and pass the input as a parameter (`?`), so it's only ever data.
+2. As a backstop. If one escape is ever missed, a CSP that refuses inline scripts stops the injected `<script>` from running.
+3. `true` five times, then `false`; and `840`. The window started at the first attempt, so after one minute 14 minutes (840 seconds) are left.
+4. Mass assignment: `{ "role": "admin" }`, and the user is an admin. Copy only the fields a user may change (an allow-list).
+
+</details>
+
 ## When you're stuck
 
 - **Search stops finding anything after your fix** — the `%` wildcards belong *inside the parameter's value* (`"%" + q + "%"`), not in the SQL text around the `?`.

@@ -132,6 +132,22 @@ For one website talking to its own API, **sessions are simpler and safer**: choo
    npm test -- day-061-signup-and-login/tokens
    ```
 
+## Check yourself
+
+1. Two people pick the password `matatu-sunset-42`. Are their stored hashes the same? Why does that matter?
+2. A login fails. Why do "no account with that email" and "wrong password" get exactly the same answer, and why does the code still hash a dummy password when the email is unknown?
+3. Someone takes a valid JWT, changes `"role":"fan"` to `"role":"admin"` in the payload and sends it. Another sends a token whose header says `"alg":"none"` with no signature. Predict what `verifyJwt` returns for each.
+4. Five requests get a `401` at the same moment because the access token expired. What goes wrong if each one refreshes on its own?
+
+<details><summary>Answers</summary>
+
+1. No. Each password gets its own random salt, so equal passwords get different hashes, and cracking one doesn't reveal everyone else who chose it.
+2. A different message would tell an attacker which emails have accounts. Hashing a dummy password makes the unknown-email case take as long as a real check, so the timing doesn't give it away either.
+3. `{ ok: false, reason: "bad-signature" }` (anyone can read a JWT, but changing it breaks the signature) and `{ ok: false, reason: "wrong-algorithm" }` (the server decides the algorithm, never the token).
+4. The first refresh rotates the refresh token; the other four send the used-up one, which looks like a stolen token, so the whole family is revoked and the user is logged out for doing nothing. A single flight lets them all wait on one refresh.
+
+</details>
+
 ## When you're stuck
 
 - **Every login fails after a restart** — you hashed with a new salt when checking. Read the salt *from the stored hash* and use that.

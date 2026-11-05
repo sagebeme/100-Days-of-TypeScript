@@ -101,6 +101,22 @@ For real payments, set `DARAJA_CONSUMER_KEY`, `DARAJA_CONSUMER_SECRET`, `DARAJA_
 - Cancelling an event with paid orders: record a refund for each one.
 - Daraja's *STK Query* API, to ask M-Pesa about a payment whose callback never arrived.
 
+## Check yourself
+
+1. Nothing about ticket codes is stored. How can the gate tell that `T43-…` was forged from a real `T42-…` code?
+2. Predict the output: `readTicketCode(code.toLowerCase(), secret)` for a real ticket 42, and `readTicketCode(code, "a different secret")`
+3. A fan orders, then walks off without paying. No clean-up job runs. How do the seats come back on sale?
+4. Why is the M-Pesa STK push sent *outside* the database transaction that places the order?
+
+<details><summary>Answers</summary>
+
+1. The code is the id plus an HMAC of the id made with the server's secret. The server works out what ticket 43's signature should be; without the secret nobody else can, so the edited code doesn't match.
+2. `42` (it forgives lowercase and spaces typed at the gate) and `null` (signed with another secret, so it's not ours).
+3. `seatsTaken` only counts paid orders and *pending* orders whose hold hasn't run out. After 10 minutes the hold simply stops counting.
+4. A network call can take seconds or hang. Holding the transaction open that long would block every other buyer. Place the order, commit, then call M-Pesa, and release the seats if the call fails.
+
+</details>
+
 ## When you're stuck
 
 - **The rush test sells too many seats** — the count and the insert must be in the same `database.transaction(...)`. Otherwise another order's check can run between your check and your insert.

@@ -43,6 +43,22 @@ await viewPlaylist(database, roadTrip, chebet);
 
 Tracks A B C D sit at 1 2 3 4. Move D (at 4) to 1: every track from position 1 up to 3 moves down one place, then D goes to 1. That gives D A B C. Moving A (at 1) to 3 is the mirror image: tracks from 2 up to 3 move up one place, then A goes to 3, giving B C A D. Draw it before you code it.
 
+## Check yourself
+
+1. Why can't a `playlists` row just hold a list of its track ids? What does `playlist_tracks` hold instead?
+2. Tracks A B C D sit at positions 1 to 4. Predict the order after `moveTrack(…, B, 4)`, and then after `removeTrack(…, A)`.
+3. Baraka adds a track that's already on the playlist. What stops it, and what would stop it even if the code forgot to check?
+4. Why does `moveTrack` run inside a transaction?
+
+<details><summary>Answers</summary>
+
+1. A column holds one value, and tracks belong to many playlists while playlists hold many tracks. A join table has one row per pairing, with the details of that pairing: its position and who added it.
+2. `A C D B` (C and D each move up one place, and B goes to 4), then `C D B`, renumbered 1, 2, 3 so the order has no gap.
+3. `addTrack` checks first and throws "That track is already on the playlist". Underneath, the composite primary key `(playlist_id, track_id)` makes a second row for the same pair impossible.
+4. A move shifts several rows. If one update fails halfway, the transaction undoes the lot, so you never end up with two tracks at position 2 and none at 3.
+
+</details>
+
 ## When you're stuck
 
 - **Two tracks end up at the same position** — you shifted the wrong range. Check `gte`/`lt` for moving up and `gt`/`lte` for moving down.

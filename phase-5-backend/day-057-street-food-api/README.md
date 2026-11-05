@@ -58,6 +58,22 @@ The vendors are made up, at real places around Nairobi.
    curl -i -X DELETE localhost:3057/vendors/cbd-githeri
    ```
 
+## Check yourself
+
+1. What's the difference between `PUT /vendors/:id` and `PATCH /vendors/:id`? What happens to a field you leave out of each?
+2. Why does `POST /vendors` answer `201` with a `Location` header, and `DELETE` answer `204` with no body?
+3. A client sends `PATCH /vendors/cbd-githeri` with `{ "rating": 5 }`. What happens, and why?
+4. Predict the output, roughly: `distanceKm({ latitude: 0, longitude: 0 }, { latitude: 1, longitude: 0 })`
+
+<details><summary>Answers</summary>
+
+1. `PUT` replaces the whole vendor, so every field must be sent and nothing is kept from before. `PATCH` changes only the fields you send and keeps the rest.
+2. `201 Created` says something new exists, and `Location` says where (`/vendors/<id>`), so the client doesn't have to guess. After a delete there's nothing to send back; `204 No Content` says it worked.
+3. `400`, "rating can't be changed". `rating`, `reviewCount` and `id` are owned by the server: a rating comes from `POST /vendors/:id/reviews`, never from a client setting it.
+4. About `111.19` km. One degree of latitude is roughly 111 km anywhere on Earth.
+
+</details>
+
 ## When you're stuck
 
 - **Distances are huge or tiny** — the trig functions need radians. Multiply degrees by π / 180 first.
