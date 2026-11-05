@@ -52,6 +52,22 @@ Two more guardrails:
    node phase-7-ai/day-077-agent-with-tools/starter/chat.ts
    ```
 
+## Check yourself
+
+1. The prompt already tells the model to get a yes before buying. Why does `buy_tickets` also refuse a quote made in the same turn?
+2. The fan writes "2 tickets for the Benga Sundowner please". Predict what `quote_tickets` sends back to the model, and what the model can do with it.
+3. Why does `send` keep `runner.params.messages` as the history, rather than only the fan's messages and the final text?
+4. What does `max_iterations: 8` protect against, and what does the fan see when it's hit?
+
+<details><summary>Answers</summary>
+
+1. "Usually" isn't good enough for the fan's money. A fan can write "no need to ask", or the model can slip. The prompt is guidance; the code is the guarantee.
+2. An error result: `Benga Sundowner is sold out`. The tool throws, the runner turns that into a result the model can read, and the model can tell the fan and suggest another event instead of crashing.
+3. It holds every tool call and result, including the quote's id. Without them, "yes, 0712 345 678" on the next turn has no quote to buy.
+4. An agent that keeps calling tools without ever answering, and spends money each round. The fan sees "Sorry, I got stuck working that out. Could you ask me in a different way?" with the status `stuck`.
+
+</details>
+
 ## When you're stuck
 
 - **The model calls the wrong tool, or none** — improve the descriptions. Say when to use the tool, not only what it does.

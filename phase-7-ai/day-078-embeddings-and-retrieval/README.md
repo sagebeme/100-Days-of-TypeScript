@@ -52,6 +52,22 @@ Building this turned up a lesson in hashing: with 512 slots, "What time do doors
    npm test -- day-078
    ```
 
+## Check yourself
+
+1. Predict the output: `cosine([1, 2], [2, 4])`, `cosine([1, 0], [0, 3])` and `cosine([1, 0], [-1, 0])`
+2. Predict the output: `stem("refunds")`, `stem("refunded")`, `stem("bus")` and `words("What time do doors open?")`
+3. With the hashing embedder, "can I bring someone to help me with my wheelchair?" finds nothing, even though the accessibility page answers it. Why, and what would fix it?
+4. The model's answer cites `[refunds#2]` and `[support#9]`, but only `refunds#2` was among the extracts. What does `answerQuestion` do, and why?
+
+<details><summary>Answers</summary>
+
+1. `1`, `0` and `-1`. Only direction counts, so `[2, 4]` is the same direction as `[1, 2]` despite being twice as long.
+2. `"refund"`, `"refund"`, `"bus"` (too short to cut) and `["time", "door", "open"]`: "what" and "do" are stop words.
+3. It matches words, not meanings, and the page says "a companion who helps you". An embedding model that understands meaning, like Voyage, should find it.
+4. It keeps `refunds#2` in `sources`, and removes `[support#9]` from the text as well as from the sources. An id that wasn't given to the model was made up, and the fan shouldn't see a fake reference.
+
+</details>
+
 ## When you're stuck
 
 - **Everything scores about the same** — check that `cosine` divides by both lengths.
