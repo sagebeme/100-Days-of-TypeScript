@@ -89,3 +89,7 @@ Once it's live:
 ## Phase 3 is done
 
 In 14 days you went from a link-in-bio page to two games you can send to anyone: HTML and CSS, a typed DOM, Vite, forms, `fetch`, `localStorage`, Canvas, pointer events, a game loop, a rules engine, animation, sound, accessibility, and a real deployment. Phase 4 takes your code off the page and onto the internet: APIs, secrets, and a bot that messages you every morning.
+
+## Phase recap
+
+Before you move on, read the [Phase 3 recap](../RECAP.md): the phase's big ideas on one page, a short self-test, and one project to build with no steps.

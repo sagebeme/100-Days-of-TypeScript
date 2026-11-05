@@ -118,6 +118,19 @@ From Phase 5 on, one app grows with you: an event ticketing platform. You build 
 
 Days 81 to 100 have no build-along video. You get a short brief and a test suite, the way real work arrives.
 
+### Phase recaps
+
+Each phase has a one-page recap: what it taught, the key ideas, a short self-test, and one project to build with no steps. Read it when you finish the phase, and again before the next one starts.
+
+- [Phase 1: Terminal foundations](phase-1-terminal/RECAP.md)
+- [Phase 2: Modelling with types](phase-2-modelling/RECAP.md)
+- [Phase 3: Browser and games](phase-3-browser/RECAP.md)
+- [Phase 4: Talking to the internet](phase-4-internet/RECAP.md)
+- [Phase 5: Backend with Node](phase-5-backend/RECAP.md)
+- [Phase 6: Full-stack React](phase-6-fullstack-react/RECAP.md)
+- [Phase 7: AI in TypeScript](phase-7-ai/RECAP.md)
+- [Phase 8: Portfolio](phase-8-portfolio/RECAP.md)
+
 ## Why these projects
 
 The projects come from things people actually care about: games, music, football, sneakers, street food, side hustles. Each one has a Nairobi flavour, from matatu routes to M-Pesa payments, so the code you write looks like the place you live in. You don't need to be Kenyan to follow any of it.

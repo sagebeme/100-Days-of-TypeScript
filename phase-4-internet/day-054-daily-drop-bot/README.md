@@ -104,3 +104,7 @@ Unavailable today (Gave up after 4 attempts: fetch failed).
 ## Phase 4 is done
 
 You can now talk to other people's servers safely: REST and status codes, runtime validation, secrets, scheduling, email, SMS, retries, polite scraping, browser automation, M-Pesa payments, and packaging your own SDK. Phase 5 turns it around: you build the server.
+
+## Phase recap
+
+Before you move on, read the [Phase 4 recap](../RECAP.md): the phase's big ideas on one page, a short self-test, and one project to build with no steps.

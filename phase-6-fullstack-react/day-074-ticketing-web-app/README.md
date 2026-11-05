@@ -90,3 +90,7 @@ The Day 66 API (`server/`, with its migrations as a module so Next can bundle th
 ## Phase 6 done
 
 Eight days ago this was an API with no face. Now it's a fast, accessible web app: typed components, a cart with real rules, forms that share the API's schema, live data, pages that load before the spinner would have, tests that click through the whole journey, and a check that it works on a cheap phone. Phase 7 hands it to an AI.
+
+## Phase recap
+
+Before you move on, read the [Phase 6 recap](../RECAP.md): the phase's big ideas on one page, a short self-test, and one project to build with no steps.

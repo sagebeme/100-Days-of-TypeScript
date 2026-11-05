@@ -76,3 +76,7 @@ Work in this order. Each layer is testable before the next one exists.
 - **CLI tests fail but the function tests pass** — run the CLI yourself from the repo root and read the error it prints. `cli.ts` catches errors from `runCommand` and prints the message.
 - **`Cannot find module`** — imports between your own files need the `.ts` extension, like `./ledger.ts`.
 - **Still stuck?** Read the solution files, then close them and write your own from memory.
+
+## Phase recap
+
+Before you move on, read the [Phase 2 recap](../RECAP.md): the phase's big ideas on one page, a short self-test, and one project to build with no steps.

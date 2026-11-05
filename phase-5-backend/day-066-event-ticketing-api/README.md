@@ -125,3 +125,7 @@ For real payments, set `DARAJA_CONSUMER_KEY`, `DARAJA_CONSUMER_SECRET`, `DARAJA_
 - **The late-payment test fails** — when you check for room, leave the order you're settling out of the count (the `exceptOrderId` argument), or it competes with itself.
 - **The callback answers 500 on junk** — `parseCallback` throws; catch it and answer 400.
 - **Still stuck?** Read the files in `solution/`, then close them and write your own from memory.
+
+## Phase recap
+
+Before you move on, read the [Phase 5 recap](../RECAP.md): the phase's big ideas on one page, a short self-test, and one project to build with no steps.

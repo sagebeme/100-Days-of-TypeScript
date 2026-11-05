@@ -103,3 +103,7 @@ Six days ago Tikiti had no AI in it. Now it has a concierge that:
 - speaks the way its fans do.
 
 Phase 8 is yours: twenty projects, a brief and a test suite each, and no walkthrough.
+
+## Phase recap
+
+Before you move on, read the [Phase 7 recap](../RECAP.md): the phase's big ideas on one page, a short self-test, and one project to build with no steps.

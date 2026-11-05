@@ -101,3 +101,7 @@ npm test -- day-100
 Then keep going. Every project from here on gets a page.
 
 **Congratulations on 100 days.**
+
+## Phase recap
+
+Before you go, read the [Phase 8 recap](../RECAP.md): the big ideas of the last twenty days, a self-test, and the next project, which is yours to choose.

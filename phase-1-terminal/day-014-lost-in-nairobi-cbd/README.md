@@ -67,3 +67,7 @@ This day pulls together everything from Phase 1: types, objects, functions, cond
 - **`isEnding` returns `undefined` instead of `false`** — for rooms without the flag, `room.isEnding` is `undefined`. `room.isEnding === true` gives you a real boolean.
 - **Stretch goal (ungraded)** — write a small loop in a separate file that reads a direction from the terminal with `node:readline` and plays your world for real.
 - **Still stuck?** Read `solution/nairobi-cbd.ts`, then close it and write your own from memory.
+
+## Phase recap
+
+Before you move on, read the [Phase 1 recap](../RECAP.md): the phase's big ideas on one page, a short self-test, and one project to build with no steps.
