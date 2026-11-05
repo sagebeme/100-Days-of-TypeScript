@@ -24,3 +24,6 @@ next-env.d.ts
 
 # Screenshots from failed browser tests (Day 72)
 test-results/
+
+# GitHub Pages build output (scripts/build-pages.sh)
+_site/

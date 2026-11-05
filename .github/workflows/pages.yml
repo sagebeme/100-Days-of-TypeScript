@@ -1,0 +1,52 @@
+# Publishes the course website to GitHub Pages: the site/ folder and each day's README, the same
+# website netlify.toml and vercel.json publish. Pages must be set to "GitHub Actions"
+# (Settings → Pages → Build and deployment → Source).
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time; a newer push waits for the one in progress.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Put the website together
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      # Nothing to install: the check runs on Node alone, like on Netlify.
+      - name: The site's day list matches the READMEs
+        run: node scripts/build-site-data.ts --check
+
+      - name: Build the site folder
+        run: scripts/build-pages.sh _site
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    name: Publish to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}site/
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
