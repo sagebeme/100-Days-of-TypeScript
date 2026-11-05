@@ -45,6 +45,22 @@ Liverpool,Arsenal,1,3
    npm test -- day-024
    ```
 
+## Check yourself
+
+1. What does the return type `value is Match` give you that `boolean` doesn't?
+2. Predict the output: `Number("")`, `Number(" 2 ")` and `Number("two")`. Why does `toGoals` treat `""` specially?
+3. Predict the output: `parseMatches("home,away,homeGoals,awayGoals\nArsenal,Chelsea,2,\n")`
+4. In the brief's table, Chelsea and Liverpool both have 1 point. Why is Chelsea above?
+
+<details><summary>Answers</summary>
+
+1. After `if (isMatch(candidate))`, TypeScript treats `candidate` as a `Match`, so you can push it into a `Match[]` without a cast. A plain `boolean` tells the compiler nothing.
+2. `0`, `2` and `NaN`. An empty cell would quietly become a 0-goal score, so `toGoals` turns it into `NaN`, which `isMatch` rejects.
+3. It throws `Line 2 is not a valid match: Arsenal,Chelsea,2,`. The away goals are empty. Line numbers count the header as line 1.
+4. Goal difference is the next rule: Chelsea is −1, Liverpool −2.
+
+</details>
+
 ## When you're stuck
 
 - **A `\r` shows up on the last team name** — the CSV has Windows line endings. Splitting on `"\n"` alone leaves the `\r` behind; use `/\r?\n/`.

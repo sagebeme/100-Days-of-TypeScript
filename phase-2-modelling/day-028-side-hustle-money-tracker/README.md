@@ -53,6 +53,22 @@ Work in this order. Each layer is testable before the next one exists.
 
 5. **Use it for real.** From the root of the repo, run the commands in the brief above. Your data lands in `money.json` in the folder you ran them from (it's ignored by git, so it won't get committed).
 
+## Check yourself
+
+1. `money.json` is a file you wrote yourself. Why still check it with `isLedger` after `JSON.parse`?
+2. `loadLedger` returns an empty ledger only for `ENOENT` and re-throws every other error. What could go wrong if it returned an empty ledger for any error?
+3. Predict the output: `await runCommand(["add", "income", "abc", "Logo"], file)`
+4. Why are `ledger.ts`'s `addEntry` and `summarize` pure functions, with all the file reading and writing kept elsewhere?
+
+<details><summary>Answers</summary>
+
+1. Anything can change a file on disk: a hand edit, an old version of the program, a half-written save. `JSON.parse` gives you `any`; the type guard is what makes it a `Ledger` you can trust.
+2. A file that exists but can't be read (bad permissions, say) would look empty. The next `add` would save a one-entry ledger over it and wipe out everything you'd recorded.
+3. It rejects with `Amount must be a positive number`. `Number("abc")` is `NaN`, and `addEntry` refuses it. Nothing is saved.
+4. They're easy to test: data in, data out, no temp files. And each layer can be tested before the next one exists, which is the order the steps follow.
+
+</details>
+
 ## When you're stuck
 
 - **`loadLedger` crashes on the first run** — there's no file yet. A missing file is normal, so return an empty ledger instead of throwing.

@@ -38,6 +38,27 @@ amina.send(1000, kip)  →  throws "Insufficient funds"
 
 7. **Try the compiler.** After the tests pass, add a line outside the class, like `amina.owner = "Someone Else"`, and see the error from `npm run typecheck`. Then try `amina.#balanceCents` and see that one too. Delete both lines.
 
+## Check yourself
+
+1. Predict the output: `0.1 + 0.2`. What does that tell you about storing money?
+2. `readonly owner` and `#balanceCents` both protect data. What's the difference?
+3. Predict the output:
+   ```ts
+   const w = new MobileWallet("Amina", 0.1);
+   w.deposit(0.2);
+   console.log(w.balance);
+   ```
+4. What does `tsc` say about `amina.balance = 1000000;`?
+
+<details><summary>Answers</summary>
+
+1. `0.30000000000000004`. Decimal fractions aren't exact in floating point, so money is kept in whole cents (whole numbers are exact) and turned back into shillings only to show it.
+2. `readonly` lets anyone read `owner` but stops reassigning it, and only the compiler enforces it. `#balanceCents` can't be read or written from outside the class at all, and the JavaScript runtime itself enforces that.
+3. `0.3`. Both amounts become whole cents (10 + 20 = 30), so nothing drifts.
+4. "Cannot assign to 'balance' because it is a read-only property." There's a getter and no setter, so the only ways to change the balance are `deposit` and `send`.
+
+</details>
+
 ## When you're stuck
 
 - **"Property 'owner' has no initializer"** — a `readonly` field has to be assigned in the constructor. Write `this.owner = owner;`.

@@ -51,6 +51,28 @@ Output (`wrapped.json`):
    npm test -- day-023
    ```
 
+## Check yourself
+
+1. What does an `async` function always return, even when you write `return wrapped`?
+2. Three artists each played 40,000 ms. Predict `buildWrapped(plays).totalMinutes`, and what you'd get by adding up each artist's rounded minutes instead.
+3. Spot the bug:
+   ```ts
+   export async function loadPlays(path: string): Promise<Play[]> {
+     const text = readFile(path, "utf8");
+     return JSON.parse(text);
+   }
+   ```
+4. `plays.json` doesn't exist. What happens when you `await createWrapped(...)`?
+
+<details><summary>Answers</summary>
+
+1. A Promise. `return wrapped` resolves it with that value, and the caller uses `await` (or `.then`) to get it out.
+2. `2`: 120,000 ms is exactly 2 minutes. Each artist rounds to 1 minute, so adding the rounded values gives `3`. Add the milliseconds first, convert once.
+3. The `await` is missing, so `text` is a `Promise<string>`, not a string. `tsc` catches it: "Argument of type 'Promise<string>' is not assignable to parameter of type 'string'."
+4. `readFile` rejects with an `ENOENT` error, `await` turns that into a thrown error, and it passes up through `loadPlays` and `createWrapped` to whoever called them. Wrap the call in `try`/`catch` to handle it.
+
+</details>
+
 ## When you're stuck
 
 - **You get a Promise instead of a value** — you forgot `await`. Printing a Promise shows `Promise { <pending> }`.

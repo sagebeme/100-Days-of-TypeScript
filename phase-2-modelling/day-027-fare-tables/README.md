@@ -50,6 +50,22 @@ A plain object with `as const` gives you nearly everything an enum did: named va
 
 7. **Try it yourself.** Create a scratch file anywhere with `enum Fare { Peak = 120 }` in it and run `node scratch.ts`. Read the error, then delete the file.
 
+## Check yourself
+
+1. Why does plain Node refuse an `enum` when it runs every other TypeScript feature you've used?
+2. What is the type of `FARE.peak` with `as const`, and without it?
+3. Predict the output: `isFareKind("toString")` and `"toString" in FARE`
+4. You add `weekend: 100` to `FARE`. What else do you have to change for `fareFor("weekend")` to compile?
+
+<details><summary>Answers</summary>
+
+1. Node runs `.ts` files by erasing the types. An `enum` isn't only a type: it generates a real object at runtime, so there's nothing to simply erase.
+2. With `as const`, the literal type `120` (and it's `readonly`). Without it, just `number`.
+3. `false` and `true`. `in` also looks at inherited properties, and every object inherits `toString`. `Object.hasOwn` only checks the object's own keys.
+4. Nothing. `FareKind` is `keyof typeof FARE`, so the new key joins the union by itself.
+
+</details>
+
 ## When you're stuck
 
 - **`npm run typecheck` says `number` is not `120`** — `FARE` is missing `as const`.

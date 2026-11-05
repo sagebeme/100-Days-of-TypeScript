@@ -39,6 +39,22 @@ You'll also chain them: `sessions.filter(...).map(...)`. And you'll type a `Reco
 
 Try to solve these without a `for` loop. Loops still work, but the point of today is to get comfortable with the three tools.
 
+## Check yourself
+
+1. Which of `map`, `filter` and `reduce` does each of these: app names of long sessions; total minutes; minutes per category?
+2. Predict the output: `formatMinutes(59)`, `formatMinutes(60)` and `formatMinutes(125)`
+3. Spot the bug: `sessions.reduce((sum, s) => sum + s.minutes)` with no starting value. What does `tsc` say, and what happens with an empty list at runtime?
+4. Why does `minutesByCategory` start from `{ social: 0, games: 0, study: 0, video: 0 }`?
+
+<details><summary>Answers</summary>
+
+1. `filter` then `map` (keep long sessions, turn each into its app name); `reduce` (a list down to one number); `reduce` again (a list down to one object).
+2. `"59m"`, `"1h 00m"` and `"2h 05m"`.
+3. Without a start value, the first *session* becomes `sum`, so `tsc` rejects the sum: "Operator '+' cannot be applied to types 'Session' and 'number'." At runtime, an empty list throws `TypeError: Reduce of empty array with no initial value`.
+4. So every category appears even with no sessions in it, and so the starting value already matches `Record<Category, number>`, which demands all four keys.
+
+</details>
+
 ## When you're stuck
 
 - **`reduce` returns `NaN` or `undefined`** — you forgot the starting value (the second argument), or your callback doesn't `return` the new running total.

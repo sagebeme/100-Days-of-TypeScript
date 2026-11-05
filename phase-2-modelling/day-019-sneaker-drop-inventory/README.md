@@ -36,6 +36,22 @@ totalStock(stock)         →  3
    npm test -- day-019
    ```
 
+## Check yourself
+
+1. What does `T extends { id: string }` let you store, and what does it stop?
+2. Predict the output: `stock.all().push(anotherSneaker); console.log(stock.size);` when the store held one sneaker.
+3. Predict the output: `stock.get("nope")?.model`
+4. Spot the bug: `remove` skips the `index === -1` check and calls `this.#items.splice(index, 1)` straight away. What does `remove("nope")` do?
+
+<details><summary>Answers</summary>
+
+1. Any object with a string `id`: sneakers, caps, hoodies. `new Store<number>()` or a type without `id` is a compile error, because `add` and `get` rely on `item.id`.
+2. `1`. `all()` returns a copy, so pushing onto it doesn't touch the store's own array.
+3. `undefined`. `?.` stops and gives `undefined` instead of throwing "Cannot read properties of undefined".
+4. `splice(-1, 1)` counts from the end, so it deletes the *last* item, which wasn't the one you asked for.
+
+</details>
+
 ## When you're stuck
 
 - **"Property 'id' does not exist on type 'T'"** — the constraint `T extends { id: string }` is what lets you read `item.id` inside the class. Check that it's on the class line.
