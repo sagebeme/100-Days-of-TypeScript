@@ -39,3 +39,13 @@ Documentation fixes count too. A confusing sentence in a README that you underst
 
 - `slugo` has no benchmark. Tomorrow is Day 99: would your fix make it slower? Measure it.
 - Add a `locale` option: German `ä` → `ae`, Swedish `ä` → `a`. Write the proposal as an issue first. A new option is a design discussion, not just a PR.
+
+## When you're stuck
+
+- **Every patch fixes one example and breaks another** — step back to `src/slugify.ts` and follow `"Jazz 🎷 Night"` through it line by line. Look at the *order* things happen in: what's left between the two spaces once the emoji is deleted? And what does the "drop everything else" line do to a `.` separator?
+- **The 2.3.1 slugs test fails** — your change altered a slug that people already use as a URL. Read which one, and find a version of the fix that leaves it alone.
+- **#19 still ends in a dash** — cut at whole words: keep adding words while the slug fits. A single word longer than `maxLength` still gets hard-cut (that was #9).
+- **#23's message still mentions `normalize`** — check `typeof text` at the very start of `slugify`, before anything else runs, and throw a `TypeError` that says what it got.
+- **The changelog test fails** — each fix is a line starting `- ` and ending with its issue number, between `## Unreleased` and `## 2.3.1`. Don't touch the older entries, and don't list #21.
+- **The pull request test fails** — `Fixes #N` for every issue the code closes, the duplicate included, but not the one that isn't a bug. Say what was wrong, why, and how you fixed it, in more than a couple of lines.
+- **Still stuck?** Read the files in `solution/`, then close them and write your own from memory.

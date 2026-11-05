@@ -18,6 +18,14 @@ Build the dashboard a football fan checks every Monday morning: the league table
 
 Draw the chart yourself in SVG. No chart library: you've got `pointsRace` and `niceTicks`. Let people pick a club to follow on the chart. Mark the champions and the relegation places with more than colour. On a phone, make sure points stay visible. And escape everything from a loaded CSV: it's typed by somebody.
 
+## Steps
+
+1. Read the tests, the types in `stats.ts`, and the first lines of `season.csv`.
+2. `parseResults`: split into lines, skip the header and blank lines, check each line in the order of the errors in the test. `npm test -- day-094 -t "reading a season"`.
+3. `leagueTable`, with the tie-breaks and form. `npm test -- day-094 -t "the table"`.
+4. `topScorers`, `headToHead`, `pointsRace`, then `niceTicks`.
+5. Run the tests, including the sample season, then build the page in `main.ts` with an SVG chart you draw yourself (the commands under "Done when").
+
 ## Done when
 
 ```bash
@@ -30,3 +38,14 @@ npx vite phase-8-portfolio/day-094-football-stats-dashboard/starter
 - A page per club: results, scorers, and home against away.
 - "What if" mode: change a result and watch the table move.
 - The table as it stood on any matchday, with a slider.
+
+## When you're stuck
+
+- **The line numbers in the errors are off** — count every line of the file, header and blank lines included, from 1. Skip blank lines, but don't renumber.
+- **`"one"` passes as a score** — `Number("")` is 0 and `parseInt("1x")` is 1. Test the text with `/^\d+$/` before converting.
+- **A scorer for the wrong team is accepted** — split each scorer on `|` into exactly three parts, and the team must be the home or away side. When a line lists scorers, each team's count must match its score; a line with none is fine.
+- **Ties come out in the wrong order** — one `sort` comparing points, then goal difference, then goals scored (all highest first), then `a.team.localeCompare(b.team)`.
+- **Form has more than five, or newest first** — sort the results by date, push each outcome, and keep `form.slice(-5)`.
+- **Two "Ian"s are added together** — key the count on player *and* team, like `` `${player}|${team}` ``.
+- **`niceTicks(1200)` gives 240 or 300** — divide the max by the count, find its power of ten, and take the first of 1, 2, 5 or 10 times that which is at least as big. Then count up to the first tick at or above the max.
+- **Still stuck?** Read the files in `solution/`, then close them and write your own from memory.

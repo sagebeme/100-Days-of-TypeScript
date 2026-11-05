@@ -53,7 +53,9 @@ npm run site
 
 It opens `http://localhost:8000/site/`. The site is plain static files that read the READMEs straight from the day folders, so there's nothing to build. After adding or renaming a day, refresh its list of days with `npm run site:data`. `npm run site:check` fails if the list is out of date.
 
-To put it online, import the repo into Netlify or Vercel. `netlify.toml` and `vercel.json` are already set up: there's nothing to install or build, and `/` goes to `/site/`. Or turn on GitHub Pages for the `main` branch and open `/site/`.
+It's online at **https://sagebeme.github.io/100-Days-of-TypeScript/**, published by `.github/workflows/pages.yml` on every push to `main`. For that to work, Pages must be set to **GitHub Actions** in the repo's Settings → Pages → Build and deployment → Source. The workflow publishes only `site/` and each day's README; `scripts/build-pages.sh` builds the same folder locally if you want to try it.
+
+To host it somewhere else, import the repo into Netlify or Vercel. `netlify.toml` and `vercel.json` are already set up: there's nothing to install or build, and `/` goes to `/site/`.
 
 ## How each day works
 

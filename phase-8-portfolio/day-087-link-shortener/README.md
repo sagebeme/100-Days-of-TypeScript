@@ -28,6 +28,15 @@ Build **Fupi**, a link shortener: paste `https://tikiti.example/events/2/gengeto
 
 Use Node's built-in `node:sqlite`, with parameters always bound (Day 64).
 
+## Steps
+
+1. Read the tests, then `links.ts` and `app.ts`. `page.ts` and `main.ts` are already written.
+2. `openLinks`: create a `links` table (slug, url, token hash, created) and a `clicks` table (slug, time, referring site).
+3. `urlProblem`, `slugProblem`, `randomSlug` and `referrerSite`. `npm test -- day-087 -t "checking links"`.
+4. `createLink`, `findLink`, `ownsLink`, `recordClick`, `linkStats` and `deleteLink`.
+5. `app.ts`: `POST /api/links` with the rate limit, then the redirect, then stats and delete.
+6. Run the tests, then try it (the commands under "Done when").
+
 ## Done when
 
 ```bash
@@ -40,3 +49,14 @@ node phase-8-portfolio/day-087-link-shortener/starter/main.ts
 - A QR code for every short link.
 - A stats page for owners, with a chart.
 - Check new links against a list of known scam sites before shortening them.
+
+## When you're stuck
+
+- **`tikiti.example/events` is accepted** — `new URL()` throws on it, which is how you know it isn't a complete link. Catch that and return the "complete link" message, then check `protocol` is `http:` or `https:`, then the host.
+- **The token shows up in the database** — store `createHash("sha256").update(token).digest("hex")`, and in `ownsLink` hash what you're given and compare the hashes.
+- **`/GENGETONE` is a 404** — store endings in lowercase, and lowercase the ending from the address before looking it up.
+- **Deleting fails, or leaves clicks behind** — the clicks point at the link. Delete them too, or declare the column `REFERENCES links(slug) ON DELETE CASCADE` (and turn on `PRAGMA foreign_keys = ON`).
+- **`lastSevenDays` misses days with no clicks** — build the 7 days yourself, oldest first, and fill each from the counts, with 0 for a missing one. Store click times as ISO strings, so `substr(at, 1, 10)` is the day.
+- **`direct` and `whatsapp.com` come out the other way round** — they're tied on 2. Sort by clicks, then by site name: `ORDER BY clicks DESC, site`.
+- **The rate limit never resets** — keep each client's recent times and drop any older than a minute (by `now()`, not `Date.now()`, so the test's clock works).
+- **Still stuck?** Read the files in `solution/`, then close them and write your own from memory.

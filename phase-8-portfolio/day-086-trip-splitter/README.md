@@ -20,6 +20,14 @@ Build the app that answers that, and posts the answer to the group chat.
 
 Add people and expenses, pick how each is split, see balances and the settle-up list update as you type, and copy the summary with one tap. Keep the trip in `localStorage`. Show validation problems next to the form, in words.
 
+## Steps
+
+1. Read the tests, and the `Split` and `Expense` types in `split.ts`. `formatKes` is already written.
+2. `divide`: floor every share, then hand out the leftover shillings. `npm test -- day-086 -t dividing`.
+3. `owed`, for each of the three kinds of split, with its errors.
+4. `balances`, then `settleUp`, then `summary`.
+5. Run the tests, then build the page in `main.ts` and `index.html` (the commands under "Done when").
+
 ## Done when
 
 ```bash
@@ -32,3 +40,12 @@ npx vite phase-8-portfolio/day-086-trip-splitter/starter
 - Several trips, each with its own link.
 - Currencies: a trip to Kampala in UGX, settled in KES at a fixed rate.
 - Sync between phones: put Day 57's API behind it.
+
+## When you're stuck
+
+- **The parts don't add up to the total** — `Math.round` on each share can give one shilling too many or too few. `Math.floor` them all, then give the shillings left over, one each, to the people with the biggest fractional parts.
+- **`divide(10, …)` gives the extra shillings to the wrong people** — when the fractions are equal, keep the people in the order they came. `sort` keeps equal items in order, so sort a copy by fraction only.
+- **`{ A: 0 }` doesn't throw** — drop anyone with weight 0 first, then check there's still somebody left.
+- **Exact amounts that don't add up give the wrong message** — the test looks for the expense's description, the sum and the total in that order: `Boat: the parts add up to 1000, not 3000`.
+- **`settleUp` loops forever or leaves someone a shilling short** — each send is the smaller of what the biggest debtor owes and what the biggest creditor is owed. Take it off both and drop anyone who reaches 0.
+- **Still stuck?** Read the files in `solution/`, then close them and write your own from memory.

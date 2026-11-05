@@ -21,6 +21,14 @@ Freelancers in Nairobi lose hours to invoices in Word: sums done by hand, VAT fo
 
 The form on one side, the invoice as a sheet of A4 paper on the other, updating as you type. On paper it's always black on white, even in dark mode. Add `@media print` so printing shows only the invoice, full-page. Set the page title to the invoice number: browsers use it as the PDF's file name.
 
+## Steps
+
+1. Read the tests, and the `Invoice` and `Totals` types in `invoice.ts`.
+2. `totals`: each line's net, its discount and its VAT, then the sums. `npm test -- day-090 -t "^totals"`.
+3. `formatKes` and `parseKes`, then `nextNumber`, `dueDate`, `status` and `isKraPin`, then `problems`.
+4. `render.ts`: `escapeHtml`, then `renderInvoice`.
+5. Run the tests, then build the page in `main.ts`, and print a test invoice to PDF (the commands under "Done when").
+
 ## Done when
 
 ```bash
@@ -35,3 +43,13 @@ Print one to PDF and check it looks right on paper.
 - Save invoices, and a list of them with paid, due and overdue.
 - A QR code that opens the M-Pesa payment on a phone.
 - Quotes that turn into invoices with one click.
+
+## When you're stuck
+
+- **A total is a cent out** — round each line on its own (`Math.round` of quantity × unit price), take that line's discount off and round it, then work out its VAT and round that. Add up the rounded lines; never round the sum.
+- **The discounted VAT is wrong** — the discount comes off each line *before* VAT, so VAT is 16% of what's left, not of the full price.
+- **`parseKes("1.234")` gives a number** — after taking out `KES`, commas and spaces, allow digits with at most two after the point (`/^\d+(\.\d{1,2})?$/`). Build the cents from the two parts as text, not with `* 100`, which brings floats back.
+- **`formatKes(-950_000)` has the minus in the wrong place** — format the absolute amount, and put `−` (the minus sign, not a hyphen) in front of `KES`.
+- **`nextNumber` repeats a number** — take the highest number already used *in that year* and add 1, not the count of invoices.
+- **An invoice is overdue on its due date** — it's overdue only once today is *after* the due date. `YYYY-MM-DD` strings compare correctly with `>`.
+- **Still stuck?** Read the files in `solution/`, then close them and write your own from memory.

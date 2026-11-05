@@ -51,11 +51,29 @@ The code is the easy part. Write the content like it matters, because it's what 
 - **Show evidence**: numbers ("under 75 KB of JavaScript", "90x faster"), links that work, and source code that's tidy with a good README.
 - Replace the generated covers with real screenshots when you have them.
 
+## Steps
+
+1. Read the tests, then the files under "What's already written", above all the `Project` type in `site.ts` and the sample in `content.ts`.
+2. `validateProjects`: every problem at once, in the words the tests expect. `npm test -- day-100 -t "checking the content"`.
+3. `sortProjects`, `tagSlug`, `tagCounts`, `filterProjects` and `relatedProjects`. `npm test -- day-100 -t "organising the work"`.
+4. `escapeHtml`, then `buildSite`: refuse content with problems (throw `ContentProblems`), then build the home page, a page per project and per tag, the 404 page, `sitemap.xml` and `robots.txt`, using `THEME_CSS`, `cover` and `favicon`.
+5. Run the tests, then build it and look (the commands under "The brief"). Then replace `content.ts` with your own projects and ship it.
+
 ## Done when
 
 ```bash
 npm test -- day-100
 ```
+
+## When you're stuck
+
+- **Only the first problem is reported** — don't throw inside `validateProjects`. Push each problem onto a list, keep checking, and return them all. A project with no slug is named `project 5` (its place in the list).
+- **Featured projects come out newest first** — featured ones keep the order they were listed in. Only the rest are sorted, newest year first, then by title.
+- **`Café` becomes `caf`** — `normalize("NFD")` splits `é` into `e` and an accent; remove the accents before turning everything else into dashes.
+- **`react` and `React` are counted apart** — count by `tagSlug(tag)`, and show the spelling you saw first.
+- **A link escapes `/portfolio/`** — build every link from `basePath` (`${basePath}style.css`, `${basePath}projects/${slug}/`), and every absolute URL from `url + basePath`. Never write a bare `/`.
+- **Escaping fails on one page** — escape where the text goes into the HTML, every time, including titles in `<title>`, `<meta>` content and the sitemap.
+- **Still stuck?** Read the files in `solution/`, then close them and write your own from memory.
 
 ## Ship it
 

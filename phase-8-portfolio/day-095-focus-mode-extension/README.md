@@ -21,6 +21,15 @@ The extension is written: a background service worker, the popup, the blocked pa
 
 The old way was an extension that watched every request and decided on each one. That meant it read all your browsing. Manifest V3 extensions hand Chrome a list of rules instead, and Chrome applies them. Your extension asks for less, and a store reviewer (or a suspicious friend) can see exactly what it does.
 
+## Steps
+
+1. Read the tests, then `rules.ts`. The rest of the extension (`background.ts`, the popup, the blocked page, `chrome.ts`) is already written: skim `background.ts` to see where your functions are called.
+2. `parseBlocklist`. `npm test -- day-095 -t "blocklist"`.
+3. `isBlocked`. `npm test -- day-095 -t "which pages"`.
+4. `inSchedule`, then `isFocusing`. `npm test -- day-095 -t "the schedule"`.
+5. `toRules` and `formatLeft`.
+6. Run the tests, build it, and load `starter/dist` in Chrome (see "Done when").
+
 ## Done when
 
 ```bash
@@ -37,3 +46,13 @@ While designing, `npx vite phase-8-portfolio/day-095-focus-mode-extension/starte
 - Let people edit the schedule in the popup, not only the list.
 - A "5 more minutes" button on the blocked page that's deliberately slow: type a sentence first.
 - Count how many times each site was blocked this week, and show it in the popup.
+
+## When you're stuck
+
+- **`notyoutube.com` gets blocked** — `host.endsWith("youtube.com")` matches it. Block when the host *is* the domain, or ends with `"." + domain`.
+- **`chrome://extensions` or `not a url` throws** — `new URL()` throws on nonsense: catch it and say no. Then check the protocol is `http:` or `https:` before looking at the host.
+- **`www.`, a path or a port survives in the list** — split the box on spaces, newlines and commas. For each piece: lowercase it, take the `hostname` from `new URL()` when it starts with a scheme, otherwise cut it at the first `/`, then drop a leading `*.` or `www.` and a `:port`.
+- **`youtube` is accepted** — a website has at least one dot, and each part is letters, digits and dashes that don't start or end with a dash.
+- **The schedule follows the computer's clock** — get the day and the time with `Intl.DateTimeFormat` in the given `timeZone` (`weekday`, `hour`, `minute`, with `hourCycle: "h23"`), never `getHours()`.
+- **The Friday-night session misses Saturday's small hours** — when the end is before the start, it's on from the start to midnight on a listed day, *or* from midnight to the end on the day after a listed day.
+- **Still stuck?** Read the files in `solution/`, then close them and write your own from memory.

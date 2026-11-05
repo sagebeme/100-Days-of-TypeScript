@@ -38,6 +38,14 @@ The first time I took a matatu from town to Rongai, I got on the wrong one. **Tw
 
 `theme.ts` has a reading theme you can use, or replace with your own. `build.ts` runs it all.
 
+## Steps
+
+1. Read the tests, then the four posts in `starter/posts/` (one is a draft). `build.ts` is already written.
+2. `markdown.ts`: `escapeHtml`, then `inline`, then `markdownToHtml` one kind of block at a time, then `plainText`. `npm test -- day-081 -t markdown`.
+3. `posts.ts`: `parseFrontMatter`, `slugify`, `readingMinutes`, then `parsePost`.
+4. `site.ts`: `published` and `formatDate`, then `rss`, then `buildSite`.
+5. Run the tests, build the real posts, and look at the result (the commands under "Done when").
+
 ## Done when
 
 ```bash
@@ -51,3 +59,12 @@ npx vite preview --outDir phase-8-portfolio/day-081-blog-generator/starter/dist 
 - Syntax highlighting for code blocks, at build time: no JavaScript sent to readers.
 - "Next and previous post" links at the bottom of each post.
 - Publish it for real, and send the link to someone.
+
+## When you're stuck
+
+- **`**bold**` gets turned into `<strong>` inside backticks** — take the code spans out first (swap each for a placeholder), do bold, emphasis and links on what's left, then put the code back.
+- **The link test with `&` fails, or `onmouseover="` gets through** — escape the whole line first, then build the tags. A URL is checked against the allowed starts (`http(s):`, `mailto:`, a relative path) and anything else keeps only its text.
+- **`Café` becomes `caf`** — `normalize("NFKD")` splits `é` into `e` plus an accent; drop the accents (`\p{M}`) before throwing away everything that isn't a letter or digit.
+- **Dates come out a day early, or `pubDate` isn't `12:00:00 GMT`** — `new Date("2026-11-14")` is midnight UTC, which is the day before in some time zones. Read the date as noon UTC (`T12:00:00Z`) and format it in UTC.
+- **The stylesheet doesn't load on a post page** — a post is two folders deep (`posts/<slug>/index.html`), so its links start with `../../`. The index's start with nothing.
+- **Still stuck?** Read the files in `solution/`, then close them and write your own from memory.

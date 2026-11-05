@@ -34,6 +34,14 @@ The bot is an **interactions endpoint**: no always-connected gateway. Discord PO
   - Mentions are always off: an event named `@everyone` pings nobody.
 - **`app.ts`: the endpoint.** Read the raw body, verify it, then parse it and answer it.
 
+## Steps
+
+1. Read the tests, then the files under "What's already written", above all `discord.ts`.
+2. `verify.ts`: check the headers' shape and the timestamp's age, then the Ed25519 signature. `npm test -- day-096 -t "signature"`.
+3. `bot.ts`: `seats`, then `handleInteraction` for PING, `/events`, `/event`, suggestions, the reminder button and `/checkin`, with a catch for when Tikiti is down.
+4. `app.ts`: read the raw body and the two headers, verify, then parse and answer. `npm test -- day-096 -t "endpoint"`.
+5. Run the tests, then try it in a real Discord server (see "Try it for real").
+
 ## Done when
 
 ```bash
@@ -54,3 +62,13 @@ The bot token and the public key are different things. The public key isn't secr
 - Add a reminders route to Day 66, and a daily job that sends each person a DM the day before.
 - Tikiti can be slow. Answer with a *deferred* response (type 5) straight away, then send the real reply by editing the original message through the webhook.
 - Make Day 66's 409 answer include `checkedInAt`, so the bot can say when the ticket got in.
+
+## When you're stuck
+
+- **`verifyDiscordRequest` throws on a bad key or signature** — check the shapes before you touch `node:crypto`: a signature is 128 hex characters, a public key 64, a timestamp only digits. Return `false` for anything else.
+- **`createPublicKey` won't take Discord's key** — Node wants it in DER `spki` form: `Buffer.concat([Buffer.from("302a300506032b6570032100", "hex"), Buffer.from(publicKey, "hex")])` with `format: "der", type: "spki"`.
+- **A good request fails to verify** — sign-check `timestamp + body` exactly as received. In `app.ts`, read the body with `c.req.text()`, not `c.req.json()`, which you'd then have to turn back into the same string.
+- **Fans can check people in** — refuse when there's no `member` (a DM), when `staffRoleId` is empty, or when the member's `roles` don't include it. Do it before calling Tikiti.
+- **The code isn't found** — trim it and uppercase it before calling `checkIn`.
+- **Discord says "The application did not respond" when Tikiti is down** — wrap the Tikiti calls in `try`/`catch` and answer the private "isn't answering" message (or no choices, for suggestions).
+- **Still stuck?** Read the files in `solution/`, then close them and write your own from memory.
