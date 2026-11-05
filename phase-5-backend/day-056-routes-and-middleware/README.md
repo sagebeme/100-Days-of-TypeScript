@@ -48,7 +48,7 @@ id-5 POST /stages/kencom/reports 413 0.6ms
 
 ## Things to notice
 
-- **Order matters.** `requestId` runs first, so every later middleware and handler can use the id. Move `logRequests` above it and the log lines lose their ids.
+- **Order matters.** `requestId` runs first, so every later middleware and handler can use the id. A middleware above it that reads the id before its own `await next()` gets `undefined`. (`logRequests` reads it on the way out, after `requestId` has run, so it would still work there; reading it on the way in would not.)
 - **Hono answers a wrong method with 404**, where your Day 55 server gave a 405 with an `Allow` header. Frameworks make choices for you. (Hono has a `method-not-allowed` middleware if you want the 405 back.)
 - **CORS is a browser rule, not security.** It stops *other websites* from calling your API through a visitor's browser. `curl` ignores it completely, so never rely on it to protect anything.
 
