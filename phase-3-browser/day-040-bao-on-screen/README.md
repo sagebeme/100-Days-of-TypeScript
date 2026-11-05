@@ -52,6 +52,22 @@ You don't touch the rules today. `bao.ts` is yesterday's finished engine, and th
 
 7. Play a few games. Then turn on *reduce motion* (it's under Accessibility in most system settings) and play one more.
 
+## Check yourself
+
+1. Why does one `draw()` set all 32 holes from the data, instead of each click handler changing the holes it knows about?
+2. What is the generation counter for?
+3. `chooseMove` calls `play` for every legal move before choosing one. Why doesn't that mess up the real game?
+4. Predict the output: `positionOf(0, 3)` and `positionOf(1, facingHole(3))`
+
+<details><summary>Answers</summary>
+
+1. The screen can't drift away from the state. Whatever happened, calling `draw()` makes every hole match, so there's only one place where the screen changes.
+2. Pressing **New game** in the middle of an animation bumps the counter. The old animation checks it after every `wait` and stops when it no longer matches, so two games never draw over each other.
+3. `play` never changes the state it's given; it returns a new one. Trying a move is free, and the real game only moves on when the app keeps a result.
+4. `{ row: 2, col: 3 }` and `{ row: 1, col: 3 }`. Facing holes are in the same column, so a capture goes straight across the board.
+
+</details>
+
 ## When you're stuck
 
 - **Clicking does nothing** — a disabled `<button>` never fires `click`. Check that your `draw()` enables your legal holes when it's your turn.

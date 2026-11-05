@@ -56,6 +56,25 @@ review(p,  "maji", false, "2026-10-05")  →  { maji: { box: 1, due: "2026-10-05
    npm test -- day-034
    ```
 
+## Check yourself
+
+1. Predict the output: `String({ box: 1 })`. What would `localStorage.setItem("progress", progress)` store without `JSON.stringify`?
+2. Predict the output: a card already in box 3 is answered right again.
+   ```ts
+   review({ maji: { box: 3, due: "2026-10-08" } }, "maji", true, "2026-10-08")
+   ```
+3. Saved progress is `{"maji":{"box":5,"due":"2026-10-03"},"chai":{"box":2,"due":"2026-10-03"}}`. What does `loadProgress` return, and why?
+4. Why are `getItem` and `setItem` wrapped in `try`/`catch`? What makes them throw?
+
+<details><summary>Answers</summary>
+
+1. `"[object Object]"`. `localStorage` keeps strings only, so anything else is turned into a string first, and an object becomes that useless text. Save with `JSON.stringify`, load with `JSON.parse`.
+2. `{ maji: { box: 3, due: "2026-10-15" } }`. Box 3 is the top, so it stays there and comes back in 7 days.
+3. `{ chai: { box: 2, due: "2026-10-03" } }`. There is no box 5, so that entry is dropped. Anyone can edit storage in DevTools, so it's checked like any data from outside.
+4. Some private-browsing modes block storage, and a full quota makes `setItem` throw. The app should keep working (just without saving) instead of crashing.
+
+</details>
+
 ## When you're stuck
 
 - **`[object Object]` in storage** — you saved the object itself. `localStorage` turns everything into a string; save `JSON.stringify(progress)`.

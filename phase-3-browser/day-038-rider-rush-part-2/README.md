@@ -56,6 +56,22 @@ The `starter/` folder already holds a finished Part 1, so you start from a worki
 
 7. Play. What's your best?
 
+## Check yourself
+
+1. Predict the output: `overlaps({ x: 0, y: 0, width: 10, height: 10 }, { x: 5, y: 20, width: 10, height: 10 })`. Why?
+2. Predict the output: `levelFor(2999)`, `levelFor(3000)`, `speedFor(1)` and `spawnEveryFor(10)`
+3. Once `status` is `"over"`, `update` returns the state unchanged. What would happen on screen without that check?
+4. `requestAnimationFrame` keeps calling `frame` after a crash. Why must the app handle the crash only once?
+
+<details><summary>Answers</summary>
+
+1. `false`. The boxes overlap on the x axis (0–10 and 5–15) but not on the y axis (0–10 and 20–30). AABB needs both.
+2. `1`, `2`, `240` and `0.5`. A level is 3000 pixels (300 m). Level 10 would be 1.2 − 0.9 = 0.3 s between cars, but `MIN_SPAWN_EVERY` keeps it at 0.5.
+3. The road and the cars would keep moving under the "Crashed!" message, and the score could still go up.
+4. Otherwise it would save the best score, write the message and move focus to **Ride again** on every frame, about 60 times a second.
+
+</details>
+
 ## When you're stuck
 
 - **You crash the moment the game starts** — check `overlaps` with the numbers: in Part 1, cars start above the screen, at `y = -CAR_HEIGHT`.

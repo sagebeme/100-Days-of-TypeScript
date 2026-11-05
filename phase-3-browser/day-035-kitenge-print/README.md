@@ -55,6 +55,22 @@ generatePrint({ width: 200, height: 100, tile: 50, palette: PALETTES.sunset.colo
    npm test -- day-035
    ```
 
+## Check yourself
+
+1. Why does every print come from a seed instead of calling `Math.random()`?
+2. Why does `generatePrint` return a list of shapes instead of drawing straight onto the canvas?
+3. Predict the output: `generatePrint({ width: 200, height: 100, tile: 50, palette, seed: 42 }).length`, then the same with `height: 120`.
+4. You swap the order so each row picks its shapes' colours before its stripe's. The tests for seed 42 now fail, though every shape is still there. Why?
+
+<details><summary>Answers</summary>
+
+1. The same seed always paints the same print, so `Print #42` can be found again, and a test can check exactly what comes out.
+2. A list of plain objects is easy to test with `toEqual`. Drawing is kept in `drawShape`, and the tests check it with a fake pen that records calls.
+3. `10` and `15`. 100 / 50 gives 2 rows, 200 / 50 gives 4 columns, and each row is 1 stripe + 4 shapes. 120 / 50 rounds *up* to 3 rows, so the last row is cut off at the bottom.
+4. The random numbers come out in a fixed sequence. Changing the order you ask for them hands each colour to a different shape, so the same seed paints a different print.
+
+</details>
+
 ## When you're stuck
 
 - **The canvas is blurry** — setting the size with CSS stretches it. Set `canvas.width` and `canvas.height` in code.

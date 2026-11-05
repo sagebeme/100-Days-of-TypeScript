@@ -54,6 +54,22 @@ stepLoop(0.01, 0.05, 1/60)      →  { steps: 3, accumulator: ~0.01 }
 
 5. Play it. Nothing can hurt you yet, so ride as far as you like.
 
+## Check yourself
+
+1. Why run the game in fixed 1/60 s steps instead of one `update` per `requestAnimationFrame`?
+2. The tab was in the background for 2 seconds. Predict the output: `stepLoop(0, 2, 1 / 60)`
+3. Predict the output: `formatDistance(1239)`, and `steer(state, "left").lane` when the rider is already in lane 0.
+4. `update` moves cars by `speed × dt`, not by a fixed number of pixels. What does that buy you?
+
+<details><summary>Answers</summary>
+
+1. Screens refresh at different rates. One step per frame would make the game twice as fast on a 120 Hz screen as on a 60 Hz one. Fixed steps mean every device plays the same game.
+2. `{ steps: 15, accumulator: ~0 }` (floating point leaves something like `4.9e-17`). The frame is capped at `MAX_FRAME`, 0.25 s, which is 15 steps, so the game doesn't jump 2 seconds ahead.
+3. `"123 m"` (10 pixels to a metre, rounded down) and `0`. The lane is clamped, so you can't ride off the road.
+4. Speeds are in pixels per *second*, so the game moves at the same real speed whatever `dt` is, and a test can step it by any amount of time.
+
+</details>
+
 ## When you're stuck
 
 - **Everything moves twice as fast on a gaming laptop** — you're moving things per frame. Move them per *second*: multiply by `dt`.

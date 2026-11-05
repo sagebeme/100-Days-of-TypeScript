@@ -48,6 +48,22 @@ That sounds like a step backwards, but it isn't. For the rest of Phase 3, your T
    npm test -- day-029
    ```
 
+## Check yourself
+
+1. What can a page opened with `target="_blank"` do to yours if the link has no `rel="noopener"`?
+2. What happens on a phone if you leave out `<meta name="viewport" content="width=device-width, initial-scale=1">`?
+3. Spot the bug: `<a href="www.youtube.com/@aminacreates">YouTube</a>`. Where does clicking it actually go?
+4. Why use `<header>`, `<nav>`, `<main>` and `<footer>` (and exactly one `<h1>`) instead of a pile of `<div>`s that look the same?
+
+<details><summary>Answers</summary>
+
+1. It gets a handle back to your page (`window.opener`) and can send your tab somewhere else, for example a fake login page, while you're looking at the new one.
+2. The phone pretends to be a desktop screen about 980 px wide and shrinks the whole page to fit, so the text is tiny and you have to pinch to zoom.
+3. With no `https://`, it's a *relative* address: the browser looks for a folder called `www.youtube.com` next to your page and finds nothing. Links to other sites need the full `https://…`.
+4. They tell the browser, search engines and screen readers what each part is. A screen-reader user can jump straight to the navigation or the main content, and the `<h1>` says what the page is about. A `<div>` means nothing.
+
+</details>
+
 ## When you're stuck
 
 - **The page has no styles** — the `href` in your `<link>` must match the file name exactly: `style.css`, in the same folder.
