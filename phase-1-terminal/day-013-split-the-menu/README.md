@@ -31,6 +31,22 @@ orderTotal(["Pizza"])                 →  throws "Unknown item: Pizza"
    npm test -- day-013
    ```
 
+## Check yourself
+
+1. Why does the import end in `.ts`: `import { findItem } from "./menu.ts"`?
+2. What does `tsc` say if you write `const item = findItem(name);` and then `total += item.price` without checking for `undefined` first?
+3. Predict the output: `orderTotal(["Soda", "Soda", "Mandazi"])`
+4. Predict the output: `orderTotal(["soda"])`
+
+<details><summary>Answers</summary>
+
+1. This project runs TypeScript files directly with Node, and Node finds files by their real name. There's no build step to rewrite the path.
+2. "'item' is possibly 'undefined'." The `MenuItem | undefined` return type forces you to handle "not found" first.
+3. `140`: 60 + 60 + 20.
+4. It throws `Unknown item: soda`. `find` compares with `===`, which is case-sensitive.
+
+</details>
+
 ## When you're stuck
 
 - **"Cannot find module" or "does not provide an export named..."** — check that the thing you're importing has the word `export` in front of it in the other file, and that the import path starts with `./` and ends with `.ts`.

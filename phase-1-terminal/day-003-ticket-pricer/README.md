@@ -28,6 +28,22 @@ priceTicket("vip", 1000)         →  1500
 npm test -- day-003
 ```
 
+## Check yourself
+
+1. What does the compiler say about `priceTicket("stundet", 1000)`, and why is that a good thing?
+2. Predict the output: `priceTicket("student", 999)`
+3. You replace the final `else` with `else if (type === "vip")`. All three cases are still covered, but `tsc` now complains. What does it say?
+4. Why is a plain `else` enough for VIP?
+
+<details><summary>Answers</summary>
+
+1. `Argument of type '"stundet"' is not assignable to parameter of type 'TicketType'`. The typo is caught before the code runs, instead of falling through to the VIP price.
+2. `499.5`. Nothing rounds the result.
+3. "Function lacks ending return statement and return type does not include 'undefined'." An `if`/`else if` chain with no `else` has a path where nothing is returned, as far as `tsc` is concerned.
+4. By the time you reach it, `"early-bird"` and `"student"` are ruled out, and the union says only `"vip"` is left.
+
+</details>
+
 ## When you're stuck
 
 - **"Argument of type 'string' is not assignable to parameter of type 'TicketType'"** — this is the union type doing its job. Pass one of the three exact strings, in quotes.

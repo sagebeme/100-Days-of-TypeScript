@@ -30,6 +30,22 @@ countAttemptsUntilCorrect(["Wrong"], "Right")                                →
 npm test -- day-008
 ```
 
+## Check yourself
+
+1. Why does this use a `while` loop rather than `for...of`, and could `for...of` do the job?
+2. Predict the output: `countAttemptsUntilCorrect(["Bien", "bien"], "bien")`
+3. Predict the output: `countAttemptsUntilCorrect([], "Nyashinski")`
+4. Spot the bug: someone deletes the `index += 1` line. What happens when the first guess is wrong?
+
+<details><summary>Answers</summary>
+
+1. `while` fits "keep going until something happens", which is how a real game reading guesses one at a time works. With a list already in hand, `for...of` plus an early `return` would work too.
+2. `2`. `===` is case-sensitive, so `"Bien"` doesn't match `"bien"`.
+3. `-1`. `0 < 0` is false, so the loop never runs.
+4. The loop never ends. `index` stays at 0, the condition stays true, and `attempts` counts up forever.
+
+</details>
+
 ## When you're stuck
 
 - **Infinite loop, test never finishes** — you're not incrementing `index` inside the `while` loop, so the condition never becomes false. Every path through the loop body needs to eventually move `index` forward.

@@ -35,6 +35,26 @@ buildConfirmation("RKD4XY7Z1P", 1250, "Kip")
 npm test -- day-001
 ```
 
+## Check yourself
+
+1. Why is `message` a `let` while `status` and `currency` are `const`s?
+2. Predict the output: `buildConfirmation("AB12", 99.5, "Wanjiru")`
+3. Spot the bug:
+   ```ts
+   const message = `${code} ${status}`;
+   message = `${message} ${currency}${amount}.00 sent to ${name}.`;
+   ```
+4. `amount` is a `number`. What does `${amount}` do with it inside a template string?
+
+<details><summary>Answers</summary>
+
+1. `message` is reassigned in a second step, and only a `let` can be reassigned. `status` and `currency` never change, so `const` says so and stops anyone changing them by accident.
+2. `"AB12 Confirmed. Ksh99.5.00 sent to Wanjiru."` Sticking `.00` on the end only works for whole amounts. Formatting money properly comes later in the course.
+3. `message` is a `const`, so the second line is an error: "Cannot assign to 'message' because it is a constant." Make it a `let`.
+4. It turns the number into text (`500` becomes `"500"`) and drops it into the string. No `String(...)` or `+` needed.
+
+</details>
+
 ## When you're stuck
 
 - **"Cannot find name 'code'" or similar**: check the function's parameter list in `starter/mpesa-sms.ts`. Don't rename or reorder the parameters; the tests call the function by its exact name with the code, the amount and the name, in that order.

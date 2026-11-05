@@ -27,6 +27,22 @@ estimateVideoMinutes(2, 10)    →  204
 npm test -- day-002
 ```
 
+## Check yourself
+
+1. Why `Math.floor` and not `Math.round`?
+2. Predict the output: `estimateVideoMinutes(1, 3)`
+3. Predict the output: `estimateVideoMinutes(0.5, 8)`
+4. Spot the bug: someone writes `const totalMegabytes: number = gigabytes * 1000;`. Which example in the brief now fails, and what does it return?
+
+<details><summary>Answers</summary>
+
+1. You can't watch a fraction of a minute. 341.9 minutes of data still only buys 341 whole minutes, and `Math.round` would promise 342.
+2. `341`. 1024 / 3 is 341.33…, rounded down.
+3. `64`. Half a gigabyte is 512 MB, and 512 / 8 is exactly 64.
+4. `estimateVideoMinutes(1, 8)` returns `125` instead of `128`. The brief counts 1 GB as 1024 MB.
+
+</details>
+
 ## When you're stuck
 
 - **Your answer is off by a fraction, like `128.5` instead of `128`** — you forgot `Math.floor`. Division in TypeScript doesn't round on its own.

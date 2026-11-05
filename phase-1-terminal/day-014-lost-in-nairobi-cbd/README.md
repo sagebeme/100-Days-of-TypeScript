@@ -44,6 +44,22 @@ This day pulls together everything from Phase 1: types, objects, functions, cond
    npm test -- day-014
    ```
 
+## Check yourself
+
+1. The world is a plain object, not code. What does that let you do without touching `move` or `isEnding`?
+2. Predict the output: `move(nairobiCbdWorld, "kencom", "east")`
+3. Predict the output: `move(nairobiCbdWorld, "matatu-roof", "north")`
+4. Why does `isEnding` return `room.isEnding === true` instead of just `room.isEnding`?
+
+<details><summary>Answers</summary>
+
+1. Add, remove or rewire rooms. The engine only follows `exits`, so a new map is new data, not new code.
+2. `"kencom"`. There's no east exit, so you stay where you are.
+3. It throws `Unknown room: matatu-roof`.
+4. `isEnding` is optional, so it can be `undefined`. Returning it directly gives `boolean | undefined`, which `tsc` rejects for a function that promises `boolean`. `=== true` turns a missing value into `false`.
+
+</details>
+
 ## When you're stuck
 
 - **A test says an exit points to a room that doesn't exist** — check the spelling of the target id against the key of the room it should point to. A single typo in a room id is the most common bug here.

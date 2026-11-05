@@ -27,6 +27,22 @@ formatReceiptLine({ name: "Smokie Pasua", price: 50, quantity: 2 })
 npm test -- day-009
 ```
 
+## Check yourself
+
+1. What does the `OrderItem` type stop you doing that plain JavaScript would allow?
+2. Predict the output, and its length: `formatReceiptLine({ name: "Mandazi", price: 20, quantity: 3 })`
+3. Predict the output: `formatReceiptLine({ name: "Chapati Beans Special Large", price: 150, quantity: 1 })`
+4. Spot the bug: someone writes `item.name.padStart(20)`. What does the receipt look like?
+
+<details><summary>Answers</summary>
+
+1. Passing the wrong shape: a `price` of `"50"` (a string), a missing `quantity`, or a misspelt field. The compiler rejects each one at the call.
+2. `"Mandazi             KES 60"`, 26 characters: the name padded to 20, then `KES 60`.
+3. `"Chapati Beans Special LargeKES 150"`. `padEnd` never cuts a string that's already longer than the width, so the columns stop lining up.
+4. The spaces go before the name, so names line up on the right and stick to the price: `"             MandaziKES 60"`.
+
+</details>
+
 ## When you're stuck
 
 - **Extra or missing spaces in the output** — `.padEnd(20)` pads *up to* 20 characters total, including the name itself. A 12-character name gets 8 spaces added, not 20.
