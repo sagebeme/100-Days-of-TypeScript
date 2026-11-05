@@ -21,6 +21,14 @@ Build **Neno**, a daily word game: guess the five-letter Kiswahili word in six t
 
 The grid and an on-screen keyboard that works alongside the real one, tiles that flip, a row that shakes when a guess isn't accepted, and a result showing the meaning, stats and a Share button. Keep today's game and the stats in `localStorage`, so a reload carries on. Don't rely on colour alone: give the tiles accessible labels ("n, present").
 
+## Steps
+
+1. Read the tests, then `words.ts` (`ANSWERS` with their meanings, and `WORDS`, every guess allowed). `newGame` and `noStats` are already written.
+2. `score` with the two passes, then `keyboard`. `npm test -- day-092 -t "scoring"`.
+3. `play`: letters, back, enter, the two messages, winning and losing.
+4. `puzzleNumber` and `answerFor`, then `shareText` and `record`.
+5. Run the tests, then build the page in `main.ts` (the commands under "Done when").
+
 ## Done when
 
 ```bash
@@ -33,3 +41,13 @@ npx vite phase-8-portfolio/day-092-kiswahili-wordle/starter
 - A much bigger word list, so more real guesses are accepted.
 - Hard mode: letters you've found must be used in later guesses.
 - Sheng mode, with its own words.
+
+## When you're stuck
+
+- **`mtoto` for `tumbo` gives too many yellows** — two passes. First mark the greens and count the answer's letters that *weren't* matched. Then go left to right: a letter is yellow only while its count is above 0, and each yellow takes one off.
+- **A wrong guess uses up a turn** — on Enter, check the length and then `WORDS.has(current)` before adding it to `guesses`. Keep `current` as typed, so the player can fix it.
+- **`A` or `1` is typed as is** — lowercase the letter first, then accept only `a` to `z`.
+- **The puzzle changes at 03:00 in Nairobi** — Nairobi is UTC+3 all year. Add 3 hours to the time before you divide by a day's milliseconds, and count from 1 January 2026 as puzzle 1.
+- **The answers come out alphabetically** — shuffle the list once with a fixed seed (a small random-number formula you write, not `Math.random`), so every player gets the same order. Then `(puzzle - 1) % count` picks the word.
+- **A missed day keeps the streak going** — the streak carries on only when this puzzle is `lastPuzzle + 1`. The same puzzle again changes nothing.
+- **Still stuck?** Read the files in `solution/`, then close them and write your own from memory.

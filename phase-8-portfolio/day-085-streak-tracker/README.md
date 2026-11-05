@@ -29,6 +29,15 @@ Then write `sw.ts` to follow them. `vite.config.ts` builds it as `sw.js` next to
 
 A big, satisfying check button per habit (at least 44px), the streak, the 12-week grid, add and delete, with an undo for deleting. Keep habits in `localStorage` (wrapped in `try`/`catch`). Register the service worker only in production builds.
 
+## Steps
+
+1. Read the tests, and the types in `streaks.ts`. A `Day` is a `"YYYY-MM-DD"` string.
+2. `localDay`, `addDays` and `daysBetween` first: everything else is built on them.
+3. `toggle`, `currentStreak`, `longestStreak`, `milestone`, `completionRate`, then `weekGrid`.
+4. `offline.ts`: `strategyFor` and `cachesToDelete`. `npm test -- day-085 -t offline`.
+5. `sw.ts`: cache `APP_SHELL` on `install`, call `cachesToDelete` on `activate`, and answer `fetch` by `strategyFor`. Then the page in `main.ts`.
+6. Run the tests, then build it and try it offline (the commands under "Done when").
+
 ## Done when
 
 ```bash
@@ -44,3 +53,13 @@ Then, in Chrome's DevTools, open Application → Service workers, tick "Offline"
 - A daily reminder with the Notifications API.
 - Export and import habits as a file, so they survive a new phone.
 - "Freeze" days: one missed day a week that doesn't break a streak.
+
+## When you're stuck
+
+- **Late-night check-ins land on the wrong day** — `toISOString()` gives the UTC date. Use `Intl.DateTimeFormat` with the `timeZone` (the `"en-CA"` locale formats dates as `YYYY-MM-DD`), or its `formatToParts`.
+- **A day goes missing or repeats around a clock change** — don't add `24 * 60 * 60 * 1000` to a local time. Read the day as noon UTC (`${day}T12:00:00Z`), add with `setUTCDate`, and slice the first 10 characters back out.
+- **The streak is 0 when today isn't ticked yet** — start counting from today if it's checked in, otherwise from yesterday.
+- **`longestStreak` counts a repeated day twice** — remove repeats before you count runs.
+- **The grid starts on the wrong day** — `getUTCDay()` is 0 for Sunday. The week's Monday is `(getUTCDay() + 6) % 7` days back.
+- **The service worker serves an old page forever** — pages (`mode === "navigate"`, or ending in `/` or `.html`) are network-first. Only files that can't change, like hashed `assets/…-XXXXXXXX.js`, are cache-first.
+- **Still stuck?** Read the files in `solution/`, then close them and write your own from memory.

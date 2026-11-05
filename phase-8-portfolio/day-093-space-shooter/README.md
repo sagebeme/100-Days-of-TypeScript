@@ -22,6 +22,14 @@ The twist: **the game is testable**. `engine.ts` has no canvas and no clock in i
 
 Draw it on a canvas scaled to fit the screen. Keys, and touch buttons on phones. A score line, a start screen, a pause (P, and whenever the window loses focus, so no key gets stuck down), a game-over screen, and a best score in `localStorage`. With reduced motion on, keep the background still.
 
+## Steps
+
+1. Read the tests, then the types and constants in `engine.ts`. A box's `x` and `y` are its centre.
+2. `random` (mulberry32), `overlaps`, `formation`, `marchSpeed`, then `newWorld`. `npm test -- day-093 -t "randomness"`.
+3. `update`, a piece at a time: the player and firing, then the march, then shots, bombs and hits, then game over and the next wave.
+4. `advance`: whole steps, the carry, and the quarter-second cap. `npm test -- day-093 -t "fixed-step"`.
+5. Run the tests, then draw it in `main.ts` with `requestAnimationFrame` calling `advance` (the commands under "Done when").
+
 ## Done when
 
 ```bash
@@ -34,3 +42,13 @@ npx vite phase-8-portfolio/day-093-space-shooter/starter
 - Shields to hide behind, that bombs and shots chip away.
 - A mystery ship across the top, worth a random bonus.
 - Record the keys and seed of a great game, and replay it.
+
+## When you're stuck
+
+- **The same seed plays two different games** — every random roll must come from `random(world.seed)`, and the new seed must go back into the world you return. One `Math.random()` anywhere breaks it.
+- **"never changes the world it was given" fails** — copy before you change: `{ ...world.player }`, `world.enemies.map((e) => ({ ...e }))`, new arrays for shots and bombs.
+- **The formation slides off the edge before turning** — move it, check whether any enemy's edge (`x ± w / 2`) went past the screen, and if so turn round and step everyone down 16px instead.
+- **The player fires every frame** — keep a `cooldown` on the player, count it down by `STEP` each update, and only fire (and reset it to `COOLDOWN`) when it's 0.
+- **Two bombs take two lives** — after a hit, set the shield to `SHIELD` and ignore bombs until it has counted down to 0.
+- **`advance` takes one step too few** — `0.04 - 2 * STEP` can come out as `0.0166…66` just under `STEP` in floating point. Compare with a tiny allowance (`time >= STEP - 1e-9`), and cap `elapsed` at 0.25 before you start.
+- **Still stuck?** Read the files in `solution/`, then close them and write your own from memory.

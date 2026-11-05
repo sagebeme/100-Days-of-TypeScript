@@ -57,6 +57,15 @@ A good CLI is polite to two audiences. **People** get clear words, colour, a liv
   - An expired session is forgotten, and the person is told to log in again.
   - The API's own reasons ("Sold out") are passed on word for word.
 
+## Steps
+
+1. Read the tests, then `api.ts` and `io.ts` (both already written). Everything from the outside world reaches your code through `Io`.
+2. `args.ts`: `normalisePhone`, `closest`, then `parseCommand` with `parseArgs`. `npm test -- day-097 -t "reading the command line"`.
+3. `format.ts`: `shouldColor`, `visibleWidth`, `table`, `kes` and `when`. `npm test -- day-097 -t "output for people"`.
+4. `session.ts`, then `poll.ts`. `npm test -- day-097 -t "staying logged in"` and `-t "waiting for M-Pesa"`.
+5. `run.ts`: one command at a time (`help`, `events`, `login`, `buy`, `order`, `logout`), with the exit codes. `npm test -- day-097 -t "the whole CLI"`.
+6. Run the tests, then try it against the Day 66 API (see "Try it for real").
+
 ## Done when
 
 ```bash
@@ -81,3 +90,15 @@ node phase-5-backend/day-066-event-ticketing-api/starter/simulate-callback.ts ws
 - `tikiti tickets`: every ticket you have, across orders (the Day 66 stretch route).
 - Print each ticket's QR code in the terminal with block characters (`▀▄█`).
 - Publish it: a `bin` entry in a `package.json`, so `npm install -g` gives people a real `tikiti` command.
+
+## When you're stuck
+
+- **`--jsn` is accepted, or a stray word is ignored** — call `parseArgs` with `strict: true` and `allowPositionals: true`, catch its error and rethrow it as a `UsageError` starting with `tikiti <command>:`. Then check how many positionals the command takes.
+- **`BUY` gets no suggestion** — lowercase the word before measuring the edit distance, and only suggest when it's 2 or less.
+- **`Jioni 🎷` measures 8** — `"🎷".length` is 2 (two UTF-16 units). Strip the colour codes (`/\x1b\[[0-9;]*m/g`), then count `[...text].length`.
+- **Lines end in spaces** — pad every column but the last, or `trimEnd()` each line when you're done.
+- **The session file isn't mode 600** — `writeFile`'s `mode` only applies when it creates the file. Call `chmod(file, 0o600)` afterwards too.
+- **`NO_COLOR=""` turns colour off** — the rule is "set and not empty". Check `NO_COLOR` first, then `FORCE_COLOR`, then `TERM=dumb`, then whether it's a terminal.
+- **Polling gives up after one blip** — count `Unreachable` errors in a row and reset the count on a good answer; throw on the third. Rethrow an `ApiError` straight away.
+- **`--json | jq` breaks** — anything that isn't the result (`✘ …`, "Waiting…") goes to `io.err`, never `io.out`.
+- **Still stuck?** Read the files in `solution/`, then close them and write your own from memory.

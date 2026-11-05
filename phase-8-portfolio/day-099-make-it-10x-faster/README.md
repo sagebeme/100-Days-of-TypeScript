@@ -38,3 +38,13 @@ The speed test prints both times. The ratio is measured in the same process, the
 - Write down, for each change, how much faster it made things. Which one mattered most? Were you right before you profiled?
 - The report is now linear. Make it *incremental*: keep running totals as orders come in, so the dashboard never recomputes the season.
 - Try it with a million orders. What's the slow part now? (Hint: memory.)
+
+## When you're stuck
+
+- **You don't know where to start** — profile before you change anything (the command is at the top of `bench.ts`), and look at the bottom-up view's *self* time. Guessing first is how a day of work makes it 10% faster.
+- **The profile points at `Intl`** — an `Intl.DateTimeFormat` is slow to create and quick to use. Make one, once, outside the function, and reuse it for every order.
+- **A number or an ordering changed** — keep every sort's comparison exactly as it was; only move *where* a sort happens. A `Map` keeps insertion order, so sort its values when the order matters, the same way the original did.
+- **An event nobody bought goes missing** — build the event rows from `season.events`, not from the orders, so every event gets a row (with `topBuyer: null`).
+- **The month or the hour is wrong for late-night orders** — keep reading them in `Africa/Nairobi`. `getMonth()` and `getHours()` use the computer's time zone.
+- **It's faster, but not 10x** — run the bench at its four sizes. If the time still grows faster than the orders, a `find`, `filter` or `includes` inside a loop is still there.
+- **Still stuck?** Read the files in `solution/`, then close them and write your own from memory.
