@@ -163,4 +163,7 @@ Tick a phase off when its tests pass. Commit your work daily: in three months yo
 
 ## Licence
 
-MIT for the code. Course materials are for learning, personal or in a classroom.
+The course has two licences, one for the code and one for the lessons:
+
+- **Code** (starters, solutions, tests, tools and the website's code): [MIT](LICENSE). Use it for anything, including commercial work, as long as the copyright notice stays in.
+- **Lessons** (the Markdown lesson text and the images that go with it): [Creative Commons Attribution-NonCommercial 4.0](https://creativecommons.org/licenses/by-nc/4.0/) (CC BY-NC 4.0), full text in [LICENSE-LESSONS](LICENSE-LESSONS). You can copy, share and adapt them, as long as you credit **Sage**, link back here, and don't use them commercially (for example, selling them or a course built from them). For any other use, ask first.
