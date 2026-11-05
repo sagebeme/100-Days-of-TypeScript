@@ -71,6 +71,25 @@ Welcome to Phase 4. Until now your code only talked to itself. From today it tal
 
 Every method and status code, with when to use each: [HTTP: methods and status codes](../../reference/http.md).
 
+## Check yourself
+
+1. Why build the address with `new URL(API)` and `searchParams.set` instead of gluing strings together? What does `searchParams` do with the `/` in `Africa/Nairobi`?
+2. Why turn `temperature_2m` and `precipitation_probability_max` into `temperature` and `rainChance` straight away, in one place?
+3. Predict the output:
+   ```ts
+   pickOutfit({ temperature: 23, feelsLike: 24, rainNow: 0, rainChance: 35, windKmh: 10, high: 28, low: 16, code: 1 })
+   ```
+4. Why does a `429` get a different message from a `503`?
+
+<details><summary>Answers</summary>
+
+1. `searchParams` encodes every value for you, so a space, `&` or `/` can't break the address or slip in an extra parameter. The `/` becomes `%2F`: `timezone=Africa%2FNairobi`.
+2. If Open-Meteo renames a field, only that mapping changes. The rest of the app speaks your names and never sees theirs.
+3. `{ top: "T-shirt", bottom: "Shorts", extras: ["Pack a small umbrella", "Layers: it's cold early and warm later"] }`. A 35% chance is under 40, so shorts are fine, but it's over 30, so pack an umbrella. 28 − 16 = 12 degrees between high and low means layers. Code 1 isn't a clear sky, so no sunglasses.
+4. They need different actions. `429` means *you* asked too often: wait and slow down. `5xx` means *their* server has a problem: try later, and nothing you change will fix it.
+
+</details>
+
 ## When you're stuck
 
 - **`fetch` didn't throw, but the data is nonsense** — a `400` or `500` is still a successful *network* request. Check `response.status` before you read the body.

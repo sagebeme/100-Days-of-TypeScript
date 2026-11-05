@@ -54,6 +54,22 @@ $ node phase-4-internet/day-048-survive-bad-wifi/starter/cli.ts
 
 From here on, every API call in Phase 4 goes through `fetchWithRetry`.
 
+## Check yourself
+
+1. Predict the output: `isRepeatable({ method: "post" })`, `isRepeatable({ method: "POST", headers: { "Idempotency-Key": "abc" } })` and `isRepeatable()`. Why the difference?
+2. Predict the output: `parseRetryAfter("3", now)` and `parseRetryAfter("soon", now)`
+3. With `baseDelayMs: 500` and `maxDelayMs: 8000`, predict `backoffDelay(3, …)` and `backoffDelay(5, …)` when `random` returns `1`, and `backoffDelay(2, …)` when it returns `0.5`.
+4. Why add jitter (a random wait) instead of always waiting exactly 0.5 s, 1 s, 2 s?
+
+<details><summary>Answers</summary>
+
+1. `false`, `true`, `true`. Sending a `POST` twice could charge someone twice, so it's tried once. With an `Idempotency-Key` the server can spot the repeat, so it's safe. No `init` means a `GET`, which is safe to repeat.
+2. `3000` (seconds, in milliseconds) and `null` (neither a number nor a date, so the normal backoff is used).
+3. `4000` (500 × 2³), `8000` (500 × 2⁵ is 16,000, capped at the maximum) and `1000` (half of 2,000).
+4. When a mast goes down, thousands of phones lose signal at once. With identical waits they'd all retry at the same instant and knock the server over again. Random waits spread them out.
+
+</details>
+
 ## When you're stuck
 
 - **The timeout never fires** — the signal has to be passed to `fetch` in its options: `fetchFn(url, { ...init, signal })`.

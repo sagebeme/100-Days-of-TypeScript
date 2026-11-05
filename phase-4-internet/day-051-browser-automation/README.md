@@ -54,6 +54,22 @@ The same skills test your own web apps: Phase 6 uses Playwright to test a whole 
 
 Everything from Day 49 still applies, more so: a browser loads every image, script and ad, so each visit costs the site far more than one `fetch`. Look for an API first, read `robots.txt` and the terms of use, go slowly, and never automate a login that isn't yours.
 
+## Check yourself
+
+1. Why does `fetch` on Tukio's address give you a page with no events in it?
+2. Why find things with `getByLabel("Search events")` and `getByRole("button", { name: "Search" })` instead of CSS classes like `.btn-primary`?
+3. Why wait for a condition (`status.filter({ hasText: /found/ }).waitFor()`) instead of `await sleep(2000)`?
+4. In `loadEverything`, why wait for `cards.nth(before)` after clicking "Load more"?
+
+<details><summary>Answers</summary>
+
+1. The HTML is an empty shell. The events are added afterwards by the site's own JavaScript, which `fetch` never runs. A real browser does.
+2. They match what a person sees, so they survive a redesign that renames every class. And they only work if the page is accessible, so a failing locator also tells you a screen reader would struggle.
+3. A fixed sleep is too slow when the site is fast and too short when it's slow, so tests are both sluggish and flaky. Waiting for a condition carries on the moment it's true.
+4. `click()` returns before the new cards arrive. The card at index `before` is the first new one, so waiting for it proves the next batch has loaded before you count again.
+
+</details>
+
 ## When you're stuck
 
 - **`No Chrome, Edge or Chromium found`** — install Chrome, or set `CHROME_PATH` to your browser's executable.

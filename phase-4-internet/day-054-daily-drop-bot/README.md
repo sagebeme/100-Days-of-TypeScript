@@ -77,6 +77,22 @@ Unavailable today (Gave up after 4 attempts: fetch failed).
 
 4. `--now` sends one straight away. Without it, the bot keeps running and sends one every day at `SEND_AT`. To keep it running when your laptop is off, it needs a server: that's Phase 5.
 
+## Check yourself
+
+1. The releases feed is down. What would `Promise.all` do with the three loads, and what does `Promise.allSettled` do instead?
+2. Predict the output: `nextRunAt(new Date("2026-10-03T05:00:00Z"), "07:00").toISOString()` and the same at `03:59:00Z`
+3. Why must the bot never log the URL it posts to, or put it in an error message?
+4. Predict the output: `fitToLimit("abcdef", 4)`
+
+<details><summary>Answers</summary>
+
+1. `Promise.all` rejects as soon as one load fails, and you'd lose the weather and fixtures too. `allSettled` waits for all three and reports each as `fulfilled` or `rejected`, so the message goes out with "Unavailable today" in just that section.
+2. `"2026-10-04T04:00:00.000Z"` and `"2026-10-03T04:00:00.000Z"`. 07:00 in Nairobi is 04:00 UTC. At 05:00 UTC today's run has passed, so it's tomorrow; at 03:59 it's still to come.
+3. Telegram puts the bot token *in* the URL (`/bot<token>/sendMessage`). Anyone who sees the logs could then control your bot.
+4. `"abc…"`: three characters plus the ellipsis, four in all.
+
+</details>
+
 ## When you're stuck
 
 - **One failing source stops the whole message** — you used `Promise.all`. Use `Promise.allSettled`, and turn each result into a section.

@@ -66,6 +66,22 @@ It has to be dependable: it can't send the same reminder twice, it can't send on
    While you're testing, Resend's shared `onboarding@resend.dev` sender can only deliver to your own sign-up address. To send to anyone else, verify a domain you own in Resend's dashboard.
 3. Run it without `--once` and leave it running. It prints when the next reminder is due, and sleeps until then.
 
+## Check yourself
+
+1. Predict the output: `eveOf(new Date("2026-10-04T22:30:00Z")).toISOString()`. Why isn't the eve on the 3rd?
+2. `sendDue` saves `sent.json` after *each* email, not once at the end. Why?
+3. Predict what Node does with `setTimeout(fn, 2 ** 31)`. Why does `runForever` cut waits to `MAX_WAIT_MS`?
+4. Why does `reminderEmail` run team names through `escapeHtml`?
+
+<details><summary>Answers</summary>
+
+1. `"2026-10-04T15:00:00.000Z"`. 22:30 UTC on the 4th is 01:30 on the **5th** in Nairobi, so the evening before is 18:00 Nairobi time on the 4th, which is 15:00 UTC.
+2. If the program crashes after the second of three emails, the first two are already recorded and won't be sent again on restart. That's what makes it idempotent.
+3. It prints a `TimeoutOverflowWarning` and fires after **1 ms**. A timer can't wait more than 2³¹ − 1 ms (about 24.8 days), so a longer wait is cut down, and the next tick works out the rest.
+4. A name like `<b>Gor</b>` or one with `&` would otherwise become HTML inside the email. Escaping makes it show as text, whatever the data says.
+
+</details>
+
 ## When you're stuck
 
 - **Every reminder is three hours out** — you mixed local time and UTC. Do the maths in UTC, and only use Nairobi time to find "the day before" and to format.

@@ -83,6 +83,22 @@ It happens to everyone once. If a key ends up in a commit, a screenshot or a cha
 1. **Revoke it** in the provider's dashboard straight away, and make a new one. Deleting the commit isn't enough: it's already been copied.
 2. Put the new key in `.env`, never in code.
 
+## Check yourself
+
+1. Why does the key go in an `Authorization` header instead of `?key=...` in the URL?
+2. Predict the output: `redact("practice-key-1234")` and `redact("short")`
+3. `.env.example` is committed but `.env` isn't. What is each one for?
+4. Predict the output: `landedCost({ itemUsd: 100, shippingUsd: 0 }, 100, EXAMPLE_RULES).totalKes`
+
+<details><summary>Answers</summary>
+
+1. URLs end up in server logs, browser history, proxies and error messages. A header isn't written down in all those places.
+2. `"****1234"` and `"****"`. Short secrets show nothing at all, because their last four characters would be most of the key.
+3. `.env.example` lists *which* settings exist, with placeholders, so anyone cloning the repo knows what to fill in. `.env` holds your real values, and `.gitignore` keeps it off GitHub.
+4. `16250`. Value 10,000; bank fee 300; duty 2,500; IDF 250; railway levy 200; VAT 16% of 12,500 = 2,000; clearing 1,000.
+
+</details>
+
 ## When you're stuck
 
 - **`RATES_API_KEY is missing`** — `.env` must be in the `starter/` folder, next to `cli.ts`, and the line must be `RATES_API_KEY=your-key` with no spaces around the `=`.

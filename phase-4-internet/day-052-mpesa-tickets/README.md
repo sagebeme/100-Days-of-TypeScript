@@ -94,6 +94,22 @@ Ignored a repeated callback for order 1e2da5ca…
 
 Going live needs a real paybill or till, Safaricom's approval, and production keys. Keep the secret path, the checks, and HTTPS.
 
+## Check yourself
+
+1. The STK push request came back `200`. Has the customer paid? How does your server find out?
+2. Predict the output: `darajaTimestamp(new Date("2026-10-03T16:45:12Z"))` and `darajaPhone("+254 712 345 678")`
+3. A callback arrives for a `CheckoutRequestID` you never started. What does `callback()` reply, and why not a `404`?
+4. The first callback said "paid" and a second identical one arrives a minute later. What happens to the order, and why?
+
+<details><summary>Answers</summary>
+
+1. No. That only means the prompt was sent to their phone. Safaricom tells you the result later by POSTing to your callback URL, so the order stays `pending` until then.
+2. `"20261003194512"` (Daraja wants Kenyan time, UTC+3, as `YYYYMMDDHHmmss`) and `"254712345678"` (no `+`, no spaces).
+3. `200` with `{ ResultCode: 0, ResultDesc: "Accepted" }`, and it logs the problem. Any other answer makes Safaricom retry, and a different reply for unknown payments would tell a stranger probing your URL which ids are real.
+4. Nothing. The order is no longer `pending`, so the repeat is ignored. Callbacks can be delivered twice, and the first one decides; otherwise one payment could be counted twice.
+
+</details>
+
 ## When you're stuck
 
 - **`400.002.02 Invalid PhoneNumber`** — Daraja wants `2547…`, as a number, with no `+` and no leading `0`.

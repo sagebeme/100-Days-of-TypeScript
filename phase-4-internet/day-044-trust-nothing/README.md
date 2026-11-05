@@ -61,6 +61,22 @@ Today you check data at the border, where it enters your program. Two jobs:
 
 6. Break it on purpose: change a fare in `fares.json`, or change `temperature_2m` in the URL inside `cli.ts` to a field that doesn't exist. Read what comes back.
 
+## Check yourself
+
+1. What's wrong with `(await response.json()) as OpenMeteoResponse`? What happens if the API renames a field?
+2. Predict the output: `FareSchema.safeParse({ route: "46", from: "CBD", to: "Kawangware", fareKes: "80", updated: "2026-09-01" })`
+3. Predict the error for `fareKes: "eighty"`, `fareKes: ""` and `fareKes: "80.5"`. Why is the second one surprising?
+4. Why write `type Fare = z.infer<typeof FareSchema>` instead of a separate `interface Fare`?
+
+<details><summary>Answers</summary>
+
+1. `as` only tells the compiler "trust me". Nothing checks at runtime, so a renamed field quietly becomes `undefined` and the app shows `undefined°C` instead of failing.
+2. Success: `{ route: "46", from: "CBD", to: "Kawangware", fareKes: 80, peak: false, updated: "2026-09-01" }`. `z.coerce.number()` turns `"80"` into `80`, and `.default(false)` fills in the missing `peak`.
+3. `fareKes: fare must be a number`, `fareKes: fare must be above 0` and `fareKes: fare must be whole shillings`. Coercion runs `Number("")`, which is `0`, not `NaN`, so an empty cell gets past the "is it a number" check and is only caught by `.positive()`.
+4. The type comes from the schema, so the check and the type can never disagree. Change a rule and the type follows.
+
+</details>
+
 ## When you're stuck
 
 - **`z.infer` gives you `{}` or `unknown`** — you wrote a type by hand and a schema separately. Delete the hand-written type and use `z.infer<typeof ForecastSchema>`.

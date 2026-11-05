@@ -69,6 +69,22 @@ LigiError 404 not_found: No team called simba
 
 Change `@your-name` to your npm username, then `npm login`, and `npm publish --access public` from the `starter/` folder. After that, every change needs a new `version` (following semver: `0.1.1` for a fix, `0.2.0` for a new feature, `1.0.0` when you promise not to break things). Published versions can't be changed, only deprecated, so dry-run first, every time.
 
+## Check yourself
+
+1. `index.ts` exports `createLigiClient`, `LigiError` and some types, but not `ErrorBodySchema` or the private `get` helper. Why so little?
+2. What do `"files": ["dist", "README.md"]` and `prepublishOnly` each protect you from?
+3. Predict the request URL for `ligi.team("simba fc")` with `baseUrl: "http://x/v1/"`.
+4. The API answers `429` with `Retry-After: 30` and an error body `{ "error": { "code": "rate_limited", "message": "Slow down" } }`. What does the caller catch?
+
+<details><summary>Answers</summary>
+
+1. Whatever you export, users will rely on, and changing it breaks their code. Keeping the public surface small leaves you free to change everything else.
+2. `files` stops tests, `.env` files and other clutter being published: only the build and the README ship. `prepublishOnly` rebuilds before every publish, so you can't ship an old `dist/`.
+3. `http://x/v1/teams/simba%20fc`. The trailing `/` on the base is trimmed, and `encodeURIComponent` encodes the space.
+4. A `LigiError` with `status` 429, `code` `"rate_limited"`, `retryAfterSeconds` 30 and the message `"Slow down"`, so the caller can branch on the details instead of parsing text.
+
+</details>
+
 ## When you're stuck
 
 - **`Cannot find module './client.ts'` when running the built code** — `rewriteRelativeImportExtensions` is missing from `tsconfig.build.json`, so the output still imports `.ts` files.
