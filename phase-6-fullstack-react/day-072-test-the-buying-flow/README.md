@@ -61,6 +61,22 @@ Find everything by **role and accessible name**, the way a person (or a screen r
 
 5. Write one scenario of your own. How about "two tabs buy the last seat at once"?
 
+## Check yourself
+
+1. Every piece of the app had unit tests. What bug did the end-to-end test find, and why couldn't a unit test find it?
+2. Why find the Buy button with `getByRole("button", { name: "Buy with M-Pesa" })` and not `.button-primary`?
+3. Why does the test API settle a payment only when the test says so, instead of after a random delay like Day 70's fake API?
+4. The order page polls every 2 seconds. Why does the test `waitFor()` the "You're in!" heading instead of sleeping for 3 seconds?
+
+<details><summary>Answers</summary>
+
+1. After a cancelled payment the event page showed 11 seats left when the server had 14: its cached count was still "fresh". Each piece was right on its own; only the whole journey, page to page, showed the stale cache.
+2. It finds the button the way a person or a screen reader does. A redesign that keeps the page usable keeps the test passing, and a change that hides the button from a screen reader fails it.
+3. End-to-end tests have to control the world, or they fail at random. With nothing random, a failure always means a real problem.
+4. A fixed sleep is too short on a slow run and wasted time on a fast one. Waiting for the heading carries on the moment it appears, up to a limit.
+
+</details>
+
 ## When you're stuck
 
 - **The tests are skipped** — no Chrome was found. Install Chrome or Chromium, or set `CHROME_PATH`.

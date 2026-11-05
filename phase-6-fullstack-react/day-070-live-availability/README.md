@@ -52,6 +52,22 @@ Yesterday's form state belonged to the page. Server state doesn't: the server ow
 
 **Don't make the fan wait for your housekeeping.** After an order, the seat counts should be refreshed, so `onSettled` calls `invalidateQueries`. But if `onSettled` *returns* that promise, TanStack Query keeps the mutation pending until the refresh lands. The button says "Sending…" and an error stays hidden, just to refresh numbers the fan isn't looking at. Start the refresh and don't wait: `void queryClient.invalidateQueries(...)`.
 
+## Check yourself
+
+1. Why are all the query keys built in one `keys` object instead of written where they're used? What does invalidating `["events"]` refresh?
+2. Predict the output: `orderPollInterval(undefined)`, `orderPollInterval({ …order, status: "pending" })` and `orderPollInterval({ …order, status: "paid" })`
+3. A background refresh fails with a 503, but the events loaded fine a minute ago. What should the page show, and what condition says so?
+4. Why does `onSettled` call `void queryClient.invalidateQueries(...)` instead of returning that promise?
+
+<details><summary>Answers</summary>
+
+1. A typo'd key silently becomes a different cache entry. Keys nest, so `["events"]` also refreshes `["events", 3]` and every other event.
+2. `2000`, `2000` and `false`: keep asking every 2 seconds while there's no answer or it's pending, and stop the moment it's settled.
+3. The last good data. Only show the error when there's nothing else to show: `error && !data`, not just `error`.
+4. Returning it keeps the mutation pending until the refresh lands, so the button says "Sending…" and an error stays hidden, just to refresh numbers the fan isn't looking at.
+
+</details>
+
 ## When you're stuck
 
 - **Two pages show different numbers for the same event** — they're using different keys. Build keys only with the `keys` helpers.
