@@ -68,6 +68,12 @@
   function enhance() {
     lesson.querySelectorAll("a[href]").forEach(rewrite);
 
+    // "Watch the video: (not recorded yet)" is a note for the author, not the learner. A line with a
+    // real video link stays.
+    lesson.querySelectorAll("p").forEach(function (p) {
+      if (/^Watch the video:/.test(p.textContent.trim()) && !p.querySelector("a")) p.remove();
+    });
+
     lesson.querySelectorAll("table").forEach(function (t) {
       var wrap = document.createElement("div");
       wrap.className = "table-wrap";
