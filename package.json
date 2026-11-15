@@ -12,6 +12,8 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.next.json",
     "lint": "eslint .",
+    "format": "prettier --write eslint.config.js vitest.config.ts scripts .github tsconfig.json tsconfig.next.json package.json vercel.json .prettierrc.json",
+    "format:check": "prettier --check eslint.config.js vitest.config.ts scripts .github tsconfig.json tsconfig.next.json package.json vercel.json .prettierrc.json",
     "site": "vite --port 8000 --open /site/",
     "site:data": "node scripts/build-site-data.ts",
     "site:check": "node scripts/build-site-data.ts --check"
@@ -38,6 +40,7 @@
     "hono": "^4.13.9",
     "next": "^16.3.6",
     "playwright-core": "^1.63.0",
+    "prettier": "3.10.1",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-hook-form": "^7.88.0",

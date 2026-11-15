@@ -92,7 +92,10 @@ Check the whole repo the way CI does:
 ```bash
 npm run typecheck   # TypeScript, in strict mode
 npm run lint        # ESLint: unused code and risky patterns
+npm run format:check
 ```
+
+`npm run format` tidies the repo's tooling and config files with Prettier (`.prettierrc.json`). The days' code isn't checked: it's written more compactly than Prettier's style, and reformatting it would rewrite about a third of the files.
 
 ### Browser days
 
