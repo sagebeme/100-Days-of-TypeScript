@@ -48,6 +48,8 @@ checkout(sol, 1, "BOGUS")        →  { ok: false, error: InvalidPromoError }
    npm test -- day-021
    ```
 
+The same goes for every `catch` you write from now on: narrow the error, then handle it or pass it on. Never catch it and carry on silently ([rule 6](../../reference/coding-rules.md#while-you-write)).
+
 ## When you're stuck
 
 - **"Type 'unknown' is not assignable..."** — you can't use an `unknown` value until you've narrowed it. Check `typeof input === "number"` or `error instanceof Error` first.

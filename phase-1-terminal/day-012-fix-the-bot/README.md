@@ -40,6 +40,8 @@ The code in `starter/fix-the-bot.ts` has **two bugs**, and they're different kin
 4. Read what the failing test says it *expected* versus what it *got*, and trace through the loop by hand with a small input like `("hi", 2)` until you find the difference.
 5. Fix the second bug. Tests pass.
 
+Here the failing test was written for you. On a bug nobody has a test for yet, write that test first, then fix: [Fixing a bug](../../reference/coding-rules.md#fixing-a-bug).
+
 ## When you're stuck
 
 - **The type checker lists errors in other days' files** — ignore those; only fix errors pointing at `day-012-fix-the-bot`.
