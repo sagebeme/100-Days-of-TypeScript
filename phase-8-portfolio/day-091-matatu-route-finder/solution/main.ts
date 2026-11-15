@@ -34,8 +34,10 @@ function drawMap(trip: Trip | null): void {
   const used = new Set(trip?.legs.filter((l) => l.kind === "ride").map((l) => (l.kind === "ride" ? l.route : "")));
   const onTrip = new Set<string>();
   for (const leg of trip?.legs ?? []) {
-    if (leg.kind === "walk") (onTrip.add(leg.from), onTrip.add(leg.to));
-    else {
+    if (leg.kind === "walk") {
+      onTrip.add(leg.from);
+      onTrip.add(leg.to);
+    } else {
       const route = net.routes.find((r) => r.number === leg.route)!;
       const [a, b] = [route.stages.indexOf(leg.from), route.stages.indexOf(leg.to)].sort((x, y) => x - y);
       route.stages.slice(a, b + 1).forEach((s) => onTrip.add(s));

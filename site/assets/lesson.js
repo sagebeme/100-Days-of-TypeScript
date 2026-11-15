@@ -1,4 +1,5 @@
 // The lesson page: renders a day's README.md straight from its folder, plus the checklist.
+/* global marked, hljs -- loaded by the CDN <script> tags in day.html */
 (function () {
   var days = window.TS_DAYS, phases = window.TS_PHASES, P = window.TS_PROGRESS;
   var $ = function (id) { return document.getElementById(id); };
@@ -79,7 +80,7 @@
       var code = pre.querySelector("code");
       // Highlight only blocks that say their language: the rest are output and diagrams.
       if (code && /language-/.test(code.className) && window.hljs) {
-        try { hljs.highlightElement(code); } catch (e) { /* unknown language: leave it plain */ }
+        try { hljs.highlightElement(code); } catch { /* unknown language: leave it plain */ }
       }
       var wrap = document.createElement("div");
       wrap.className = "code";
@@ -104,7 +105,7 @@
         };
         try {
           navigator.clipboard.writeText(pre.innerText).then(function () { done("Copied!"); }, select);
-        } catch (e) {
+        } catch {
           select();
         }
       });

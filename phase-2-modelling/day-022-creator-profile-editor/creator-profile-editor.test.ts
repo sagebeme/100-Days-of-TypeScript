@@ -54,7 +54,7 @@ describe("toPublicProfile", () => {
   it("drops the internal fields, in the type and at runtime", () => {
     const publicProfile = toPublicProfile(profile);
     // @ts-expect-error id is not part of PublicProfile
-    publicProfile.id;
+    publicProfile.id; // eslint-disable-line @typescript-eslint/no-unused-expressions -- reading the field is the test: @ts-expect-error says it's a type error
     expect("id" in publicProfile).toBe(false);
     expect("createdAt" in publicProfile).toBe(false);
   });

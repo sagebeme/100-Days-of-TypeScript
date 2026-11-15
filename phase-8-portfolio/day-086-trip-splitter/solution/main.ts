@@ -27,7 +27,7 @@ function load(): Trip {
     return SAMPLE;
   }
 }
-let trip = load();
+const trip = load();
 function save(): void {
   try {
     localStorage.setItem(KEY, JSON.stringify(trip));

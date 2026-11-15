@@ -29,6 +29,7 @@ export function inline(text: string): string {
     return url ? `<a href="${escapeHtml(url)}">${label}</a>` : label;
   });
   out = out.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/(^|[^*])\*([^*\s][^*]*?)\*/g, "$1<em>$2</em>");
+  // eslint-disable-next-line no-control-regex -- \u0000 marks where a code span was set aside
   return out.replace(/\u0000(\d+)\u0000/g, (_, i: string) => codes[Number(i)]);
 }
 

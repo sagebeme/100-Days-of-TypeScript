@@ -35,5 +35,5 @@ export function toGsmFriendly(text: string): string {
     .replace(/…/g, "...")
     .replace(/[–—]/g, "-")
     .replace(/[•·]/g, "-")
-    .replace(/ /g, " ");
+    .replace(/\u00a0/g, " "); // non-breaking space
 }

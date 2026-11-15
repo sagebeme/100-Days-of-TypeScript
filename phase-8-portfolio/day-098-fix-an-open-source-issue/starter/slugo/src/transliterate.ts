@@ -22,5 +22,6 @@ export function transliterate(text: string): string {
   return text
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
+    // eslint-disable-next-line no-control-regex -- \x00-\x7f is the ASCII range
     .replace(/[^\x00-\x7f]|[&@]/g, (ch) => LETTERS[ch] ?? ch);
 }

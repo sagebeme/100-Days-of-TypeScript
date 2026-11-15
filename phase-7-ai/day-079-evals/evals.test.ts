@@ -39,6 +39,7 @@ describe("the judge", () => {
     const { client, requests } = fakeClaude([say(JSON.stringify({ reasoning: "Calm, and points to refund rules.", pass: true }))]);
     const verdict = await llmJudge(client)(rude, answer("I'm sorry it's been frustrating. Tickets can only be refunded if the event is cancelled…"));
     expect(verdict).toEqual({ grader: "judge", pass: true, reason: "Calm, and points to refund rules." });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- the request body is the SDK's JSON: the test reads deep fields, and a wrong path fails it
     const body = requests[0].body as Record<string, any>;
     expect(body.model).toBe("claude-opus-5");
     expect(Object.keys(body.output_config.format.schema.properties)).toEqual(["reasoning", "pass"]);

@@ -79,9 +79,13 @@ export function leagueTable(results: Result[]): Row[] {
       t.played++;
       t.goalsFor += mine;
       t.goalsAgainst += theirs;
-      if (o === "W") (t.won++, (t.points += 3));
-      else if (o === "D") (t.drawn++, t.points++);
-      else t.lost++;
+      if (o === "W") {
+        t.won++;
+        t.points += 3;
+      } else if (o === "D") {
+        t.drawn++;
+        t.points++;
+      } else t.lost++;
       t.all.push(o);
     }
   }

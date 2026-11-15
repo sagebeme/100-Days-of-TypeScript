@@ -19,12 +19,12 @@
     try {
       var state = JSON.parse(localStorage.getItem(KEY) || "{}");
       return state && typeof state === "object" ? state : {};
-    } catch (e) {
+    } catch {
       return {};
     }
   }
   function save(state) {
-    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* private window: progress just isn't kept */ }
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch { /* private window: progress just isn't kept */ }
   }
   function ticks(state, day) {
     var saved = state[String(day)];
