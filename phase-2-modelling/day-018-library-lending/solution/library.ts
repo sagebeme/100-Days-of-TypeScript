@@ -33,7 +33,7 @@ export class ReferenceBook extends Book {
     return false;
   }
 
-  override checkOut(person: string): void {
+  override checkOut(_person: string): void {
     throw new Error(`${this.title} is reference only`);
   }
 }

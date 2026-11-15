@@ -75,6 +75,8 @@ The routine:
 4. **Run the tests** until they pass.
 5. **Compare with `solution/`** once yours works. There's always another way to write it.
 
+How to write the code itself (what "done" means, errors, tests, commits) is in [How we write code in this course](reference/coding-rules.md). Read it before Day 1.
+
 Run one day's tests:
 
 ```bash
@@ -86,6 +88,16 @@ Run everything you've done so far:
 ```bash
 npm test
 ```
+
+Check the whole repo the way CI does:
+
+```bash
+npm run typecheck   # TypeScript, in strict mode
+npm run lint        # ESLint: unused code and risky patterns
+npm run format:check
+```
+
+`npm run format` tidies the repo's tooling and config files with Prettier (`.prettierrc.json`). The days' code isn't checked: it's written more compactly than Prettier's style, and reformatting it would rewrite about a third of the files.
 
 ### Browser days
 
@@ -152,6 +164,7 @@ Tick a phase off when its tests pass. Commit your work daily: in three months yo
 
 ## Reference
 
+- [How we write code in this course](reference/coding-rules.md): the habits every day expects, and the checks to run before you call a day done.
 - [HTTP: methods and status codes](reference/http.md): every method, safe or idempotent, `PUT` vs `PATCH`, and the status codes from `1xx` to `5xx`, with an example from the ticketing API for each. Keep it open from Day 43.
 
 ## Getting unstuck

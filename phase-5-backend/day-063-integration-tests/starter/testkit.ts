@@ -8,6 +8,7 @@ import type { Role } from "./schema.ts";
 
 export interface Reply {
   status: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- deliberate: the reason is on the next line
   body: any; // `any` on purpose: tests poke at whatever came back, and a wrong guess fails the test anyway
 }
 

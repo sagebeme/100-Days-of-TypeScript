@@ -12,6 +12,7 @@ import { createStore } from "../day-077-agent-with-tools/starter/store.ts";
 const NOW = new Date("2026-12-01T09:00:00Z");
 const SHENG_REFUND = "Manze, doh yangu itarudi kama event imecancelliwa?";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- the request body is the SDK's JSON: the test reads deep fields, and a wrong path fails it
 type Body = Record<string, any>;
 const isUnderstanding = (r: RecordedRequest) => Boolean((r.body as Body).output_config?.format);
 const isTickets = (r: RecordedRequest) => Array.isArray((r.body as Body).tools);

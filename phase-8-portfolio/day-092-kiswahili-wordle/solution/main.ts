@@ -42,9 +42,17 @@ LAYOUT.forEach((line) => {
   const row = Object.assign(document.createElement("div"), { className: "krow" });
   for (const ch of line) {
     const key = Object.assign(document.createElement("button"), { type: "button", className: "key" }) as HTMLButtonElement;
-    if (ch === "+") Object.assign(key, { textContent: "Enter", className: "key wide" }), (key.dataset.action = "enter");
-    else if (ch === "-") Object.assign(key, { textContent: "⌫", className: "key wide" }), key.setAttribute("aria-label", "Delete"), (key.dataset.action = "back");
-    else Object.assign(key, { textContent: ch }), (key.dataset.letter = ch);
+    if (ch === "+") {
+      Object.assign(key, { textContent: "Enter", className: "key wide" });
+      key.dataset.action = "enter";
+    } else if (ch === "-") {
+      Object.assign(key, { textContent: "⌫", className: "key wide" });
+      key.setAttribute("aria-label", "Delete");
+      key.dataset.action = "back";
+    } else {
+      Object.assign(key, { textContent: ch });
+      key.dataset.letter = ch;
+    }
     row.append(key);
   }
   $("keys").append(row);
@@ -128,7 +136,10 @@ $("share").addEventListener("click", async () => {
   const text = shareText(game, puzzle);
   try {
     if (navigator.share) await navigator.share({ text });
-    else (await navigator.clipboard.writeText(text), toast("Imenakiliwa · Copied"));
+    else {
+      await navigator.clipboard.writeText(text);
+      toast("Imenakiliwa · Copied");
+    }
   } catch {
     /* they cancelled */
   }
@@ -139,5 +150,7 @@ $("help").addEventListener("click", () => $<HTMLDialogElement>("rules").showModa
 $("rules-close").addEventListener("click", () => $<HTMLDialogElement>("rules").close());
 
 render();
-if (!store.get("neno-seen-rules", false)) ($<HTMLDialogElement>("rules").showModal(), store.set("neno-seen-rules", true));
-else if (game.status !== "playing") showResult();
+if (!store.get("neno-seen-rules", false)) {
+  $<HTMLDialogElement>("rules").showModal();
+  store.set("neno-seen-rules", true);
+} else if (game.status !== "playing") showResult();

@@ -79,6 +79,7 @@ export function cleanName(name: string): string {
 }
 
 export function cleanText(text: string): string {
+  // eslint-disable-next-line no-control-regex -- stripping control characters is the point
   return text.replace(/[\u0000-\u0008\u000b-\u001f\u007f]/g, "").replace(/[ \t]+/g, " ").trim();
 }
 

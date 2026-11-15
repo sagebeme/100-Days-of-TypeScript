@@ -134,7 +134,10 @@ function editor(cardId: string): HTMLElement {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const labels = [...form.querySelectorAll<HTMLInputElement>("input[type=checkbox]:checked")].map((i) => i.value as Label);
-    if (apply({ type: "edit", cardId, title: title.value, labels })) ((editing = null), render(cardId));
+    if (apply({ type: "edit", cardId, title: title.value, labels })) {
+      editing = null;
+      render(cardId);
+    }
   });
   form.querySelector(".cancel")!.addEventListener("click", () => ((editing = null), render(cardId)));
   form.querySelector(".delete")!.addEventListener("click", () => {

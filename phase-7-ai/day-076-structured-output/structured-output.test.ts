@@ -50,6 +50,7 @@ describe("extractEvent", () => {
     const result = await extractEvent(client, ANNOUNCEMENT, NOW);
     expect(result).toEqual({ ok: true, draft, attempts: 1 });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- the request body is the SDK's JSON: the test reads deep fields, and a wrong path fails it
     const body = requests[0].body as Record<string, any>;
     expect(body).toMatchObject({ model: "claude-opus-5", system: SYSTEM_PROMPT, fallbacks: "default" });
     expect(body.output_config.format.type).toBe("json_schema");

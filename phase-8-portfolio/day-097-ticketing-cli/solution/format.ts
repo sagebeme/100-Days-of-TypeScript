@@ -23,6 +23,7 @@ export type Paint = ReturnType<typeof painter>;
 
 // How wide text looks: colour codes take no room, and an emoji is one character, not two code units.
 export function visibleWidth(text: string): number {
+  // eslint-disable-next-line no-control-regex -- \x1b starts a terminal colour code
   return [...text.replace(/\x1b\[[0-9;]*m/g, "")].length;
 }
 
