@@ -24,6 +24,8 @@ buildConfirmation("RKD4XY7Z1P", 1250, "Kip")
 
 ## Steps
 
+First, read [How we write code in this course](../../reference/coding-rules.md). It's short, and every day after this one expects it.
+
 1. Open `starter/mpesa-sms.ts`.
 2. Declare two `const`s: `status` holding `"Confirmed."`, and `currency` holding `"Ksh"`.
 3. Declare a `let` called `message`, starting as `` `${code} ${status}` ``: the code, a space, then the status.
