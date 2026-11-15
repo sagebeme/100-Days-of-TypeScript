@@ -43,7 +43,11 @@ const plain = (md: string) =>
 
 function brief(readme: string): string {
   const section = readme.split(/^## The brief\s*$/m)[1] ?? "";
-  const paragraph = section.split(/\n\s*\n/).map((p) => p.trim()).find((p) => p && !p.startsWith("```") && !p.startsWith("|") && !p.startsWith("#")) ?? "";
+  const paragraph =
+    section
+      .split(/\n\s*\n/)
+      .map((p) => p.trim())
+      .find((p) => p && !p.startsWith("```") && !p.startsWith("|") && !p.startsWith("#")) ?? "";
   const text = plain(paragraph);
   if (text.length <= 220) return text;
   const cut = text.slice(0, 220);
@@ -53,7 +57,9 @@ function brief(readme: string): string {
 const days: Day[] = [];
 for (const phase of PHASES) {
   const phaseDir = join(root, phase.folder);
-  for (const folder of readdirSync(phaseDir).filter((f) => /^day-\d{3}-/.test(f)).sort()) {
+  for (const folder of readdirSync(phaseDir)
+    .filter((f) => /^day-\d{3}-/.test(f))
+    .sort()) {
     const readmePath = join(phaseDir, folder, "README.md");
     if (!existsSync(readmePath)) throw new Error(`${phase.folder}/${folder} has no README.md`);
     const readme = readFileSync(readmePath, "utf8");
