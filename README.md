@@ -87,6 +87,13 @@ Run everything you've done so far:
 npm test
 ```
 
+Check the whole repo the way CI does:
+
+```bash
+npm run typecheck   # TypeScript, in strict mode
+npm run lint        # ESLint: unused code and risky patterns
+```
+
 ### Browser days
 
 From Day 30, projects run in the browser. Start a dev server for that day's `starter/` folder and open the address it prints (usually `http://localhost:5173`):
